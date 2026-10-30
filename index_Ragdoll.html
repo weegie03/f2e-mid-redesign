@@ -139,7 +139,7 @@ body:has(#cat-food:checked) #sec-food {
     
     <!-- 左側區塊: Hero 主圖與花色切換按鈕 -->
     <div class="lg:col-span-5 space-y-4 sm:space-y-6">
-      <!-- 貓咪主圖容器 (加上 id="hero-section" 供捲動定位) -->
+      <!-- 貓咪主圖容器 -->
       <section id="hero-section" class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100 scroll-mt-24">
         <img id="hero-seal" src="./images/ragdoll_seal.jpg" alt="Seal Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
         <img id="hero-blue" src="./images/ragdoll_blue.png" alt="Blue Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
@@ -154,7 +154,7 @@ body:has(#cat-food:checked) #sec-food {
         </div>
       </section>
 
-      <!-- 花色選擇膠囊按鈕區 -->
+      <!-- 花色選擇按鈕 -->
       <section class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3">
         <span class="text-xs sm:text-sm font-bold text-stone-600 flex items-center gap-2">
           點擊切換代表花色與主圖連動:
@@ -273,7 +273,6 @@ body:has(#cat-food:checked) #sec-food {
   <!-- 右下角懸浮雲朵按鈕 -->
   <div class="fixed bottom-6 right-6 z-30">
     <button id="cloud-btn" type="button" class="w-12 h-12 bg-[#C68B59] hover:bg-[#B87B4B] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group" title="貓咪迷思破解小卡">
-      <!-- 雲朵 SVG 圖示 -->
       <svg class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
         <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
       </svg>
@@ -323,7 +322,7 @@ body:has(#cat-food:checked) #sec-food {
   </div>
 </div>
 
-<!-- JavaScript 邏輯 -->
+<!-- JavaScript 腳本 -->
 <script>
 const catMyths = [
   {
@@ -346,7 +345,7 @@ let currentMythIndex = 0;
 window.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.getElementById('hero-section');
 
-  // 1. 一般 label radio 切換邏輯
+  // 1. label 點擊邏輯修復與花色專屬置頂滾動
   document.querySelectorAll('label[for]').forEach(label => {
     label.addEventListener('click', (e) => {
       e.preventDefault();
@@ -357,14 +356,14 @@ window.addEventListener('DOMContentLoaded', () => {
         targetInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
 
-      // 只有左側花色卡片（有 class="color-btn" 的按鈕）點擊時才會滾動回照片處
+      // 只有左側花色卡片（帶有 class="color-btn"）才會捲動回照片頂部
       if (label.classList.contains('color-btn') && heroSection) {
         heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
 
-  // 2. 取得雲朵與對話框元件
+  // 2. 雲朵彈窗邏輯
   const cloudBtn = document.getElementById('cloud-btn');
   const mythModal = document.getElementById('myth-modal');
   const closeModalBtn = document.getElementById('close-modal-btn');
@@ -372,15 +371,22 @@ window.addEventListener('DOMContentLoaded', () => {
   const mythTitle = document.getElementById('myth-title');
   const mythContent = document.getElementById('myth-content');
 
-  // 更新對話框內容
   function updateMythContent(index) {
     if (mythTitle && mythContent) {
       mythTitle.textContent = catMyths[index].title;
       mythContent.textContent = catMyths[index].content;
     }
+
+    // 當走到最後一條時，將按鈕文字切換為「看完囉！關閉對話框 ✨」
+    if (nextMythBtn) {
+      if (index === catMyths.length - 1) {
+        nextMythBtn.textContent = '看完囉！關閉對話框 ✨';
+      } else {
+        nextMythBtn.textContent = '了解！看下一條迷思 🐾';
+      }
+    }
   }
 
-  // 開啟對話框
   function openModal() {
     if (mythModal) {
       updateMythContent(currentMythIndex);
@@ -389,7 +395,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 關閉對話框
   function closeModal() {
     if (mythModal) {
       mythModal.style.opacity = '0';
@@ -397,18 +402,23 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 綁定點擊事件
   if (cloudBtn) cloudBtn.addEventListener('click', openModal);
   if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-  
+
   if (nextMythBtn) {
     nextMythBtn.addEventListener('click', () => {
-      currentMythIndex = (currentMythIndex + 1) % catMyths.length;
-      updateMythContent(currentMythIndex);
+      // 在最後一條點擊時關閉對話框並重新計數
+      if (currentMythIndex === catMyths.length - 1) {
+        closeModal();
+        currentMythIndex = 0;
+      } else {
+        currentMythIndex++;
+        updateMythContent(currentMythIndex);
+      }
     });
   }
 
-  // 點擊背景空白處關閉
+  // 點擊對話框外陰影區域可直接關閉
   if (mythModal) {
     mythModal.addEventListener('click', (e) => {
       if (e.target === mythModal) closeModal();
