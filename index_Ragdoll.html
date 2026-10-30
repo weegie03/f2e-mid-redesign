@@ -1,357 +1,421 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purina CatDex - 布偶貓 (Ragdoll) 品種介紹</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purina CatDex 布偶貓 (Ragdoll) 品種介紹</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    html, body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: #FAF8F5;
-      color: #2D3748;
-      margin: 0;
-      padding: 0;
-      overscroll-behavior: contain;
-    }
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #FAF8F5;
+  color: #2D3748;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: contain;
+}
 
-    /* 隱藏原生滾動條但保持滾動功能 */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+/* 隱藏原生滾動條但保持滾動功能 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-    /* 防止點擊觸發頁面放大或非預期動作 */
-    label, button {
-      touch-action: manipulation;
-    }
+/* 防止點擊觸發頁面放大或非預期動作 */
+label, button {
+  touch-action: manipulation;
+}
 
-    /* 隱藏純 CSS 控制用的 Radio Input */
-    .state-toggle {
-      display: none !important;
-    }
+/* 隱藏純 CSS 控制用的 Radio Input */
+.state-toggle {
+  display: none !important;
+}
 
-    /* --- 純 CSS 切換邏輯 (利用 :has 偽類選擇器) --- */
-    body:has(#color-seal:checked) #hero-seal,
-    body:has(#color-blue:checked) #hero-blue,
-    body:has(#color-chocolate:checked) #hero-chocolate,
-    body:has(#color-lilac:checked) #hero-lilac {
-      opacity: 1;
-      visibility: visible;
-    }
+/* 純 CSS 切換邏輯 (利用 :has 偽類選擇器) */
+body:has(#color-seal:checked) #hero-seal,
+body:has(#color-blue:checked) #hero-blue,
+body:has(#color-chocolate:checked) #hero-chocolate,
+body:has(#color-lilac:checked) #hero-lilac {
+  opacity: 1;
+  visibility: visible;
+}
 
-    /* 花色標籤徽章切換 */
-    body:has(#color-seal:checked) #tag-seal,
-    body:has(#color-blue:checked) #tag-blue,
-    body:has(#color-chocolate:checked) #tag-chocolate,
-    body:has(#color-lilac:checked) #tag-lilac {
-      display: flex;
-    }
+/* 花色標籤徽章切換 */
+body:has(#color-seal:checked) #tag-seal,
+body:has(#color-blue:checked) #tag-blue,
+body:has(#color-chocolate:checked) #tag-chocolate,
+body:has(#color-lilac:checked) #tag-lilac {
+  display: flex;
+}
 
-    /* 花色按鈕 Highlight 高亮 */
-    body:has(#color-seal:checked) label[for="color-seal"],
-    body:has(#color-blue:checked) label[for="color-blue"],
-    body:has(#color-chocolate:checked) label[for="color-chocolate"],
-    body:has(#color-lilac:checked) label[for="color-lilac"] {
-      background-color: #C68B59;
-      color: #ffffff;
-      border-color: #C68B59;
-    }
+/* 花色按鈕 Highlight 高亮 */
+body:has(#color-seal:checked) label[for="color-seal"],
+body:has(#color-blue:checked) label[for="color-blue"],
+body:has(#color-chocolate:checked) label[for="color-chocolate"],
+body:has(#color-lilac:checked) label[for="color-lilac"] {
+  background-color: #C68B59;
+  color: #ffffff;
+  border-color: #C68B59;
+}
 
-    /* 花色數據卡片顯示當前花色 */
-    body:has(#color-seal:checked) #color-val-seal,
-    body:has(#color-blue:checked) #color-val-blue,
-    body:has(#color-chocolate:checked) #color-val-chocolate,
-    body:has(#color-lilac:checked) #color-val-lilac {
-      display: block;
-    }
+/* 花色數據卡片顯示當前花色 */
+body:has(#color-seal:checked) #color-val-seal,
+body:has(#color-blue:checked) #color-val-blue,
+body:has(#color-chocolate:checked) #color-val-chocolate,
+body:has(#color-lilac:checked) #color-val-lilac {
+  display: block;
+}
 
-    /* --- 純 CSS 公母體重切換邏輯 --- */
-    body:has(#weight-male:checked) #weight-card-male,
-    body:has(#weight-female:checked) #weight-card-female {
-      display: block;
-    }
+/* 純 CSS 公母體重切換邏輯 */
+body:has(#weight-male:checked) #weight-card-male,
+body:has(#weight-female:checked) #weight-card-female {
+  display: block;
+}
 
-    /* --- 純 CSS 吸頂目錄頁籤切換邏輯 --- */
-    body:has(#cat-overview:checked) label[for="cat-overview"],
-    body:has(#cat-temperament:checked) label[for="cat-temperament"],
-    body:has(#cat-health:checked) label[for="cat-health"],
-    body:has(#cat-food:checked) label[for="cat-food"] {
-      background-color: #C68B59;
-      color: #ffffff;
-    }
+/* 純 CSS 吸頂目錄頁籤切換邏輯 */
+body:has(#cat-overview:checked) label[for="cat-overview"],
+body:has(#cat-temperament:checked) label[for="cat-temperament"],
+body:has(#cat-health:checked) label[for="cat-health"],
+body:has(#cat-food:checked) label[for="cat-food"] {
+  background-color: #C68B59;
+  color: #ffffff;
+}
 
-    body:has(#cat-overview:checked) #sec-overview,
-    body:has(#cat-temperament:checked) #sec-temperament,
-    body:has(#cat-health:checked) #sec-health,
-    body:has(#cat-food:checked) #sec-food {
-      display: block;
-    }
-  </style>
+body:has(#cat-overview:checked) #sec-overview,
+body:has(#cat-temperament:checked) #sec-temperament,
+body:has(#cat-health:checked) #sec-health,
+body:has(#cat-food:checked) #sec-food {
+  display: block;
+}
+</style>
 </head>
 <body class="min-h-screen bg-[#FAF8F5]">
 
-  <!-- 純 CSS 狀態控制器 -->
-  <input type="radio" name="color-picker" id="color-seal" class="state-toggle" checked>
-  <input type="radio" name="color-picker" id="color-blue" class="state-toggle">
-  <input type="radio" name="color-picker" id="color-chocolate" class="state-toggle">
-  <input type="radio" name="color-picker" id="color-lilac" class="state-toggle">
+<!-- 純 CSS 狀態控制器 -->
+<input type="radio" name="color-picker" id="color-seal" class="state-toggle" checked>
+<input type="radio" name="color-picker" id="color-blue" class="state-toggle">
+<input type="radio" name="color-picker" id="color-chocolate" class="state-toggle">
+<input type="radio" name="color-picker" id="color-lilac" class="state-toggle">
 
-  <input type="radio" name="weight-picker" id="weight-male" class="state-toggle" checked>
-  <input type="radio" name="weight-picker" id="weight-female" class="state-toggle">
+<input type="radio" name="weight-picker" id="weight-male" class="state-toggle" checked>
+<input type="radio" name="weight-picker" id="weight-female" class="state-toggle">
 
-  <input type="radio" name="category-picker" id="cat-overview" class="state-toggle" checked>
-  <input type="radio" name="category-picker" id="cat-temperament" class="state-toggle">
-  <input type="radio" name="category-picker" id="cat-health" class="state-toggle">
-  <input type="radio" name="category-picker" id="cat-food" class="state-toggle">
+<input type="radio" name="category-picker" id="cat-overview" class="state-toggle" checked>
+<input type="radio" name="category-picker" id="cat-temperament" class="state-toggle">
+<input type="radio" name="category-picker" id="cat-health" class="state-toggle">
+<input type="radio" name="category-picker" id="cat-food" class="state-toggle">
 
-  <!-- 主應用程式容器 -->
-  <main class="w-full min-h-screen bg-white relative flex flex-col justify-between">
+<!-- 主應用程式容器 -->
+<main class="w-full min-h-screen bg-white relative flex flex-col justify-between">
+
+  <!-- 頂部導覽列 -->
+  <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-100 flex justify-between items-center shrink-0">
+    <a href="index.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </a>
     
-    <!-- 頂部導覽列 -->
-    <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-100 flex justify-between items-center shrink-0">
-      <button type="button" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-      </button>
-      <div class="text-center">
-        <span class="text-[10px] sm:text-xs font-bold text-[#C68B59] tracking-wider uppercase block">PURINA CATDEX</span>
-        <h1 class="text-base sm:text-lg md:text-2xl font-extrabold text-stone-800 leading-tight">布偶貓 (Ragdoll)</h1>
-      </div>
-      <button type="button" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-      </button>
-    </header>
+    <div class="text-center">
+      <span class="text-[10px] sm:text-xs font-bold text-[#C68B59] tracking-wider uppercase block">PURINA CATDEX</span>
+      <h1 class="text-base sm:text-lg md:text-2xl font-extrabold text-stone-800 leading-tight">布偶貓 (Ragdoll)</h1>
+    </div>
 
-    <!-- 主內容區 -->
-    <div class="w-full px-4 sm:px-6 md:px-12 py-6 sm:py-8 my-auto flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 lg:items-center">
+    <a href="index_cat.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </header>
 
-      <!-- 左側區塊：Hero 主圖與花色切換按鈕 -->
-      <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+  <!-- 主內容區 -->
+  <div class="w-full px-4 sm:px-6 md:px-12 py-6 sm:py-8 my-auto flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 lg:items-center">
+    
+    <!-- 左側區塊: Hero 主圖與花色切換按鈕 -->
+    <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+      <!-- 貓咪主圖容器 (加上 id="hero-section" 供捲動定位) -->
+      <section id="hero-section" class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100 scroll-mt-24">
+        <img id="hero-seal" src="./images/ragdoll_seal.jpg" alt="Seal Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+        <img id="hero-blue" src="./images/ragdoll_blue.png" alt="Blue Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+        <img id="hero-chocolate" src="./images/ragdoll_chocolate.png" alt="Chocolate Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+        <img id="hero-lilac" src="./images/ragdoll_lilac.png" alt="Lilac Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
         
-        <!-- 1. 貓咪主圖 -->
-        <section class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100">
-          
-          <!-- 圖 1: Seal -->
-          <img id="hero-seal" 
-               src="./images/ragdoll_seal.jpg" 
-               alt="Seal Ragdoll" 
-               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
-          
-          <!-- 圖 2: Blue -->
-          <img id="hero-blue" 
-               src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1000&q=80" 
-               alt="Blue Ragdoll" 
-               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+        <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#5B826D] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white shadow-sm z-10">
+          <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">Seal (海豹)</span>
+          <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">Blue (藍灰)</span>
+          <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">Chocolate (巧克力)</span>
+          <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">Lilac (丁香)</span>
+        </div>
+      </section>
 
-          <!-- 圖 3: Chocolate -->
-          <img id="hero-chocolate" 
-               src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1000&q=80" 
-               alt="Chocolate Ragdoll" 
-               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+      <!-- 花色選擇膠囊按鈕區 -->
+      <section class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3">
+        <span class="text-xs sm:text-sm font-bold text-stone-600 flex items-center gap-2">
+          點擊切換代表花色與主圖連動:
+        </span>
+        <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
+          <label for="color-seal" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Seal (海豹)</label>
+          <label for="color-blue" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Blue (藍灰)</label>
+          <label for="color-chocolate" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Chocolate (巧克力)</label>
+          <label for="color-lilac" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Lilac (丁香)</label>
+        </div>
+      </section>
+    </div>
 
-          <!-- 圖 4: Lilac -->
-          <img id="hero-lilac" 
-               src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=1000&q=80" 
-               alt="Lilac Ragdoll" 
-               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
-
-          <!-- 花色動態徽章 -->
-          <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#5B826D] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white shadow-sm z-10">
-            <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-stone-700"></span>Seal (海豹)</span>
-            <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-300"></span>Blue (藍灰)</span>
-            <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-brown-300"></span>Chocolate (巧克力)</span>
-            <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2"><span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-purple-300"></span>Lilac (丁香)</span>
-          </div>
-        </section>
-
-        <!-- 花色快速選擇膠囊 Label 按鈕 -->
-        <section class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3">
-          <span class="text-xs sm:text-sm font-bold text-stone-600 flex items-center gap-2">
-            點擊切換代表花色與主圖連動：
-          </span>
-          <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
-            <label for="color-seal" class="cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">
-              Seal (海豹)
-            </label>
-            <label for="color-blue" class="cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">
-              Blue (藍灰)
-            </label>
-            <label for="color-chocolate" class="cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">
-              Chocolate (巧克力)
-            </label>
-            <label for="color-lilac" class="cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">
-              Lilac (丁香)
-            </label>
-          </div>
-        </section>
-
-      </div>
-
-      <!-- 右側區塊：數據卡片、目錄與內容 -->
-      <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
-
-        <!-- 核心數據特徵卡片區塊 -->
-        <section class="space-y-2">
-          
-          <div class="text-[11px] sm:text-xs font-semibold text-[#C68B59] flex items-center gap-1 px-1">
-            <span>💡 提示：點擊「體重卡片」可切換 ♂️ / ♀️ 性別數據</span>
-          </div>
-
-          <!-- 卡片容器：加入 overflow-x-auto 防擠壓，設定 min-w 防止溢出破版 -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar">
+    <!-- 右側區塊: 數據卡片與內容 -->
+    <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
+      <section class="space-y-2">
+        <div class="text-[11px] sm:text-xs font-semibold text-[#C68B59] flex items-center gap-1 px-1">
+          <span>💡 提示: 點擊「體重卡片」可切換性別數據</span>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar">
+          <!-- 體重 -->
+          <div class="bg-[#FAF8F5] border-2 border-[#C68B59]/40 hover:border-[#C68B59] rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs relative transition-all group min-w-[130px]">
+            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-stone-700 text-base sm:text-lg shadow-xs shrink-0 group-hover:scale-105 transition-transform">⚖️</div>
             
-            <!-- 卡片 1：體重數據 -->
-            <div class="bg-[#FAF8F5] border-2 border-[#C68B59]/40 hover:border-[#C68B59] rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs relative transition-all group min-w-[130px]">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-stone-700 text-base sm:text-lg shadow-xs shrink-0 group-hover:scale-105 transition-transform">
-                ⚖️
+            <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
+              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
+                WEIGHT <span class="text-xs text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂ 公</span>
               </div>
-              
-              <!-- 狀態 1: 公貓 -->
-              <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
-                  weight <span class="text-xs text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂️ 🔄</span>
-                </div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">5.5-9 公斤</div>
-              </label>
+              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">5.4 至 9.1 公斤</div>
+            </label>
 
-              <!-- 狀態 2: 母貓 -->
-              <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
-                  weight <span class="text-xs text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀️ 🔄</span>
-                </div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">4.5-7 公斤</div>
-              </label>
-            </div>
-
-            <!-- 卡片 2：壽命數據 -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#C68B59] text-base sm:text-lg shadow-xs shrink-0">
-                ⏳
+            <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
+              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
+                WEIGHT <span class="text-xs text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀ 母</span>
               </div>
-              <div class="text-center xl:text-left w-full min-w-0">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">LIFESPAN</div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">12 - 15 年</div>
-              </div>
-            </div>
-
-            <!-- 卡片 3：掉毛與毛髮 -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#5B826D] text-base sm:text-lg shadow-xs shrink-0">
-                🧶
-              </div>
-              <div class="text-center xl:text-left w-full min-w-0">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COAT</div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 break-words">長毛 / 中等掉毛</div>
-              </div>
-            </div>
-
-            <!-- 卡片 4：花色數量 -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#C68B59] text-base sm:text-lg shadow-xs shrink-0">
-                🎨
-              </div>
-              <div class="text-center xl:text-left w-full min-w-0 overflow-hidden">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COLOR</div>
-                <div id="color-val-seal" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">Seal (海豹)</div>
-                <div id="color-val-red" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">Red (紅褐)</div>
-                <div id="color-val-blue" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">Blue (藍灰)</div>
-                <div id="color-val-fawn" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">Fawn (鹿皮黃)</div>
-              </div>
-            </div>
-
+              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">3.6 至 6.8 公斤</div>
+            </label>
           </div>
-        </section>
 
-        <!-- 吸頂目錄導覽 Label 標籤 -->
-        <div class="py-2 border-y border-stone-200/60 bg-white">
-          <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
-            <label for="cat-overview" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">
-              概覽
-            </label>
-            <label for="cat-temperament" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">
-              性格特徵
-            </label>
-            <label for="cat-health" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">
-              健康保養
-            </label>
-            <label for="cat-food" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">
-              主糧推薦
-            </label>
+          <!-- 壽命 -->
+          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
+            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#C68B59] text-base sm:text-lg shadow-xs shrink-0">⏳</div>
+            <div class="text-center xl:text-left w-full min-w-0">
+              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">LIFESPAN</div>
+              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">12-15 年</div>
+            </div>
+          </div>
+
+          <!-- 毛髮 -->
+          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
+            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#5B826D] text-base sm:text-lg shadow-xs shrink-0">✨</div>
+            <div class="text-center xl:text-left w-full min-w-0">
+              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COAT</div>
+              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 break-words">長毛 / 中等掉毛</div>
+            </div>
+          </div>
+
+          <!-- 花色 -->
+          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
+            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white border border-stone-200/60 flex items-center justify-center text-[#C68B59] text-base sm:text-lg shadow-xs shrink-0">🎨</div>
+            <div class="text-center xl:text-left w-full min-w-0">
+              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight">COLOR</div>
+              <div id="color-val-chocolate" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Chocolate<br class="block sm:hidden xl:block">(巧克力)</div>
+              <div id="color-val-seal" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Seal<br class="block sm:hidden xl:block">(海豹)</div>
+              <div id="color-val-lilac" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Lilac<br class="block sm:hidden xl:block">(淡紫)</div>
+              <div id="color-val-blue" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Blue<br class="block sm:hidden xl:block">(藍灰)</div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <!-- 正文內容區 -->
-        <section class="min-h-[200px] sm:min-h-[240px] bg-[#FAF8F5]/80 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center">
-          
-          <!-- 章節 1: 概覽 -->
-          <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">概覽 Overview</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-              布偶貓（Ragdoll）是大型長毛貓品種，以其深藍色的圓眼睛、柔軟長毛與極度親人溫和的性格著稱。牠們在被抱起時身體會放鬆宛如布偶一般，因而得名。
-            </p>
-          </div>
-
-          <!-- 章節 2: 性格特徵 -->
-          <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">性格特徵 Temperament</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-              布偶貓性格極其溫順、文靜且充滿耐性，喜歡隨時跟隨在主人身旁，非常適合與兒童及其他寵物家庭共同生活。
-            </p>
-          </div>
-
-          <!-- 章節 3: 健康保養 -->
-          <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">健康保養 Health & Care</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-              需要定期梳理長毛以防結毛，並需注意心肌肥大症（HCM）的基因檢測與體重管理。
-            </p>
-          </div>
-
-          <!-- 章節 4: 主糧推薦 -->
-          <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">主糧推薦 Food Recommendation</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-              推薦選用富含 Omega-3 與高品質蛋白質的 Purina Pro Plan 長毛貓配方，維持亮麗毛髮與健全肌肉發展。
-            </p>
-          </div>
-
-        </section>
-
+      <!-- 目錄選單 -->
+      <div class="py-2 border-y border-stone-200/60 bg-white">
+        <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
+          <label for="cat-overview" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">概覽</label>
+          <label for="cat-temperament" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">性格特徵</label>
+          <label for="cat-health" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">健康保養</label>
+          <label for="cat-food" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">主糧推薦</label>
+        </div>
       </div>
 
+      <!-- 詳細內容 -->
+      <section class="min-h-[200px] sm:min-h-[240px] bg-[#FAF8F5]/80 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center">
+        <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">概覽 Overview</h2>
+          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
+            布偶貓(Ragdoll) 源自1960年代的美國，屬於大型長毛貓品種。牠們擁有圓潤的頭型、深藍色的杏仁狀大眼，以及極富質感的雙層絲滑被毛。最顯著的特徵是抱起時身體會如布偶般放鬆癱軟，成長期可長達3至4年才完全成熟。
+          </p>
+        </div>
+
+        <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">性格特徵 Temperament</h2>
+          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
+            性格極度溫順親人、無攻擊性，常被形容為「貓界狗子」。布偶貓社交需求高，喜歡跟隨主人互動，甚至會在門口迎接收工，且聲音細軟柔和。由於對環境變化適應力強且極度包容，非常適合多寵物家庭或有小孩的家庭飼養。
+          </p>
+        </div>
+
+        <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">健康保養 Health & Care</h2>
+          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
+            需留意肥大性心肌病 (HCM) 與多囊腎病 (PKD) 等遺傳疾病，建議定期安排心臟超音波檢查。日常需注意腸胃保健，並勤於梳理長毛以防結塊與毛球症。同時，應嚴格控制體重與飲食份量，避免發胖增加關節與心血管負擔。
+          </p>
+        </div>
+
+        <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
+          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">主糧推薦 Food Recommendation</h2>
+          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
+            宜選擇高蛋白、中脂肪、無穀且低敏的優質貓糧，以維持豐厚被毛與肌肉發育。成分首選以優質鮮肉為主的配方(如乾糧選用渴望 Orijen、法米納 Farmina；主食罐選用 Go!、K9 Natural 等)，並可補充 Omega-3 脂肪酸護膚亮毛。
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 右下角懸浮雲朵按鈕 -->
+  <div class="fixed bottom-6 right-6 z-30">
+    <button id="cloud-btn" type="button" class="w-12 h-12 bg-[#C68B59] hover:bg-[#B87B4B] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group" title="貓咪迷思破解小卡">
+      <!-- 雲朵 SVG 圖示 -->
+      <svg class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+      </svg>
+    </button>
+  </div>
+</main>
+
+<!-- 貓咪誤解/迷思 彈出式對話框 (Modal) -->
+<div id="myth-modal" style="opacity: 0; pointer-events: none;" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all duration-300">
+  <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-100 relative">
+    
+    <!-- 關閉按鈕 -->
+    <button id="close-modal-btn" type="button" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 w-8 h-8 rounded-full flex items-center justify-center hover:bg-stone-100 transition-colors">
+      ✕
+    </button>
+
+    <!-- 對話框標頭 -->
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-2xl bg-[#FAF8F5] border border-[#C68B59]/30 flex items-center justify-center text-xl shrink-0">
+        ☁️
+      </div>
+      <div>
+        <span class="text-[10px] font-bold text-[#C68B59] uppercase tracking-wider block">Purina Cat Myth Buster</span>
+        <h3 class="text-lg font-bold text-stone-800 leading-tight">布偶貓冷知識與誤解破解</h3>
+      </div>
     </div>
 
-    <!-- 懸浮客服按鈕 -->
-    <div class="fixed bottom-6 right-6 z-30">
-      <button type="button" class="w-12 h-12 bg-[#C68B59] hover:bg-[#B87B4B] text-white rounded-full flex items-center justify-center shadow-md active:scale-95 transition-all border-2 border-white text-lg">
-        💬
+    <!-- 迷思內容區塊 -->
+    <div class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 my-4 space-y-2">
+      <div class="inline-block px-2.5 py-1 bg-[#5B826D] text-white text-xs font-semibold rounded-md mb-1">
+        常見誤解
+      </div>
+      <h4 class="text-base font-bold text-stone-800" id="myth-title">
+        載入中...
+      </h4>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed" id="myth-content">
+        載入中...
+      </p>
+    </div>
+
+    <!-- 底部操作按鈕 -->
+    <div class="flex gap-3 pt-2">
+      <button id="next-myth-btn" type="button" class="flex-1 py-3 px-4 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all active:scale-95">
+        了解！看下一條迷思 🐾
       </button>
     </div>
+  </div>
+</div>
 
-  </main>
+<!-- JavaScript 邏輯 -->
+<script>
+const catMyths = [
+  {
+    title: "「布偶貓完全沒脾氣，怎麼弄都可以。」",
+    content: "大錯特錯。再溫和的貓也有底線。強行抱太久、硬要摸牠討厭的部位（比如肚子），牠一樣會掙脫，甚至可能用不伸爪子的方式拍打你以示警告。尊重是雙向的。"
+  },
+  {
+    title: "「布偶貓不聰明，有點笨。」",
+    content: "與其說笨，不如說牠們的動機不同。牠們對「取悅人類」的動機可能高於「獨立解決問題」。我教我家布偶貓握手，五次就會了，因為有零食獎勵，牠樂於參與這種互動。但你要牠自己開複雜的門閂，牠可能沒興趣。"
+  },
+  {
+    title: "「所有布偶貓都一樣黏人。」",
+    content: "個體差異很大。就像人有的外向有的內向。有些布偶貓是「跟屁蟲」等級，有些則是「保持在同一個房間就好」。這跟遺傳、早期經驗都有關。別因為你的貓沒有24小時黏著你，就覺得牠性格有缺陷。"
+  },
 
-  <!-- 阻止點擊觸發滾動與跳頂的 JavaScript 腳本 -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('label[for]').forEach(label => {
-        label.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetId = label.getAttribute('for');
-          const targetInput = document.getElementById(targetId);
-          if (targetInput) {
-            targetInput.checked = true;
-            targetInput.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        });
-      });
+];
+
+let currentMythIndex = 0;
+
+window.addEventListener('DOMContentLoaded', () => {
+  const heroSection = document.getElementById('hero-section');
+
+  // 1. 一般 label radio 切換邏輯
+  document.querySelectorAll('label[for]').forEach(label => {
+    label.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = label.getAttribute('for');
+      const targetInput = document.getElementById(targetId);
+      if (targetInput) {
+        targetInput.checked = true;
+        targetInput.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      // 只有左側花色卡片（有 class="color-btn" 的按鈕）點擊時才會滾動回照片處
+      if (label.classList.contains('color-btn') && heroSection) {
+        heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
-  </script>
+  });
+
+  // 2. 取得雲朵與對話框元件
+  const cloudBtn = document.getElementById('cloud-btn');
+  const mythModal = document.getElementById('myth-modal');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const nextMythBtn = document.getElementById('next-myth-btn');
+  const mythTitle = document.getElementById('myth-title');
+  const mythContent = document.getElementById('myth-content');
+
+  // 更新對話框內容
+  function updateMythContent(index) {
+    if (mythTitle && mythContent) {
+      mythTitle.textContent = catMyths[index].title;
+      mythContent.textContent = catMyths[index].content;
+    }
+  }
+
+  // 開啟對話框
+  function openModal() {
+    if (mythModal) {
+      updateMythContent(currentMythIndex);
+      mythModal.style.opacity = '1';
+      mythModal.style.pointerEvents = 'auto';
+    }
+  }
+
+  // 關閉對話框
+  function closeModal() {
+    if (mythModal) {
+      mythModal.style.opacity = '0';
+      mythModal.style.pointerEvents = 'none';
+    }
+  }
+
+  // 綁定點擊事件
+  if (cloudBtn) cloudBtn.addEventListener('click', openModal);
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+  
+  if (nextMythBtn) {
+    nextMythBtn.addEventListener('click', () => {
+      currentMythIndex = (currentMythIndex + 1) % catMyths.length;
+      updateMythContent(currentMythIndex);
+    });
+  }
+
+  // 點擊背景空白處關閉
+  if (mythModal) {
+    mythModal.addEventListener('click', (e) => {
+      if (e.target === mythModal) closeModal();
+    });
+  }
+});
+</script>
 
 </body>
 </html>
