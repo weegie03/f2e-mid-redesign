@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Purina CatDex 布偶貓 (Ragdoll) 品種介紹</title>
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にゃにこれ? 喵的什麼? 布偶貓 (Ragdoll) 品種介紹</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    /* ====================================================
+       💡 設計系統 CSS 變數
+       ==================================================== */
+    :root {
+      /* 色彩系統 */
+      --color-primary: #C68B59;    /* 貓抓板暖木棕 */
+      --color-hover: #B87B4B;      /* 暖木棕 Hover 狀態 */
+      --color-secondary: #5B8266;  /* 鼠尾草綠 */
+      --color-bg-main: #FBF9F5;    /* 溫潤米白底 */
+      --color-text-main: #2B2D42;  /* 內文深碳灰 */
+      --color-text-muted: #6B7280; /* 輔助灰字 */
+
+      /* 文字尺寸 */
+      --font-size-32: 32px;        /* 32px 大標題 */
+      --font-size-20: 20px;        /* 20px 中標題/章節/按鈕 */
+      --font-size-16: 16px;        /* 16px 內文/卡片內容 */
+    }
 
     html, body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -108,62 +126,63 @@
   <input type="radio" name="category-picker" id="cat-health" class="state-toggle">
   <input type="radio" name="category-picker" id="cat-food" class="state-toggle">
 
-<!-- 主應用程式容器 -->
-<main class="w-full min-h-screen bg-white relative flex flex-col justify-between">
-
-  <!-- 頂部導覽列 -->
-  <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-100 flex justify-between items-center shrink-0">
-    <a href="index.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </a>
+  <!-- 主應用程式容器 -->
+  <main class="w-full min-h-screen bg-white relative flex flex-col justify-between" style="background-color: var(--color-bg-main);">
     
-    <div class="text-center">
-      <span class="text-[10px] sm:text-xs font-bold text-[#C68B59] tracking-wider uppercase block">PURINA CATDEX</span>
-      <h1 class="text-base sm:text-lg md:text-2xl font-extrabold text-stone-800 leading-tight">布偶貓 (Ragdoll)</h1>
-    </div>
+    <!-- 頂部導覽列 -->
+    <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-200/60 flex justify-between items-center shrink-0">
+      <a href="index.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </a>
+      
+      <!-- 「にゃにこれ? 喵的什麼?」回首頁按鈕 -->
+      <div class="text-center">
+        <a href="index.html" class="inline-block text-size-16 font-bold tracking-wider uppercase transition-all hover:opacity-80 active:scale-95 select-none" style="color: var(--color-primary);" title="回首頁">
+          にゃにこれ? 喵的什麼?
+        </a>
+        <h1 class="text-size-32 font-extrabold leading-tight mt-0.5" style="color: var(--color-text-main);">布偶貓 (RAGDOLL)</h1>
+      </div>
 
-    <a href="index_cat.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-    </a>
-  </header>
+      <a href="index_shorthair.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </header>
 
-  <!-- 主內容區 -->
-  <div class="w-full px-4 sm:px-6 md:px-12 py-6 sm:py-8 my-auto flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 lg:items-center">
-    
-    <!-- 左側區塊: Hero 主圖與花色切換按鈕 -->
-    <div class="lg:col-span-5 space-y-4 sm:space-y-6">
-      <!-- 貓咪主圖容器 -->
-      <section id="hero-section" class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100 scroll-mt-24">
-        <img id="hero-seal" src="./images/ragdoll_seal.jpg" alt="Seal Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
-        <img id="hero-blue" src="./images/ragdoll_blue.png" alt="Blue Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
-        <img id="hero-chocolate" src="./images/ragdoll_chocolate.png" alt="Chocolate Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
-        <img id="hero-lilac" src="./images/ragdoll_lilac.png" alt="Lilac Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+    <!-- 主內容區 -->
+    <div class="w-full px-4 sm:px-6 md:px-12 py-6 sm:py-8 my-auto flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 lg:items-center">
+
+      <!-- 左側區塊：Hero 主圖與花色切換按鈕 -->
+      <div class="lg:col-span-5 space-y-4 sm:space-y-6">
         
-        <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#5B826D] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white shadow-sm z-10">
-          <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">海豹 ( Seal )</span>
-          <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">藍灰 ( Blue )</span>
-          <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">巧克力 ( Chocolate )</span>
-          <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">丁香 ( Lilac )</span>
-        </div>
-      </section>
+        <!-- 1. 貓咪主圖容器 -->
+        <section id="hero-section" class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100 scroll-mt-24">
+          <img id="hero-seal" src="./images/ragdoll_seal.jpg" alt="Seal Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-blue" src="./images/ragdoll_blue.png" alt="Blue Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-chocolate" src="./images/ragdoll_chocolate.png" alt="Chocolate Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-lilac" src="./images/ragdoll_lilac.png" alt="Lilac Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
 
-      <!-- 花色選擇按鈕 -->
-      <section class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3">
-        <span class="text-xs sm:text-sm font-bold text-stone-600 flex items-center gap-2">
-          點擊切換代表花色與主圖連動:
-        </span>
-        <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
-          <label for="color-seal" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Seal (海豹)</label>
-          <label for="color-blue" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Blue (藍灰)</label>
-          <label for="color-chocolate" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Chocolate (巧克力)</label>
-          <label for="color-lilac" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">Lilac (丁香)</label>
-        </div>
-      </section>
-    </div>
+          <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3.5 py-1.5 rounded-lg text-size-16 font-medium text-white shadow-sm z-10" style="background-color: var(--color-secondary);">
+            <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">海豹 (SEAL)</span>
+            <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">藍灰 (BLUE)</span>
+            <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">巧克力 (CHOCOLATE)</span>
+            <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">淡紫 (LILAC)</span>
+          </div>
+        </section>
+
+        <!-- 花色選擇按鈕 -->
+        <section class="p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3" style="background-color: var(--color-bg-main);">
+          <span class="text-size-16 font-bold flex items-center gap-2" style="color: var(--color-text-main);">
+            點擊切換代表花色與主圖連動：
+          </span>
+          <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
+            <label for="color-seal" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">海豹 (SEAL)</label>
+            <label for="color-blue" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">藍灰 (BLUE)</label>
+            <label for="color-chocolate" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">巧克力 (CHOCOLATE)</label>
+            <label for="color-lilac" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">淡紫 (LILAC)</label>
+          </div>
+        </section>
+
+      </div>
 
       <!-- 右側區塊：數據卡片與內容 -->
       <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
