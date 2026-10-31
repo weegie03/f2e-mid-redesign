@@ -3,22 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>にゃにこれ? 喵的什麼? 英國短毛貓 (British Shorthair) 品種介紹</title>
+  <title>Purina CatDex 布偶貓 (Ragdoll) 品種介紹</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+    /* ====================================================
+       💡 設計系統 CSS 變數 (完全符合設計規範)
+       ==================================================== */
+    :root {
+      /* 色彩系統 */
+      --color-primary: #C68B59;    /* 貓抓板暖木棕 */
+      --color-hover: #B87B4B;      /* 暖木棕 Hover 狀態 */
+      --color-secondary: #5B8266;  /* 鼠尾草綠 */
+      --color-bg-main: #FBF9F5;    /* 溫潤米白底 */
+      --color-text-main: #2B2D42;  /* 內文深碳灰 */
+      --color-text-muted: #6B7280; /* 輔助灰字 */
+
+      /* 文字尺寸 */
+      --font-size-32: 32px;        /* 32px 大標題 */
+      --font-size-20: 20px;        /* 20px 中標題/章節/按鈕 */
+      --font-size-16: 16px;        /* 16px 內文/卡片內容 */
+    }
+
     html, body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: #FAF8F5;
-      color: #2D3748;
+      background-color: var(--color-bg-main);
+      color: var(--color-text-main);
       margin: 0;
       padding: 0;
       overscroll-behavior: contain;
     }
 
-    /* 隱藏原生滾動條但保持滾動功能 */
+    /* 全局統一文字尺寸類別 */
+    .text-size-32 { font-size: var(--font-size-32) !important; line-height: 1.2; }
+    .text-size-20 { font-size: var(--font-size-20) !important; line-height: 1.3; }
+    .text-size-16 { font-size: var(--font-size-16) !important; line-height: 1.6; }
+
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -27,12 +49,10 @@
       scrollbar-width: none;
     }
 
-    /* 防止點擊觸發頁面放大或非預期動作 */
     label, button {
       touch-action: manipulation;
     }
 
-    /* 隱藏純 CSS 控制用的 Radio Input */
     .state-toggle {
       display: none !important;
     }
@@ -46,7 +66,6 @@
       visibility: visible;
     }
 
-    /* 花色標籤徽章切換 */
     body:has(#color-solid:checked) #tag-solid,
     body:has(#color-shaded:checked) #tag-shaded,
     body:has(#color-tabby:checked) #tag-tabby,
@@ -54,17 +73,15 @@
       display: flex;
     }
 
-    /* 花色按鈕 Highlight 高亮 */
     body:has(#color-solid:checked) label[for="color-solid"],
     body:has(#color-shaded:checked) label[for="color-shaded"],
     body:has(#color-tabby:checked) label[for="color-tabby"],
     body:has(#color-smoke:checked) label[for="color-smoke"] {
-      background-color: #C68B59;
-      color: #ffffff;
-      border-color: #C68B59;
+      background-color: var(--color-primary) !important;
+      color: #ffffff !important;
+      border-color: var(--color-primary) !important;
     }
 
-    /* 花色數據卡片顯示當前花色 */
     body:has(#color-solid:checked) #color-val-solid,
     body:has(#color-shaded:checked) #color-val-shaded,
     body:has(#color-tabby:checked) #color-val-tabby,
@@ -72,19 +89,17 @@
       display: block;
     }
 
-    /* 純 CSS 公母體重切換邏輯 */
     body:has(#weight-male:checked) #weight-card-male,
     body:has(#weight-female:checked) #weight-card-female {
       display: block;
     }
 
-    /* 純 CSS 吸頂目錄頁籤切換邏輯 */
     body:has(#cat-overview:checked) label[for="cat-overview"],
     body:has(#cat-temperament:checked) label[for="cat-temperament"],
     body:has(#cat-health:checked) label[for="cat-health"],
     body:has(#cat-food:checked) label[for="cat-food"] {
-      background-color: #C68B59;
-      color: #ffffff;
+      background-color: var(--color-primary) !important;
+      color: #ffffff !important;
     }
 
     body:has(#cat-overview:checked) #sec-overview,
@@ -95,7 +110,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#FAF8F5]">
+<body class="min-h-screen">
 
   <!-- 純 CSS 狀態控制器 -->
   <input type="radio" name="color-picker" id="color-solid" class="state-toggle" checked>
@@ -112,18 +127,21 @@
   <input type="radio" name="category-picker" id="cat-food" class="state-toggle">
 
   <!-- 主應用程式容器 -->
-  <main class="w-full min-h-screen bg-white relative flex flex-col justify-between">
+  <main class="w-full min-h-screen bg-white relative flex flex-col justify-between" style="background-color: var(--color-bg-main);">
     
     <!-- 頂部導覽列 -->
-    <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-100 flex justify-between items-center shrink-0">
-      <a href="index_Ragdoll.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
+    <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-200/60 flex justify-between items-center shrink-0">
+      <a href="index_Ragdoll.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </a>
+      
+      <!-- 回首頁按鈕 -->
       <div class="text-center">
-        <span class="text-[10px] sm:text-xs font-bold text-[#C68B59] tracking-wider uppercase block">にゃにこれ? 喵的什麼?</span>
-        <h1 class="text-base sm:text-lg md:text-2xl font-extrabold text-stone-800 leading-tight">英國短毛貓 (British Shorthair)</h1>
+        <span class="text-[10px] sm:text-xs font-bold text-[#C68B59] tracking-wider uppercase block">PURINA CATDEX</span>
+        <h1 class="text-base sm:text-lg md:text-2xl font-extrabold text-stone-800 leading-tight">短毛貓 (Shorthair)</h1>
       </div>
-      <a href="index_cat.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-stone-800 text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
+
+      <a href="#" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
       </a>
     </header>
@@ -141,24 +159,24 @@
           <img id="hero-tabby" src="./images/shorthair_tabby.png" alt="Tabby Shorthair" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
           <img id="hero-smoke" src="./images/shorthair_smoke.png" alt="Smoke Shorthair" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
 
-          <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#5B826D] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white shadow-sm z-10">
-            <span id="tag-solid" class="hidden items-center gap-1.5 sm:gap-2">單色系 (Solid)</span>
-            <span id="tag-shaded" class="hidden items-center gap-1.5 sm:gap-2">漸層系 (Shaded)</span>
-            <span id="tag-tabby" class="hidden items-center gap-1.5 sm:gap-2">虎斑系 (Tabby)</span>
-            <span id="tag-smoke" class="hidden items-center gap-1.5 sm:gap-2">煙燻系 (Smoke)</span>
+          <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3.5 py-1.5 rounded-lg text-size-16 font-medium text-white shadow-sm z-10" style="background-color: var(--color-secondary);">
+            <span id="tag-solid" class="hidden items-center gap-1.5 sm:gap-2">單色系 (SOLID)</span>
+            <span id="tag-shaded" class="hidden items-center gap-1.5 sm:gap-2">漸層系 (SHADED)</span>
+            <span id="tag-tabby" class="hidden items-center gap-1.5 sm:gap-2">虎斑系 (TABBY)</span>
+            <span id="tag-smoke" class="hidden items-center gap-1.5 sm:gap-2">煙燻系 (SMOKE)</span>
           </div>
         </section>
 
         <!-- 花色選擇按鈕 -->
-        <section class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3">
-          <span class="text-xs sm:text-sm font-bold text-stone-600 flex items-center gap-2">
+        <section class="p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3" style="background-color: var(--color-bg-main);">
+          <span class="text-size-16 font-bold flex items-center gap-2" style="color: var(--color-text-main);">
             點擊切換代表花色與主圖連動：
           </span>
           <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
-            <label for="color-solid" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">單色系 (Solid)</label>
-            <label for="color-shaded" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">漸層系 (Shaded)</label>
-            <label for="color-tabby" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">虎斑系 (Tabby)</label>
-            <label for="color-smoke" class="color-btn cursor-pointer px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition-all select-none">煙燻系 (Smoke)</label>
+            <label for="color-solid" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">單色系 (SOLID)</label>
+            <label for="color-shaded" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">漸層系 (SHADED)</label>
+            <label for="color-tabby" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">虎斑系 (TABBY)</label>
+            <label for="color-smoke" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">煙燻系 (SMOKE)</label>
           </div>
         </section>
 
@@ -169,58 +187,53 @@
 
         <!-- 核心數據特徵卡片區塊 -->
         <section class="space-y-2">
-          <div class="text-[11px] sm:text-xs font-semibold text-[#C68B59] flex items-center gap-1 px-1">
+          <div class="text-size-16 font-semibold flex items-center gap-1 px-1" style="color: var(--color-primary);">
             <span>💡 提示：點擊「體重卡片」可切換性別數據</span>
           </div>
 
-          <!-- 卡片容器：加入 items-stretch，讓卡片等高且內容上下垂直居中 -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar items-stretch">
             
-            <!-- 卡片 1：體重數據 (加入 flex-col justify-center min-h-[96px] 解決留白問題) -->
-            <div class="bg-[#FAF8F5] border-2 border-[#C68B59]/40 hover:border-[#C68B59] rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs relative transition-all group min-w-[130px] min-h-[96px]" translate="no">
-              
-              <!-- 狀態 1: 公貓 -->
+            <!-- 卡片 1：體重數據 (小字級 16px、無點點點、上下垂直置中) -->
+            <div class="border-2 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs relative transition-all group min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main); border-color: rgba(198, 139, 89, 0.4);" translate="no">
               <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center gap-1">
-                  WEIGHT <span class="text-xs text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂️ 公</span>
+                <div class="text-size-16 font-bold uppercase tracking-tight flex items-center justify-center gap-1" style="color: var(--color-text-muted);">
+                  WEIGHT <span class="text-size-16 text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂️ 公</span>
                 </div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">5.5 至 8 公斤</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">5.5 至 8 公斤</div>
               </label>
 
-              <!-- 狀態 2: 母貓 -->
               <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center gap-1">
-                  WEIGHT <span class="text-xs text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀️ 母</span>
+                <div class="text-size-16 font-bold uppercase tracking-tight flex items-center justify-center gap-1" style="color: var(--color-text-muted);">
+                  WEIGHT <span class="text-size-16 text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀️ 母</span>
                 </div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">4 至 6 公斤</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">4 至 6 公斤</div>
               </label>
-
             </div>
 
             <!-- 卡片 2：壽命數據 -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+            <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
               <div class="text-center w-full min-w-0">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">LIFESPAN</div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">12-15 年</div>
+                <div class="text-size-16 font-bold uppercase tracking-tight break-words" style="color: var(--color-text-muted);">LIFESPAN</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">12-15 年</div>
               </div>
             </div>
 
             <!-- 卡片 3：掉毛與毛髮 -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+            <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
               <div class="text-center w-full min-w-0">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COAT</div>
-                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 break-words">短但濃密 / 中偏高等掉毛</div>
+                <div class="text-size-16 font-bold uppercase tracking-tight break-words" style="color: var(--color-text-muted);">COAT</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">短但濃密 / 中偏高等掉毛</div>
               </div>
             </div>
 
-            <!-- 卡片 4：花色 (兩行換行時，卡片等高且文字完全置中，不留白) -->
-            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+            <!-- 卡片 4：花色 -->
+            <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
               <div class="text-center w-full min-w-0">
-                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight">COLOR</div>
-                <div id="color-val-solid" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">單色系<br>( Solid )</div>
-                <div id="color-val-shaded" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">漸層系<br>( Shaded )</div>
-                <div id="color-val-tabby" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">虎斑系<br>( Tabby )</div>
-                <div id="color-val-smoke" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">煙燻系<br>( Smoke )</div>
+                <div class="text-size-16 font-bold uppercase tracking-tight" style="color: var(--color-text-muted);">COLOR</div>
+                <div id="color-val-solid" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">單色系<br>(SOLID)</div>
+                <div id="color-val-shaded" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">漸層系<br>(SHADED)</div>
+                <div id="color-val-tabby" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">虎斑系<br>(TABBY)</div>
+                <div id="color-val-smoke" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">煙燻系<br>(SMOKE)</div>
               </div>
             </div>
 
@@ -230,30 +243,30 @@
         <!-- 目錄選單 -->
         <div class="py-2 border-y border-stone-200/60 bg-white">
           <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
-            <label for="cat-overview" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">概覽</label>
-            <label for="cat-temperament" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">性格特徵</label>
-            <label for="cat-health" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">健康保養</label>
-            <label for="cat-food" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">主糧推薦</label>
+            <label for="cat-overview" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">概覽</label>
+            <label for="cat-temperament" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">性格特徵</label>
+            <label for="cat-health" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">健康保養</label>
+            <label for="cat-food" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">主糧推薦</label>
           </div>
         </div>
 
         <!-- 詳細內容 -->
-        <section class="min-h-[200px] sm:min-h-[240px] bg-[#FAF8F5]/80 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center">
+        <section class="min-h-[200px] sm:min-h-[240px] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center" style="background-color: var(--color-bg-main);">
           <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
             <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">概覽 Overview</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">英國短毛貓是一種普遍的貓咪品種，以其簡潔的外觀和易於照顧的特性而受到歡迎。它們通常擁有短而密的被毛，容易打理，適應力強，是理想的寵物選擇。</p>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">短毛貓是一種普遍的貓咪品種，以其簡潔的外觀和易於照顧的特性而受到歡迎。它們通常擁有短而密的被毛，容易打理，適應力強，是理想的寵物選擇。</p>
           </div>
           <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
             <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">性格特徵 Temperament</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">英國短毛貓性格活潑、友善，容易與人類建立情感連結。它們既獨立又親人，適合在家庭環境中生活。英國短毛貓對新環境的適應能力強，是理想的伴侶動物。</p>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">短毛貓性格活潑、友善，容易與人類建立情感連結。它們既獨立又親人，適合在家庭環境中生活。短毛貓對新環境的適應能力強，是理想的伴侶動物。</p>
           </div>
           <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">健康保養 Health & Care</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">飼養英國短毛貓需嚴格控制體重以防肥胖與關節負擔，並使用流動飲水器預防泌尿道結石。日常應養成每日刷牙習慣，每週梳毛 2～3 次預防毛球症，並定期安排心臟與腎臟超音波篩檢遺傳疾病。</p>
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">健康保養 HEALTH & CARE</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">飼養英國短毛貓需嚴格控制體重以防肥胖與關節負擔，並使用流動飲水器預防泌尿道結石。日常應養成每日刷牙習慣，每週梳毛 2~3 次預防毛球症，並定期安排心臟與腎臟超音波篩檢遺傳疾病。</p>
           </div>
           <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">主糧推薦 Food Recommendation</h2>
-            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">英國短毛貓應依成長階段調整飲食：幼貓選高蛋白高熱量配方；成貓控熱量並補充關節與皮膚保健成分；熟齡貓低磷延緩老化。並宜使用流動水提升飲水意願。</p>
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">主糧推薦 FOOD RECOMMENDATION</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">英國短毛貓應依成長階段調整飲食：幼貓選高蛋白高熱量配方；成貓控熱量並補充關節與皮膚保健成分；熟齡貓低磷延緩老化。並宜使用流動水提升飲水意願。</p>
           </div>
         </section>
 
@@ -263,7 +276,7 @@
 
     <!-- 右下角懸浮雲朵按鈕 -->
     <div class="fixed bottom-6 right-6 z-30">
-      <button id="cloud-btn" type="button" class="w-12 h-12 bg-[#C68B59] hover:bg-[#B87B4B] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group cursor-pointer" title="貓咪迷思破解小卡">
+      <button id="cloud-btn" type="button" class="w-12 h-12 text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group cursor-pointer" style="background-color: var(--color-primary);" title="貓咪迷思破解小卡">
         <svg class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
           <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
         </svg>
@@ -272,7 +285,7 @@
 
   </main>
 
-  <!-- 貓咪誤解/迷思 彈出式對話框 (Modal) -->
+  <!-- 貓咪誤解/迷思彈出式對話框 (Modal) -->
   <div id="myth-modal" style="opacity: 0; pointer-events: none;" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all duration-300">
     <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-100 relative">
       
@@ -283,31 +296,31 @@
 
       <!-- 對話框標頭 -->
       <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-2xl bg-[#FAF8F5] border border-[#C68B59]/30 flex items-center justify-center text-xl shrink-0">
+        <div class="w-10 h-10 rounded-2xl border flex items-center justify-center text-xl shrink-0" style="background-color: var(--color-bg-main); border-color: rgba(198, 139, 89, 0.3);">
           🐱
         </div>
         <div>
-          <span class="text-[10px] font-bold text-[#C68B59] uppercase tracking-wider block">Purina Cat Myth Buster</span>
-          <h3 class="text-lg font-bold text-stone-800 leading-tight">英國短毛貓冷知識與誤解破解</h3>
+          <span class="text-size-16 font-bold uppercase tracking-wider block" style="color: var(--color-primary);">Purina Cat Myth Buster</span>
+          <h3 class="text-size-20 font-bold leading-tight" style="color: var(--color-text-main);">英國短毛貓冷知識與誤解破解</h3>
         </div>
       </div>
 
       <!-- 迷思內容區塊 -->
-      <div class="bg-[#FAF8F5] p-4 sm:p-5 rounded-2xl border border-stone-200/60 my-4 space-y-2">
-        <div class="inline-block px-2.5 py-1 bg-[#5B826D] text-white text-xs font-semibold rounded-md mb-1">
+      <div class="p-4 sm:p-5 rounded-2xl border border-stone-200/60 my-4 space-y-2" style="background-color: var(--color-bg-main);">
+        <div class="inline-block px-2.5 py-1 text-white text-size-16 font-semibold rounded-md mb-1" style="background-color: var(--color-secondary);">
           常見誤解
         </div>
-        <h4 class="text-base font-bold text-stone-800" id="myth-title">
+        <h4 class="text-size-20 font-bold" id="myth-title" style="color: var(--color-text-main);">
           載入中...
         </h4>
-        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed" id="myth-content">
+        <p class="text-size-16 leading-relaxed" id="myth-content" style="color: var(--color-text-main);">
           載入中...
         </p>
       </div>
 
       <!-- 底部操作按鈕 -->
       <div class="flex gap-3 pt-2">
-        <button id="next-myth-btn" type="button" class="flex-1 py-3 px-4 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all active:scale-95 cursor-pointer">
+        <button id="next-myth-btn" type="button" class="flex-1 py-3 px-4 text-white font-bold rounded-xl text-size-20 shadow-xs transition-all active:scale-95 cursor-pointer" style="background-color: var(--color-primary);">
           了解! 看下一條迷思
         </button>
       </div>
@@ -337,7 +350,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       const heroSection = document.getElementById('hero-section');
 
-      // 1. label 點擊邏輯修復與花色專屬置頂滾動
+      // 1. label 點擊邏輯與花色專屬置頂滾動
       document.querySelectorAll('label[for]').forEach(label => {
         label.addEventListener('click', (e) => {
           e.preventDefault();
@@ -348,7 +361,6 @@
             targetInput.dispatchEvent(new Event('change', { bubbles: true }));
           }
 
-          // 只有左側花色卡片 (帶有 class="color-btn") 才會捲動回照片頂部
           if (label.classList.contains('color-btn') && heroSection) {
             heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
@@ -368,7 +380,6 @@
           mythTitle.textContent = catMyths[index].title;
           mythContent.textContent = catMyths[index].content;
 
-          // 當走到最後一條時，將按鈕文字切換為「看完囉! 關閉對話框」
           if (nextMythBtn) {
             if (index === catMyths.length - 1) {
               nextMythBtn.textContent = "看完囉! 關閉對話框";
@@ -399,7 +410,6 @@
 
       if (nextMythBtn) {
         nextMythBtn.addEventListener('click', () => {
-          // 在最後一條點擊時關閉對話框並重新計數
           if (currentMythIndex === catMyths.length - 1) {
             closeModal();
             currentMythIndex = 0;
@@ -410,7 +420,6 @@
         });
       }
 
-      // 點擊對話框外陰影區域可直接關閉
       if (mythModal) {
         mythModal.addEventListener('click', (e) => {
           if (e.target === mythModal) closeModal();
