@@ -147,10 +147,10 @@ body:has(#cat-food:checked) #sec-food {
         <img id="hero-lilac" src="./images/ragdoll_lilac.png" alt="Lilac Ragdoll" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
         
         <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#5B826D] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium text-white shadow-sm z-10">
-          <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">Seal (海豹)</span>
-          <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">Blue (藍灰)</span>
-          <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">Chocolate (巧克力)</span>
-          <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">Lilac (丁香)</span>
+          <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">海豹 ( Seal )</span>
+          <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">藍灰 ( Blue )</span>
+          <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">巧克力 ( Chocolate )</span>
+          <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">丁香 ( Lilac )</span>
         </div>
       </section>
 
@@ -169,106 +169,99 @@ body:has(#cat-food:checked) #sec-food {
     </div>
 
     <!-- 右側區塊: 數據卡片與內容 -->
-    <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
-      <section class="space-y-2">
-        <div class="text-[11px] sm:text-xs font-semibold text-[#C68B59] flex items-center gap-1 px-1">
-          <span>💡 提示: 點擊「體重卡片」可切換性別數據</span>
-        </div>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar">
-          <!-- 體重 -->
-          <!-- 在體重卡片外層加上 translate="no" 屬性 -->
-<div class="bg-[#FAF8F5] border-2 border-[#C68B59]/40 hover:border-[#C68B59] rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs relative transition-all group min-w-[130px]" translate="no">
-  
-  
-  <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
-    <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
-      WEIGHT <span class="text-xs text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂ 公</span>
-    </div>
-    <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">5.4 至 9.1 公斤</div>
-  </label>
+   <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
 
-  <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center xl:text-left">
-    <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center xl:justify-between gap-1">
-      WEIGHT <span class="text-xs text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀ 母</span>
-    </div>
-    <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">3.6 至 6.8 公斤</div>
-  </label>
-</div>
+        <!-- 核心數據特徵卡片區塊 -->
+        <section class="space-y-2">
+          <div class="text-[11px] sm:text-xs font-semibold text-[#C68B59] flex items-center gap-1 px-1">
+            <span>💡 提示：點擊「體重卡片」可切換性別數據</span>
+          </div>
 
-          <!-- 壽命 -->
-          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
+          <!-- 卡片容器：加入 items-stretch，讓卡片等高且內容上下垂直居中 -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar items-stretch">
             
-            <div class="text-center xl:text-left w-full min-w-0">
-              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">LIFESPAN</div>
-              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">12-15 年</div>
-            </div>
-          </div>
+            <!-- 卡片 1：體重數據 (加入 flex-col justify-center min-h-[96px] 解決留白問題) -->
+            <div class="bg-[#FAF8F5] border-2 border-[#C68B59]/40 hover:border-[#C68B59] rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs relative transition-all group min-w-[130px] min-h-[96px]" translate="no">
+              
+              <!-- 狀態 1: 公貓 -->
+              <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center">
+                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center gap-1">
+                  WEIGHT <span class="text-xs text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂️ 公</span>
+                </div>
+                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">5.4 至 9.1 公斤</div>
+              </label>
 
-          <!-- 毛髮 -->
-          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
-           
-            <div class="text-center xl:text-left w-full min-w-0">
-              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COAT</div>
-              <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 break-words">長毛 / 中等掉毛</div>
-            </div>
-          </div>
+              <!-- 狀態 2: 母貓 -->
+              <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center">
+                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight flex items-center justify-center gap-1">
+                  WEIGHT <span class="text-xs text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀️ 母</span>
+                </div>
+                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">3.6 至 6.8 公斤</div>
+              </label>
 
-          <!-- 花色 -->
-          <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col xl:flex-row items-center gap-2 sm:gap-3 shadow-xs min-w-[130px]">
-            
-            <div class="text-center xl:text-left w-full min-w-0">
-              <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight">COLOR</div>
-              <div id="color-val-chocolate" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Chocolate<br class="block sm:hidden xl:block">(巧克力)</div>
-              <div id="color-val-seal" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Seal<br class="block sm:hidden xl:block">(海豹)</div>
-              <div id="color-val-lilac" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Lilac<br class="block sm:hidden xl:block">(淡紫)</div>
-              <div id="color-val-blue" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">Blue<br class="block sm:hidden xl:block">(藍灰)</div>
             </div>
+
+            <!-- 卡片 2：壽命數據 -->
+            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+              <div class="text-center w-full min-w-0">
+                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">LIFESPAN</div>
+                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 truncate">12-15 年</div>
+              </div>
+            </div>
+
+            <!-- 卡片 3：掉毛與毛髮 -->
+            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+              <div class="text-center w-full min-w-0">
+                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight truncate">COAT</div>
+                <div class="text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-snug mt-0.5 break-words">長毛 / 中等掉毛</div>
+              </div>
+            </div>
+
+            <!-- 卡片 4：花色 (兩行換行時，卡片等高且文字完全置中，不留白) -->
+            <div class="bg-[#FAF8F5] border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]">
+              <div class="text-center w-full min-w-0">
+                <div class="text-[10px] sm:text-xs font-bold text-stone-400 uppercase tracking-tight">COLOR</div>
+                <div id="color-val-seal" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">海豹<br>( Seal )</div>
+                <div id="color-val-blue" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">藍灰<br>( Blue )</div>
+                <div id="color-val-chocolate" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">巧克力<br>( Chocolate )</div>
+                <div id="color-val-lilac" class="hidden text-xs sm:text-sm xl:text-base font-extrabold text-stone-800 leading-tight mt-0.5 break-words">淡紫<br>( Lilac )</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 目錄選單 -->
+        <div class="py-2 border-y border-stone-200/60 bg-white">
+          <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
+            <label for="cat-overview" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">概覽</label>
+            <label for="cat-temperament" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">性格特徵</label>
+            <label for="cat-health" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">健康保養</label>
+            <label for="cat-food" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">主糧推薦</label>
           </div>
         </div>
-      </section>
 
-      <!-- 目錄選單 -->
-      <div class="py-2 border-y border-stone-200/60 bg-white">
-        <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
-          <label for="cat-overview" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">概覽</label>
-          <label for="cat-temperament" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">性格特徵</label>
-          <label for="cat-health" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">健康保養</label>
-          <label for="cat-food" class="cursor-pointer px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shrink-0 bg-stone-100 text-stone-600 hover:bg-stone-200 select-none">主糧推薦</label>
-        </div>
+        <!-- 詳細內容 -->
+        <section class="min-h-[200px] sm:min-h-[240px] bg-[#FAF8F5]/80 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center">
+          <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">概覽 Overview</h2>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">布偶貓（Ragdoll）源自1960年代的美國，屬於大型長毛貓品種。牠們擁有圓潤的頭型、深藍色的杏仁狀大眼，以及極富質感的雙層絲滑被毛。最顯著的特徵是抱起時身體會如布偶般放鬆癱軟，成長期可長達3至4年才完全成熟。</p>
+          </div>
+          <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">性格特徵 Temperament</h2>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">性格極度溫順親人、無攻擊性，常被形容為「貓界狗子」。布偶貓社交需求高，喜歡跟隨主人互動，甚至會在門口迎接收工，且聲音細軟柔和。由於對環境變化適應力強且極度包容，非常適合多寵物家庭或有小孩的家庭飼養。</p>
+          </div>
+          <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">健康保養 Health & Care</h2>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal"></p>需留意肥大性心肌病（HCM）與多囊腎病（PKD）等遺傳疾病，建議定期安排心臟超音波檢查。日常需注意腸胃保健，並勤於梳理長毛以防結塊與毛球症。同時，應嚴格控制體重與飲食份量，避免發胖增加關節與心血管負擔。</p>
+          </div>
+          <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">主糧推薦 Food Recommendation</h2>
+            <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">宜選擇高蛋白、中脂肪、無穀且低敏的優質貓糧，以維持豐厚被毛與肌肉發育。成分首選以優質鮮肉為主的配方（如乾糧選用渴望 Orijen、法米納 Farmina；主食罐選用 Go!、K9 Natural 等），並可補充 Omega-3 脂肪酸護膚亮毛。</p>
+          </div>
+        </section>
+
       </div>
-
-      <!-- 詳細內容 -->
-      <section class="min-h-[200px] sm:min-h-[240px] bg-[#FAF8F5]/80 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center">
-        <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">概覽 Overview</h2>
-          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-            布偶貓(Ragdoll) 源自1960年代的美國，屬於大型長毛貓品種。牠們擁有圓潤的頭型、深藍色的杏仁狀大眼，以及極富質感的雙層絲滑被毛。最顯著的特徵是抱起時身體會如布偶般放鬆癱軟，成長期可長達3至4年才完全成熟。
-          </p>
-        </div>
-
-        <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">性格特徵 Temperament</h2>
-          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-            性格極度溫順親人、無攻擊性，常被形容為「貓界狗子」。布偶貓社交需求高，喜歡跟隨主人互動，甚至會在門口迎接收工，且聲音細軟柔和。由於對環境變化適應力強且極度包容，非常適合多寵物家庭或有小孩的家庭飼養。
-          </p>
-        </div>
-
-        <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">健康保養 Health & Care</h2>
-          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-            需留意肥大性心肌病 (HCM) 與多囊腎病 (PKD) 等遺傳疾病，建議定期安排心臟超音波檢查。日常需注意腸胃保健，並勤於梳理長毛以防結塊與毛球症。同時，應嚴格控制體重與飲食份量，避免發胖增加關節與心血管負擔。
-          </p>
-        </div>
-
-        <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
-          <h2 class="text-lg sm:text-xl md:text-2xl font-extrabold text-stone-800 tracking-tight">主糧推薦 Food Recommendation</h2>
-          <p class="text-xs sm:text-sm md:text-base text-stone-600 leading-relaxed font-normal">
-            宜選擇高蛋白、中脂肪、無穀且低敏的優質貓糧，以維持豐厚被毛與肌肉發育。成分首選以優質鮮肉為主的配方(如乾糧選用渴望 Orijen、法米納 Farmina；主食罐選用 Go!、K9 Natural 等)，並可補充 Omega-3 脂肪酸護膚亮毛。
-          </p>
-        </div>
-      </section>
-    </div>
   </div>
 
   <!-- 右下角懸浮雲朵按鈕 -->
