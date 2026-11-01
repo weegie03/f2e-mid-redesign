@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にゃにこれ? 喵的什麼? 暹羅貓 (SIAMESE) 品種介紹</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    /* ====================================================
+       💡 設計系統 CSS 變數 (完全符合設計規範)
+       ==================================================== */
+    :root {
+      /* 色彩系統 */
+      --color-primary: #C68B59;    /* 貓抓板暖木棕 */
+      --color-hover: #B87B4B;      /* 暖木棕 Hover 狀態 */
+      --color-secondary: #5B8266;  /* 鼠尾草綠 */
+      --color-bg-main: #FBF9F5;    /* 溫潤米白底 */
+      --color-text-main: #2B2D42;  /* 內文深碳灰 */
+      --color-text-muted: #6B7280; /* 輔助灰字 */
+
+      /* 文字尺寸 */
+      --font-size-32: 32px;        /* 32px 大標題 */
+      --font-size-20: 20px;        /* 20px 中標題/章節/按鈕 */
+      --font-size-16: 16px;        /* 16px 內文/卡片內容 */
+    }
+
+    html, body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--color-bg-main);
+      color: var(--color-text-main);
+      margin: 0;
+      padding: 0;
+      overscroll-behavior: contain;
+    }
+
+    /* 全局統一文字尺寸類別 */
+    .text-size-32 { font-size: var(--font-size-32) !important; line-height: 1.2; }
+    .text-size-20 { font-size: var(--font-size-20) !important; line-height: 1.3; }
+    .text-size-16 { font-size: var(--font-size-16) !important; line-height: 1.6; }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    label, button {
+      touch-action: manipulation;
+    }
+
+    .state-toggle {
+      display: none !important;
+    }
+
+    body:has(#color-seal:checked) #hero-seal,
+    body:has(#color-blue:checked) #hero-blue,
+    body:has(#color-chocolate:checked) #hero-chocolate,
+    body:has(#color-lilac:checked) #hero-lilac {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    body:has(#color-seal:checked) #tag-seal,
+    body:has(#color-blue:checked) #tag-blue,
+    body:has(#color-chocolate:checked) #tag-chocolate,
+    body:has(#color-lilac:checked) #tag-lilac {
+      display: flex;
+    }
+
+    body:has(#color-seal:checked) label[for="color-seal"],
+    body:has(#color-blue:checked) label[for="color-blue"],
+    body:has(#color-chocolate:checked) label[for="color-chocolate"],
+    body:has(#color-lilac:checked) label[for="color-lilac"] {
+      background-color: var(--color-primary) !important;
+      color: #ffffff !important;
+      border-color: var(--color-primary) !important;
+    }
+
+    body:has(#color-seal:checked) #color-val-seal,
+    body:has(#color-blue:checked) #color-val-blue,
+    body:has(#color-chocolate:checked) #color-val-chocolate,
+    body:has(#color-lilac:checked) #color-val-lilac {
+      display: block;
+    }
+
+    body:has(#weight-male:checked) #weight-card-male,
+    body:has(#weight-female:checked) #weight-card-female {
+      display: block;
+    }
+
+    body:has(#cat-overview:checked) label[for="cat-overview"],
+    body:has(#cat-temperament:checked) label[for="cat-temperament"],
+    body:has(#cat-health:checked) label[for="cat-health"],
+    body:has(#cat-food:checked) label[for="cat-food"] {
+      background-color: var(--color-primary) !important;
+      color: #ffffff !important;
+    }
+
+    body:has(#cat-overview:checked) #sec-overview,
+    body:has(#cat-temperament:checked) #sec-temperament,
+    body:has(#cat-health:checked) #sec-health,
+    body:has(#cat-food:checked) #sec-food {
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- 純 CSS 狀態控制器 -->
+  <input type="radio" name="color-picker" id="color-seal" class="state-toggle" checked>
+  <input type="radio" name="color-picker" id="color-blue" class="state-toggle">
+  <input type="radio" name="color-picker" id="color-chocolate" class="state-toggle">
+  <input type="radio" name="color-picker" id="color-lilac" class="state-toggle">
+
+  <input type="radio" name="weight-picker" id="weight-male" class="state-toggle" checked>
+  <input type="radio" name="weight-picker" id="weight-female" class="state-toggle">
+
+  <input type="radio" name="category-picker" id="cat-overview" class="state-toggle" checked>
+  <input type="radio" name="category-picker" id="cat-temperament" class="state-toggle">
+  <input type="radio" name="category-picker" id="cat-health" class="state-toggle">
+  <input type="radio" name="category-picker" id="cat-food" class="state-toggle">
+
+  <!-- 主應用程式容器 -->
+  <main class="w-full min-h-screen bg-white relative flex flex-col justify-between" style="background-color: var(--color-bg-main);">
+    
+    <!-- 頂部導覽列 -->
+    <header class="w-full px-4 sm:px-6 md:px-12 py-4 sm:py-5 bg-white/95 backdrop-blur-md sticky top-0 z-30 border-b border-stone-200/60 flex justify-between items-center shrink-0">
+      <a href="index_shorthair.html" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="上一隻品種">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </a>
+      
+      <!-- 回首頁按鈕 -->
+      <div class="text-center">
+        <a href="index.html" class="inline-block text-size-16 font-bold tracking-wider uppercase transition-all hover:opacity-80 active:scale-95 select-none" style="color: var(--color-primary);" title="回首頁">
+          にゃにこれ? 喵的什麼?
+        </a>
+        <h1 class="text-size-32 font-extrabold leading-tight mt-0.5" style="color: var(--color-text-main);">暹羅貓 (SIAMESE)</h1>
+      </div>
+
+      <a href="#" class="w-10 h-10 sm:w-11 sm:h-11 bg-[#2B2D42] text-white rounded-full flex items-center justify-center shadow-sm active:scale-90 hover:bg-stone-700 transition-all select-none" title="下一隻品種">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+    </header>
+
+    <!-- 主內容區 -->
+    <div class="w-full px-4 sm:px-6 md:px-12 py-6 sm:py-8 my-auto flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 lg:items-center">
+
+      <!-- 左側區塊：Hero 主圖與花色切換按鈕 -->
+      <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+        
+        <!-- 1. 貓咪主圖容器 -->
+        <section id="hero-section" class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-stone-200/80 h-64 sm:h-80 md:h-[400px] lg:h-[460px] bg-stone-100 scroll-mt-24">
+          <img id="hero-seal" src="./images/siamese_seal.png" alt="Seal Siamese" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-blue" src="./images/siamese_blue.png" alt="Blue Siamese" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-chocolate" src="./images/siamese_chocolate.png" alt="Chocolate Siamese" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+          <img id="hero-lilac" src="./images/siamese_lilac.png" alt="Lilac Siamese" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 opacity-0 invisible">
+
+          <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3.5 py-1.5 rounded-lg text-size-16 font-medium text-white shadow-sm z-10" style="background-color: var(--color-secondary);">
+            <span id="tag-seal" class="hidden items-center gap-1.5 sm:gap-2">海豹 (SEAL)</span>
+            <span id="tag-blue" class="hidden items-center gap-1.5 sm:gap-2">藍灰 (BLUE)</span>
+            <span id="tag-chocolate" class="hidden items-center gap-1.5 sm:gap-2">巧克力 (CHOCOLATE)</span>
+            <span id="tag-lilac" class="hidden items-center gap-1.5 sm:gap-2">淡紫 (LILAC)</span>
+          </div>
+        </section>
+
+        <!-- 花色選擇按鈕 -->
+        <section class="p-4 sm:p-5 rounded-2xl border border-stone-200/60 space-y-2.5 sm:space-y-3" style="background-color: var(--color-bg-main);">
+          <span class="text-size-16 font-bold flex items-center gap-2" style="color: var(--color-text-main);">
+            點擊切換代表花色與主圖連動：
+          </span>
+          <div class="flex flex-wrap gap-2 sm:gap-3 pt-0.5">
+            <label for="color-seal" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">海豹 (SEAL)</label>
+            <label for="color-blue" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">藍灰 (BLUE)</label>
+            <label for="color-chocolate" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">巧克力 (CHOCOLATE)</label>
+            <label for="color-lilac" class="color-btn cursor-pointer px-3.5 py-2 rounded-xl text-size-16 font-semibold bg-white border border-stone-200 hover:bg-stone-100 transition-all select-none" style="color: var(--color-text-main);">淡紫 (LILAC)</label>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 右側區塊：數據卡片與內容 -->
+      <div class="lg:col-span-7 space-y-5 sm:space-y-6 mt-6 lg:mt-0">
+
+        <!-- 核心數據特徵卡片區塊 -->
+        <section class="space-y-2">
+          <div class="text-size-16 font-semibold flex items-center gap-1 px-1" style="color: var(--color-primary);">
+            <span>💡 提示：點擊「體重卡片」可切換性別數據</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 overflow-x-auto pb-1 no-scrollbar items-stretch">
+            
+            <!-- 卡片 1：體重數據 (小字級 16px、無點點點、上下垂直置中) -->
+            <div class="border-2 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs relative transition-all group min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main); border-color: rgba(198, 139, 89, 0.4);" translate="no">
+              <label id="weight-card-male" for="weight-female" class="hidden cursor-pointer select-none w-full text-center">
+                <div class="text-size-16 font-bold uppercase tracking-tight flex items-center justify-center gap-1" style="color: var(--color-text-muted);">
+                  WEIGHT <span class="text-size-16 text-blue-600 bg-blue-50 px-1 py-0.2 rounded font-bold">♂️ 公</span>
+                </div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">4 至 6 <br>公斤</div>
+              </label>
+
+              <label id="weight-card-female" for="weight-male" class="hidden cursor-pointer select-none w-full text-center">
+                <div class="text-size-16 font-bold uppercase tracking-tight flex items-center justify-center gap-1" style="color: var(--color-text-muted);">
+                  WEIGHT <span class="text-size-16 text-pink-600 bg-pink-50 px-1 py-0.2 rounded font-bold">♀️ 母</span>
+                </div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">3 至 5 <br>公斤</div>
+              </label>
+            </div>
+
+            <!-- 卡片 2：壽命數據 -->
+            <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
+              <div class="text-center w-full min-w-0">
+                <div class="text-size-16 font-bold uppercase tracking-tight break-words" style="color: var(--color-text-muted);">LIFESPAN</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">10-15 年</div>
+              </div>
+            </div>
+
+            <!-- 卡片 3：掉毛與毛髮 -->
+            <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
+              <div class="text-center w-full min-w-0">
+                <div class="text-size-16 font-bold uppercase tracking-tight break-words" style="color: var(--color-text-muted);">COAT</div>
+                <div class="text-size-16 font-extrabold leading-snug mt-0.5 break-words" style="color: var(--color-text-main);">短但不厚 / 較少掉毛</div>
+              </div>
+            </div>
+
+            <!-- 卡片 4：花色 -->
+    <div class="border border-stone-200/80 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center shadow-xs min-w-[130px] min-h-[96px]" style="background-color: var(--color-bg-main);">
+      <div class="text-center w-full min-w-0">
+        <div class="text-size-16 font-bold uppercase tracking-tight" style="color: var(--color-text-muted);">COLOR</div>
+        <div id="color-val-seal" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">海豹<br>(SEAL)</div>
+        <div id="color-val-blue" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">藍灰<br>(BLUE)</div>
+        <div id="color-val-chocolate" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">巧克力<br>(CHOCOLATE)</div>
+        <div id="color-val-lilac" class="hidden text-size-16 font-extrabold leading-tight mt-0.5 break-words" style="color: var(--color-text-main);">淡紫<br>(LILAC)</div>
+      </div>
+    </div>
+
+          </div>
+        </section>
+
+        <!-- 目錄選單 -->
+        <div class="py-2 border-y border-stone-200/60 bg-white">
+          <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
+            <label for="cat-overview" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">概覽</label>
+            <label for="cat-temperament" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">性格特徵</label>
+            <label for="cat-health" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">健康保養</label>
+            <label for="cat-food" class="cursor-pointer px-5 py-2.5 rounded-full text-size-20 font-semibold transition-all shrink-0 bg-stone-100 hover:bg-stone-200 select-none" style="color: var(--color-text-main);">主糧推薦</label>
+          </div>
+        </div>
+
+        <!-- 詳細內容 -->
+        <section class="min-h-[200px] sm:min-h-[240px] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-stone-200/60 flex flex-col justify-center" style="background-color: var(--color-bg-main);">
+          <div id="sec-overview" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">概覽 OVERVIEW</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">暹羅貓源自泰國，是古老且知名的短毛品種。擁有湛藍雙眼、修長身形與標誌性重點色（部位體溫較低處顏色較深）。</p>
+          </div>
+          <div id="sec-temperament" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">性格特徵 TEMPERAMENT</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">極度親人黏人且熱愛表達，常發出豐富叫聲與飼主「對話」。智商極高且好奇心強，像狗一樣喜歡互動與跟隨人，長時間獨處容易產生分離焦慮，需要充足陪伴。</p>
+          </div>
+          <div id="sec-health" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">健康保養 HEALTH & CARE</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">需留意遺傳性呼吸道氣喘、眼疾與牙周病，建議定期檢查與刷牙。平時保持定時定量飲食以防肥胖，並提供貓跳台與益智玩具滿足其龐大的活動量與腦力需求。</p>
+          </div>
+          <div id="sec-food" class="hidden space-y-3 sm:space-y-4">
+            <h2 class="text-size-20 font-extrabold tracking-tight" style="color: var(--color-text-main);">主糧推薦 FOOD RECOMMENDATION</h2>
+            <p class="text-size-16 leading-relaxed font-normal" style="color: var(--color-text-main);">建議選擇低碳水、高蛋白（蛋白質 30% 以上）且成分明確無穀的貓糧，以維持修長肌肉線條。可搭配無穀主食罐等濕糧增加水分攝取，維護下泌尿道與腎臟健康。</p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+    <!-- 右下角懸浮雲朵按鈕 -->
+    <div class="fixed bottom-6 right-6 z-30">
+      <button id="cloud-btn" type="button" class="w-12 h-12 text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group cursor-pointer" style="background-color: var(--color-primary);" title="貓咪迷思破解小卡">
+        <svg class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+        </svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- 貓咪誤解/迷思彈出式對話框 (Modal) -->
+  <div id="myth-modal" style="opacity: 0; pointer-events: none;" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-100 relative">
+      
+      <!-- 關閉按鈕 -->
+      <button id="close-modal-btn" type="button" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 w-8 h-8 rounded-full flex items-center justify-center hover:bg-stone-100 transition-colors cursor-pointer">
+        ✕
+      </button>
+
+      <!-- 對話框標頭 -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-2xl border flex items-center justify-center text-xl shrink-0" style="background-color: var(--color-bg-main); border-color: rgba(198, 139, 89, 0.3);">
+          🐱
+        </div>
+        <div>
+          <span class="text-size-16 font-bold uppercase tracking-wider block" style="color: var(--color-primary);">にゃにこれ? MYTH BUSTER</span>
+          <h3 class="text-size-20 font-bold leading-tight" style="color: var(--color-text-main);">暹羅貓冷知識與誤解破解</h3>
+        </div>
+      </div>
+
+      <!-- 迷思內容區塊 -->
+      <div class="p-4 sm:p-5 rounded-2xl border border-stone-200/60 my-4 space-y-2" style="background-color: var(--color-bg-main);">
+        <div class="inline-block px-2.5 py-1 text-white text-size-16 font-semibold rounded-md mb-1" style="background-color: var(--color-secondary);">
+          常見誤解
+        </div>
+        <h4 class="text-size-20 font-bold" id="myth-title" style="color: var(--color-text-main);">
+          載入中...
+        </h4>
+        <p class="text-size-16 leading-relaxed" id="myth-content" style="color: var(--color-text-main);">
+          載入中...
+        </p>
+      </div>
+
+      <!-- 底部操作按鈕 -->
+      <div class="flex gap-3 pt-2">
+        <button id="next-myth-btn" type="button" class="flex-1 py-3 px-4 text-white font-bold rounded-xl text-size-20 shadow-xs transition-all active:scale-95 cursor-pointer" style="background-color: var(--color-primary);">
+          了解! 看下一條迷思
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript 腳本 -->
+  <script>
+    const catMyths = [
+      {
+        title: "「以為脾氣暴躁或愛吵架」",
+        content: "暹羅貓非常喜歡發聲與人互動，叫聲豐富且頻率高。許多不熟悉牠們的人會將這種「熱情對話」或「表達需求」的叫聲，誤解為脾氣不好、愛生氣或在發脾氣。"
+      },
+      {
+        title: "「以為個性獨立不需要人陪」",
+        content: "多數人印象中貓咪都很高冷獨立，但暹羅貓社交需求極高，被稱為「貓界狗狗」。牠們極度黏人且依賴同伴，若誤以為牠們能適應長時間獨處，很容易導致牠們出現分離焦慮或破壞行為。"
+      },
+      {
+        title: "「以為毛色變深是皮膚病或髒掉」",
+        content: "暹羅貓的毛色受體溫與酪胺酸酶影響，末端較冷的部位（如臉部、耳朵、四肢）會呈現較深的重點色，且冬天或隨年齡增長毛色整體可能會變深。不知道這種遺傳特性的新手，常誤以為是皮膚染病、過敏或毛髮變髒。"
+      }
+    ];
+
+    let currentMythIndex = 0;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroSection = document.getElementById('hero-section');
+
+      // 1. label 點擊邏輯與花色專屬置頂滾動
+      document.querySelectorAll('label[for]').forEach(label => {
+        label.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = label.getAttribute('for');
+          const targetInput = document.getElementById(targetId);
+          if (targetInput) {
+            targetInput.checked = true;
+            targetInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+
+          if (label.classList.contains('color-btn') && heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // 2. 雲朵彈窗邏輯
+      const cloudBtn = document.getElementById('cloud-btn');
+      const mythModal = document.getElementById('myth-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const nextMythBtn = document.getElementById('next-myth-btn');
+      const mythTitle = document.getElementById('myth-title');
+      const mythContent = document.getElementById('myth-content');
+
+      function updateMythContent(index) {
+        if (mythTitle && mythContent) {
+          mythTitle.textContent = catMyths[index].title;
+          mythContent.textContent = catMyths[index].content;
+
+          if (nextMythBtn) {
+            if (index === catMyths.length - 1) {
+              nextMythBtn.textContent = "看完囉! 關閉對話框";
+            } else {
+              nextMythBtn.textContent = "了解! 看下一條迷思";
+            }
+          }
+        }
+      }
+
+      function openModal() {
+        if (mythModal) {
+          updateMythContent(currentMythIndex);
+          mythModal.style.opacity = '1';
+          mythModal.style.pointerEvents = 'auto';
+        }
+      }
+
+      function closeModal() {
+        if (mythModal) {
+          mythModal.style.opacity = '0';
+          mythModal.style.pointerEvents = 'none';
+        }
+      }
+
+      if (cloudBtn) cloudBtn.addEventListener('click', openModal);
+      if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+
+      if (nextMythBtn) {
+        nextMythBtn.addEventListener('click', () => {
+          if (currentMythIndex === catMyths.length - 1) {
+            closeModal();
+            currentMythIndex = 0;
+          } else {
+            currentMythIndex++;
+            updateMythContent(currentMythIndex);
+          }
+        });
+      }
+
+      if (mythModal) {
+        mythModal.addEventListener('click', (e) => {
+          if (e.target === mythModal) closeModal();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
