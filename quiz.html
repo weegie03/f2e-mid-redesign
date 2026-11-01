@@ -5,26 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>冷知識測驗 - にゃにこれ? 喵的什麼?</title>
+
+    <!-- Google Fonts 同步首頁：Nunito & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
+        /* 1. 嚴格色彩系統：完全同步 index.html */
         :root {
-            --primary-color: #8C5A3C;
-            /* 木質棕 */
-            --sage-green: #5B8266;
-            /* 鼠尾草綠 */
-            --bg-cream: #FAF7F2;
-            /* 溫暖米白 */
-            --text-dark: #2B2A29;
-            /* 深灰字色 */
+            --primary-color: #C68B59;     /* 貓抓板暖木棕 */
+            --secondary-color: #5B8266;   /* 鼠尾草綠 */
+            --bg-color: #FBF9F5;          /* 溫潤米白底 */
+            --text-color: #2B2D42;        /* 內文深碳灰 */
         }
 
+        /* 2. 嚴格字型與字級：完全同步 index.html */
         body {
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 16px;
+            line-height: 1.6;
         }
 
         /* 首頁同款：立體微浮雕膠囊 Logo 按鍵 */
@@ -52,23 +59,20 @@
         }
 
         /* 頂級標題 32px */
-        h1,
-        .h1-title {
+        h1, .h1-title {
             font-size: 32px;
             font-weight: 700;
             color: var(--primary-color);
         }
 
         /* 次級標題 20px */
-        h2,
-        .h2-title {
+        h2, .h2-title {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* 內文 16px */
-        p,
-        .body-text {
+        p, .body-text {
             font-size: 16px;
             line-height: 1.6;
         }
@@ -76,16 +80,15 @@
         .quiz-card {
             border-radius: 16px;
             background: #ffffff;
-            border: 1px solid rgba(140, 90, 60, 0.12);
+            border: 1px solid rgba(198, 139, 89, 0.18);
         }
 
         .btn-sage {
-            background-color: var(--sage-green);
+            background-color: var(--secondary-color);
             color: #ffffff;
             border: none;
             transition: all 0.2s ease;
         }
-
         .btn-sage:hover {
             background-color: #496a52;
             color: #ffffff;
@@ -97,9 +100,8 @@
             border: none;
             transition: all 0.2s ease;
         }
-
         .btn-wood:hover {
-            background-color: #72462b;
+            background-color: #A86E3D;
             color: #ffffff;
         }
 
@@ -110,22 +112,19 @@
             border: 1.5px solid #E5DFD7;
             border-radius: 12px;
             background-color: #ffffff;
-            color: var(--text-dark);
+            color: var(--text-color);
             transition: all 0.2s ease;
         }
-
         .option-btn:hover {
             background-color: #F4EFEB;
             border-color: var(--primary-color);
         }
-
         .option-btn.correct {
             background-color: #E2ECE5 !important;
-            border-color: var(--sage-green) !important;
+            border-color: var(--secondary-color) !important;
             color: #2D4C35 !important;
             font-weight: 600;
         }
-
         .option-btn.wrong {
             background-color: #FBEBEB !important;
             border-color: #DC3545 !important;
@@ -133,20 +132,23 @@
         }
 
         .badge-breed {
-            background-color: var(--sage-green);
+            background-color: var(--secondary-color);
             color: white;
             font-weight: normal;
             font-size: 14px;
+        }
+
+        html {
+            overflow-y: scroll;
         }
     </style>
 </head>
 
 <body>
     <!-- 導覽列 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold brand-capsule my-0" href="index.html#top"
-                style="color: var(--primary-color);">にゃにこれ? 喵的什麼?</a>
+            <a class="navbar-brand fw-bold brand-capsule my-0" href="index.html#top" style="color: var(--primary-color);">にゃにこれ? 喵的什麼?</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -187,8 +189,7 @@
                 <span class="badge badge-breed" id="breed-tag">品種標籤</span>
             </div>
             <div class="progress mb-4" style="height: 8px; background-color: #E5DFD7;">
-                <div class="progress-bar" id="progress-bar" role="progressbar"
-                    style="width: 33%; background-color: var(--sage-green);"></div>
+                <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%; background-color: var(--secondary-color);"></div>
             </div>
 
             <div class="card quiz-card shadow-sm p-4 p-md-5" id="quiz-box">
@@ -196,7 +197,7 @@
                 <div class="d-grid gap-3" id="options-container">
                     <!-- 選項按鈕由 JS 隨機渲染 -->
                 </div>
-
+                
                 <!-- 作答後的解析區塊 -->
                 <div id="explanation-box" class="alert mt-4 d-none">
                     <div id="explanation-text" class="body-text mb-3"></div>
@@ -209,10 +210,8 @@
         <div class="card quiz-card shadow-sm p-4 p-md-5 text-center d-none" id="result-box">
             <div id="result-icon" class="mb-3"></div>
             <h1 class="h1-title mb-2">檢定結果結算</h1>
-            <!-- 修正：滿分顯示為 3 / 3 題 -->
-            <p class="fs-4 mb-3">答對題數：<span class="fw-bold text-danger" id="final-score">0</span> / <span
-                    id="total-questions">3</span> 題</p>
-
+            <p class="fs-4 mb-3">答對題數：<span class="fw-bold text-danger" id="final-score">0</span> / <span id="total-questions">3</span> 題</p>
+            
             <div class="alert alert-light border mb-4 text-start" id="result-feedback">
                 <!-- 診斷訊息 -->
             </div>
@@ -225,7 +224,6 @@
     </main>
 
     <script>
-        // 題庫池
         const questionBank = {
             ragdoll: {
                 breedName: "布偶貓",
@@ -337,7 +335,6 @@
             }
         };
 
-        // 洗牌演算法
         function shuffleArray(array) {
             const copy = [...array];
             for (let i = copy.length - 1; i > 0; i--) {
@@ -347,14 +344,12 @@
             return copy;
         }
 
-        // 狀態變數
         let currentQuizList = [];
         let currentIndex = 0;
-        let correctCount = 0; // 修正：精準記錄答對題數（0, 1, 2, 3）
+        let correctCount = 0;
         let answered = false;
         let wrongBreeds = [];
 
-        // DOM 元素
         const startBox = document.getElementById('start-box');
         const startBtn = document.getElementById('start-btn');
         const quizFlow = document.getElementById('quiz-flow');
@@ -373,7 +368,6 @@
         const resultFeedback = document.getElementById('result-feedback');
         const actionButtons = document.getElementById('action-buttons');
 
-        // 1. 初始化測驗
         function initQuiz() {
             const breeds = ['ragdoll', 'bsh', 'siamese'];
             currentQuizList = breeds.map(breedKey => {
@@ -402,7 +396,6 @@
             loadQuestion();
         }
 
-        // 2. 載入題目
         function loadQuestion() {
             answered = false;
             explanationBox.classList.add('d-none');
@@ -423,7 +416,6 @@
             });
         }
 
-        // 3. 作答判定
         function handleOptionClick(selectedOption, clickedBtn) {
             if (answered) return;
             answered = true;
@@ -433,7 +425,7 @@
 
             if (selectedOption.correct) {
                 clickedBtn.classList.add('correct');
-                correctCount += 1; // 答對 +1 題
+                correctCount += 1;
                 explanationBox.className = 'alert alert-success mt-4';
                 explanationText.innerHTML = `<strong>正解！</strong> ${currentItem.explanation}`;
             } else {
@@ -449,7 +441,6 @@
             explanationBox.classList.remove('d-none');
         }
 
-        // 4. 下一題
         nextBtn.addEventListener('click', () => {
             currentIndex++;
             if (currentIndex < currentQuizList.length) {
@@ -459,50 +450,45 @@
             }
         });
 
-        // 5. 結算畫面
         function showFinalResult() {
             quizFlow.classList.add('d-none');
             resultBox.classList.remove('d-none');
-
-            // 顯示答對題數 / 總題數
+            
             finalScore.textContent = correctCount;
             totalQuestions.textContent = currentQuizList.length;
             actionButtons.innerHTML = '';
 
             if (wrongBreeds.length === 0) {
-                // 3 題全對
                 resultIcon.innerHTML = '<i class="bi bi-trophy text-warning display-2"></i>';
                 resultFeedback.innerHTML = `
-          <h5 class="fw-bold text-success mb-2">🎉 恭喜！榮獲【貓咪百科大師】稱號！</h5>
-          <p class="body-text mb-0">你對圖鑑中的各品種生活習性、歷史淵源與生理機制掌握得非常透徹，是百分之百的合格貓奴！</p>
-        `;
+                    <h5 class="fw-bold text-success mb-2">🎉 恭喜！榮獲【貓咪百科大師】稱號！</h5>
+                    <p class="body-text mb-0">你對圖鑑中的各品種生活習性、歷史淵源與生理機制掌握得非常透徹，是百分之百的合格貓奴！</p>
+                `;
                 actionButtons.innerHTML = `
-          <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再測一次</button>
-          <a href="index.html#cat-dex" class="btn btn-sage px-4 py-2 fw-bold">回到貓咪圖鑑</a>
-        `;
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再測一次</button>
+                    <a href="index.html#cat-dex" class="btn btn-sage px-4 py-2 fw-bold">回到貓咪圖鑑</a>
+                `;
             } else if (wrongBreeds.length === 1) {
-                // 答對 2 題，錯 1 種貓咪
                 const target = wrongBreeds[0];
                 resultIcon.innerHTML = '<i class="bi bi-lightbulb text-warning display-2"></i>';
                 resultFeedback.innerHTML = `
-          <h5 class="fw-bold text-warning-emphasis mb-2">🐾 表現優異！但在【${target.breedName}】上稍有遺漏！</h5>
-          <p class="body-text mb-0">看來你只對 <strong>${target.breedName}</strong> 的冷知識不小心晃了神。趕緊點擊下方按鈕，直接帶你回到該卡片前重新惡補！</p>
-        `;
+                    <h5 class="fw-bold text-warning-emphasis mb-2">🐾 表現優異！但在【${target.breedName}】上稍有遺漏！</h5>
+                    <p class="body-text mb-0">看來你只對 <strong>${target.breedName}</strong> 的冷知識不小心晃了神。趕緊點擊下方按鈕，直接帶你回到該卡片前重新惡補！</p>
+                `;
                 actionButtons.innerHTML = `
-          <a href="index.html#${target.anchorId}" class="btn btn-wood px-4 py-2 fw-bold">前往複習【${target.breedName}】卡片</a>
-          <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">重測一次</button>
-        `;
+                    <a href="index.html#${target.anchorId}" class="btn btn-wood px-4 py-2 fw-bold">前往複習【${target.breedName}】卡片</a>
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">重測一次</button>
+                `;
             } else {
-                // 錯 2 種以上
                 resultIcon.innerHTML = '<i class="bi bi-exclamation-triangle text-danger display-2"></i>';
                 resultFeedback.innerHTML = `
-          <h5 class="fw-bold text-danger mb-2">🚨 知識告急！答錯了 ${wrongBreeds.length} 種品種知識！</h5>
-          <p class="body-text mb-0">看來你還沒有仔細閱讀圖鑑卡片上的說明喔！建議先回到圖鑑首頁從頭將三隻貓咪的特質與照護細節完整看過一遍再來挑戰！</p>
-        `;
+                    <h5 class="fw-bold text-danger mb-2">🚨 知識告急！答錯了 ${wrongBreeds.length} 種品種知識！</h5>
+                    <p class="body-text mb-0">看來你還沒有仔細閱讀圖鑑卡片上的說明喔！建議先回到圖鑑首頁從頭將三隻貓咪的特質與照護細節完整看過一遍再來挑戰！</p>
+                `;
                 actionButtons.innerHTML = `
-          <a href="index.html#cat-dex" class="btn btn-wood px-4 py-2 fw-bold">回到圖鑑首頁全面複習</a>
-          <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再挑戰一次</button>
-        `;
+                    <a href="index.html#cat-dex" class="btn btn-wood px-4 py-2 fw-bold">回到圖鑑首頁全面複習</a>
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再挑戰一次</button>
+                `;
             }
         }
 

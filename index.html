@@ -105,13 +105,25 @@
             transform: translateY(1px);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
+        html {
+            scroll-padding-top: 70px;
+            /* 保留頂部導覽列的高度，避免跳轉錨點被遮擋 */
+            scroll-behavior: smooth;
+            /* 點擊跳轉時平滑滾動 */
+        }
+
+        html {
+            overflow-y: scroll;
+            /* 強制所有頁面右側保留滾動條寬度，切換時畫面絕不晃動 */
+        }
     </style>
 </head>
 
 <body>
 
     <!-- 1. 頂部導覽列 Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold brand-capsule my-0" href="#top" style="color: var(--primary-color);">にゃにこれ?
                 喵的什麼?</a>
