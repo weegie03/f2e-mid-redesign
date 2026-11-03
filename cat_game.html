@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>にゃにこれ? 喵的什麼? - 布偶貓成長故事養成記</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #FAF8F5;
+  color: #2D3748;
+  margin: 0;
+  padding: 0;
+}
+
+/* 按鈕懸浮效果 */
+.option-btn {
+  transition: all 0.2s ease;
+}
+.option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(198, 139, 89, 0.15);
+}
+</style>
+</head>
+<body class="min-h-screen bg-[#FAF8F5] flex flex-col justify-between items-center select-none py-6 px-4 relative">
+
+  <!-- 頂部標題與導覽 -->
+  <header class="w-full max-w-xl bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-stone-200/80 shadow-xs flex justify-between items-center mb-4">
+    <a href="index_cat.html" class="px-3.5 py-1.5 bg-stone-800 text-white rounded-full flex items-center gap-1.5 text-xs font-semibold hover:bg-stone-700 transition-all">
+      ‹ 返回品種介紹
+    </a>
+    <div class="text-center">
+      <span class="text-[10px] font-bold text-[#C68B59] uppercase block tracking-wider">RAGDOLL Story Interactive</span>
+      <h1 class="text-base font-extrabold text-stone-800">布偶貓一生養成故事 🐾</h1>
+    </div>
+    <button id="restart-btn" class="text-xs font-bold text-stone-500 hover:text-stone-800 underline">
+      重新開始
+    </button>
+  </header>
+
+  <!-- 遊戲主舞台 -->
+  <main class="w-full max-w-xl bg-white rounded-3xl border border-stone-200/80 shadow-md p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+
+    <!-- 上方：階段與狀態看板 -->
+    <section class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200/60 space-y-3">
+      <div class="flex justify-between items-center border-b border-stone-200/60 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl" id="cat-avatar">🐾</span>
+          <div>
+            <h2 class="text-sm font-bold text-stone-800" id="cat-name">綿綿 (RAGDOLL)</h2>
+            <p class="text-xs text-[#C68B59] font-semibold" id="cat-age">年齡：幼貓 2 個月</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] text-stone-400 font-bold block uppercase">天數記錄</span>
+          <span class="text-sm font-extrabold text-stone-700" id="day-counter">第 1 天</span>
+        </div>
+      </div>
+
+      <!-- 四大核心狀態指標 -->
+      <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+        <!-- 健康度 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>❤️ 健康/腸胃狀況</span>
+            <span id="txt-health">100%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-health" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- 快樂度/親密度 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>💖 親密與信賴</span>
+            <span id="txt-love">50%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-love" class="h-full bg-pink-400 rounded-full transition-all duration-300" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- 毛髮結塊度 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>🪮 毛髮結塊/毛球風險</span>
+            <span id="txt-hair">10%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-hair" class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- 遺傳病風險 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>🏥 健檢保養與病變風險</span>
+            <span id="txt-hospital">良好</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-hospital" class="h-full bg-blue-400 rounded-full transition-all duration-300" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 中間：故事劇情呈現區 -->
+    <section class="space-y-4 flex-1 flex flex-col justify-center my-2">
+      <!-- 標籤固定為藍色底與藍字 (bg-sky-100 text-sky-700) -->
+      <div id="story-badge" class="inline-block px-3 py-1 bg-sky-100 text-sky-700 text-xs font-bold rounded-lg w-max">
+        章節 1：初次相遇
+      </div>
+      <h3 class="text-base sm:text-lg font-bold text-stone-800 leading-snug" id="story-title">
+        帶綿綿回家第一天！
+      </h3>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed bg-[#FAF8F5]/80 p-4 rounded-2xl border border-stone-200/50" id="story-text">
+        你把這隻只有 2 個月大、眼睛湛藍如星空的小布偶貓接回了家。牠怯生生地縮在貓籠角落，喵喵小聲叫著。現在該準備牠的第一餐了，你準備了什麼食物給牠？
+      </p>
+    </section>
+
+    <!-- 下方：劇情選擇肢按鈕區 -->
+    <section id="options-container" class="space-y-2.5 pt-2">
+      <!-- 按鈕會由 JS 動態生成 -->
+    </section>
+
+  </main>
+
+  <footer class="text-center py-4 text-xs text-stone-400 font-medium">
+    Pにゃにこれ? 喵的什麼? 互動養寵故事 · 提倡科學養寵與定期醫療照護
+  </footer>
+
+  <!-- 選擇結果小彈窗 Modal -->
+  <div id="feedback-modal" class="fixed inset-0 bg-stone-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-100 text-center space-y-4 transform scale-95 transition-transform duration-300" id="modal-box">
+      
+      <div class="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#C68B59]/30 flex items-center justify-center text-2xl mx-auto" id="modal-icon">
+        💡
+      </div>
+
+      <h4 class="text-base font-bold text-stone-800" id="modal-title">選擇結果說明</h4>
+
+      <div class="bg-[#FAF8F5] p-3.5 rounded-2xl border border-stone-200/60 text-xs sm:text-sm text-stone-600 leading-relaxed text-left" id="modal-text">
+        這是產生的影響...
+      </div>
+
+      <button id="modal-confirm-btn" type="button" class="w-full py-3 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all active:scale-95">
+        確認，繼續故事 🐾
+      </button>
+    </div>
+  </div>
+
+  <!-- 遊戲腳本系統 -->
+  <script>
+  // 貓咪當前數據
+  let gameState = {
+    step: 1,
+    day: 1,
+    health: 100, // 健康/腸胃
+    love: 50,    // 親密度
+    hair: 10,    // 毛髮結塊度
+    checkup: 100,// 健檢保照護值
+  };
+
+  let pendingNextNode = null;
+
+  // 藍色標籤固定樣式 Class
+  const BLUE_BADGE_CLASS = "inline-block px-3 py-1 bg-sky-100 text-sky-700 text-xs font-bold rounded-lg w-max";
+
+  // 故事節點圖譜
+  const storyNodes = {
+    // ------------------- 幼貓篇 -------------------
+    1: {
+      badge: "幼貓期：2個月",
+      title: "帶綿綿回家第一天！選擇主糧",
+      text: "小綿綿才 2 個月大，腸胃非常脆弱嬌嫩。你拿出了準備好的貓糧，打算餵牠第一餐：",
+      options: [
+        {
+          text: "A 選擇「幼貓專用高蛋白低敏無穀乾糧 + 幼貓主食罐」",
+          effect: { health: +10, love: +10 },
+          next: 2,
+          icon: "🥫",
+          msg: "答對了！幼貓需要高蛋白與好吸收的營養，無穀配方能有效保護布偶貓敏感的腸胃！"
+        },
+        {
+          text: "B 選擇「便宜的大包裝成貓乾糧」（想說貓糧應該都一樣）",
+          effect: { health: -40, love: -10 },
+          next: 2,
+          icon: "⚠️",
+          msg: "糟糕！成貓糧顆粒過大且蛋白質比例不符，加上腸胃不耐受，綿綿開始嚴重拉肚子了！"
+        },
+        {
+          text: "C 餵牠喝「人類喝的全脂鮮牛奶」想幫牠補充營養",
+          effect: { health: -60, love: -15 },
+          next: 2,
+          icon: "🚨",
+          msg: "危險！大多數貓咪有乳糖不耐症，鮮奶導致綿綿劇烈嘔吐腹瀉，差點脫水！"
+        }
+      ]
+    },
+
+    2: {
+      badge: "幼貓期：3個月",
+      title: "長毛初展現！梳毛習慣培養",
+      text: "綿綿滿 3 個月了，豐厚的長毛開始迅速生長。你發現牠開始會自己舔毛梳理，這時你決定：",
+      options: [
+        {
+          text: "A 每天用不傷皮膚的鋼針梳/排梳幫牠梳毛 10 分鐘，並適量補充排毛粉",
+          effect: { hair: -10, love: +15 },
+          next: 3,
+          icon: "🪮",
+          msg: "太棒了！從小培養梳毛習慣，綿綿很享受梳毛，毛髮絲滑順暢，完全沒有毛球問題！"
+        },
+        {
+          text: "B 覺得長毛貓自己舔毛就好，完全不去幫牠梳理",
+          effect: { hair: +45 },
+          next: 3,
+          icon: "🧶",
+          msg: "警告！布偶貓髮量極大，綿綿吃下了大量死毛，開始頻繁咳嗽並吐出大塊毛球！"
+        }
+      ]
+    },
+
+    3: {
+      badge: "幼貓期：4個月",
+      title: "與貓咪互動！避免討厭的行為",
+      text: "綿綿越來越黏人了！今天朋友來家裡玩，看到綿綿好可愛，想要跟牠玩。你該怎麼提醒朋友？",
+      options: [
+        {
+          text: "A 引導朋友用逗貓棒輕柔互動，並讓貓咪自己靠近蹭人",
+          effect: { love: +20 },
+          next: 4,
+          icon: "💖",
+          msg: "綿綿非常開心！展現了布偶貓似狗般親人的個性，在大家腳邊翻肚肚咕嚕嚕。"
+        },
+        {
+          text: "B 朋友直接強行把綿綿倒抓懸空抱起來，還大聲對牠尖叫",
+          effect: { love: -35, health: -10 },
+          next: 4,
+          icon: "😿",
+          msg: "綿綿受到了極大驚嚇！強行懸空讓牠極度不安，極度抗拒地抓傷人後躲進床底不敢出來。"
+        }
+      ]
+    },
+
+    4: {
+      badge: "幼貓期：6個月",
+      title: "遺傳疾病風險與醫院健檢",
+      text: "綿綿半歲囉！雖然外表看起來活潑可愛，但你知道布偶貓有遺傳性心臟病（HCM）與多囊腎（PKD）的潛在風險。你會：",
+      options: [
+        {
+          text: "A 帶牠去專業獸醫院進行心臟超音波檢查與遺傳基因篩檢",
+          effect: { checkup: +20, health: +10 },
+          next: 5,
+          icon: "🏥",
+          msg: "醫生誇獎你非常有責任感！經過篩檢確認綿綿心臟與腎臟結構健康，建立了完整醫療檔案。"
+        },
+        {
+          text: "B 覺得「沒看牠生病就不用去醫院」，省下健檢費用",
+          effect: { checkup: -50 },
+          next: 5,
+          icon: "🩺",
+          msg: "你忽視了定期檢驗。遺傳性心臟病通常早期完全無症狀，隱患正在偷偷累積..."
+        }
+      ]
+    },
+
+    // ------------------- 成貓篇 -------------------
+    5: {
+      badge: "成貓期：一歲",
+      title: "一歲成年禮！飲食轉化",
+      text: "恭喜！綿綿滿 1 歲成年了！牠的體型變大了不少，被毛也更加豐滿。現在需要調整牠的成貓飲食：",
+      options: [
+        {
+          text: "A 換成「高蛋白、中脂肪無穀成貓糧 + Omega-3 護膚魚油 + 主食罐」",
+          effect: { health: +15, love: +10 },
+          next: 6,
+          icon: "✨",
+          msg: "完美飲食！Omega-3 讓綿綿的爆毛毛質亮麗，營養均衡使肌肉發育良好。"
+        },
+        {
+          text: "B 繼續無限量餵食高熱量幼貓糧，任由牠吃到飽",
+          effect: { health: -25 },
+          next: 6,
+          icon: "⚖️",
+          msg: "成貓運動量減少加上幼貓糧熱量過高，綿綿過度發胖，關節與心血管負擔大增！"
+        }
+      ]
+    },
+
+    6: {
+      badge: "成貓期：2歲",
+      title: "日常維護與日常地雷考驗",
+      text: "這天綿綿不小心踩到了腳踏墊上的水，腳掌有點濕。你想幫牠清潔，你會怎麼做？",
+      options: [
+        {
+          text: "A 用濕紙巾或乾毛巾溫柔幫牠擦拭腳掌，並給予零食獎勵",
+          effect: { love: +15, hair: -5 },
+          next: 7,
+          icon: "🐾",
+          msg: "溫柔的手法讓綿綿完全不排斥，蹭著你的手討摸摸。"
+        },
+        {
+          text: "B 覺得牠髒了，直接強行把牠按進浴缸裡全身洗澡狂沖水",
+          effect: { love: -40, health: -15 },
+          next: 7,
+          icon: "💦",
+          msg: "慘劇！布偶貓極度抗拒突然的強行洗澡，綿綿應激反應劇烈，連續幾天對你發出嘶嘶聲。"
+        }
+      ]
+    },
+
+    7: {
+      badge: "成貓期：3歲",
+      title: "完全成熟與最後體檢",
+      text: "布偶貓到了 3 歲正式完全成熟，體型達到巔峰！這時候毛髮結塊與健康管理迎來最後考驗：",
+      options: [
+        {
+          text: "A 安排年度全身健檢（包含心臟超音波），並每天堅持梳毛",
+          effect: { checkup: +30, hair: -15, health: +10 },
+          next: 'CHECK_ENDING',
+          icon: "🩺",
+          msg: "細心的照料成果顯著！隨時掌握貓咪的身體狀況。"
+        },
+        {
+          text: "B 忙於工作完全不管牠，很久沒梳毛也沒去健檢",
+          effect: { hair: +35, checkup: -40 },
+          next: 'CHECK_ENDING',
+          icon: "🥀",
+          msg: "長時間忽略保養與健檢，問題累積到了臨界點..."
+        }
+      ]
+    }
+  };
+
+  // 結局判定邏輯
+  function evaluateEnding() {
+    if (gameState.health <= 35) {
+      return {
+        title: "❌ 壞結局 A：【脆弱腸胃的傷心離別】",
+        text: "因為飲食不當或應激反應過大，綿綿長期遭遇嚴重腸胃炎與營養不良，身體機能衰竭，無法順利健康長大...",
+        type: "bad"
+      };
+    }
+    if (gameState.hair >= 70) {
+      return {
+        title: "❌ 壞結局 B：【毛球阻塞的急診驚魂】",
+        text: "由於長期缺乏梳毛，綿綿胃裡積聚了巨大的毛球無法排出，引發嚴重的急性腸道阻塞，必須緊急送醫剖腹手術，受盡苦頭...",
+        type: "bad"
+      };
+    }
+    if (gameState.checkup <= 30) {
+      return {
+        title: "❌ 壞結局 C：【遺傳病的悄然突襲】",
+        text: "因為未定期進行心臟超音波與健檢，綿綿隱藏的 HCM（肥大性心肌病）在成年後突然發作，錯過了早期投藥控制的黃金時機...",
+        type: "bad"
+      };
+    }
+    if (gameState.love <= 30) {
+      return {
+        title: "❌ 壞結局 D：【同一屋簷下的陌生人】",
+        text: "由於經常做出強行抱抓、洗澡與噪音等討厭行為，綿綿對你失去了信賴。牠不再蹭你，每天只躲在沙發底下，成為最熟悉的陌生貓...",
+        type: "bad"
+      };
+    }
+
+    if (gameState.health >= 85 && gameState.love >= 85 && gameState.hair <= 30 && gameState.checkup >= 70) {
+      return {
+        title: "🎉 完美結局：【仙女貓降臨！完美的生命伴侶】",
+        text: "在你的無微不至照料下，綿綿長成了擁有夢幻爆毛、湛藍雙眼與極度親人性格的賽級仙女貓！牠身體健康、心臟強健，每天像小狗一樣在門口迎接你下班，給了你最溫暖的陪伴！",
+        type: "perfect"
+      };
+    }
+
+    return {
+      title: "🌟 成功結局：【溫暖歲月！健康幸福的毛孩子】",
+      text: "綿綿順利健康地撫養長大了！雖然偶爾有些小毛病，但在你的細心陪伴與愛護下，牠過得非常幸福滿足！",
+      type: "good"
+    };
+  }
+
+  // DOM 元素
+  const elCatAge = document.getElementById('cat-age');
+  const elDayCounter = document.getElementById('day-counter');
+  const elBarHealth = document.getElementById('bar-health');
+  const elTxtHealth = document.getElementById('txt-health');
+  const elBarLove = document.getElementById('bar-love');
+  const elTxtLove = document.getElementById('txt-love');
+  const elBarHair = document.getElementById('bar-hair');
+  const elTxtHair = document.getElementById('txt-hair');
+  const elBarHospital = document.getElementById('bar-hospital');
+  const elTxtHospital = document.getElementById('txt-hospital');
+
+  const elBadge = document.getElementById('story-badge');
+  const elTitle = document.getElementById('story-title');
+  const elText = document.getElementById('story-text');
+  const elOptions = document.getElementById('options-container');
+  const elCatAvatar = document.getElementById('cat-avatar');
+
+  // Modal 彈窗元件
+  const feedbackModal = document.getElementById('feedback-modal');
+  const modalIcon = document.getElementById('modal-icon');
+  const modalText = document.getElementById('modal-text');
+  const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+
+  // 更新 UI 狀態看板
+  function updateBoard() {
+    gameState.health = Math.min(100, Math.max(0, gameState.health));
+    gameState.love = Math.min(100, Math.max(0, gameState.love));
+    gameState.hair = Math.min(100, Math.max(0, gameState.hair));
+    gameState.checkup = Math.min(100, Math.max(0, gameState.checkup));
+
+    elTxtHealth.textContent = gameState.health + '%';
+    elBarHealth.style.width = gameState.health + '%';
+
+    elTxtLove.textContent = gameState.love + '%';
+    elBarLove.style.width = gameState.love + '%';
+
+    elTxtHair.textContent = gameState.hair + '%';
+    elBarHair.style.width = gameState.hair + '%';
+
+    if (gameState.checkup >= 70) elTxtHospital.textContent = "良好";
+    else if (gameState.checkup >= 40) elTxtHospital.textContent = "待檢查";
+    else elTxtHospital.textContent = "危險！";
+    elBarHospital.style.width = gameState.checkup + '%';
+
+    if (gameState.step >= 5) {
+      elCatAvatar.textContent = "😻";
+      elCatAge.textContent = "年齡：成貓 (完全體)";
+    } else {
+      elCatAvatar.textContent = "🐱";
+      elCatAge.textContent = `年齡：幼貓 (${gameState.step * 2} 個月)`;
+    }
+
+    elDayCounter.textContent = `第 ${gameState.day} 天`;
+  }
+
+  // 顯示小彈窗
+  function openModal(icon, text, nextNode) {
+    modalIcon.textContent = icon || '💡';
+    modalText.textContent = text;
+    pendingNextNode = nextNode;
+
+    feedbackModal.classList.remove('opacity-0', 'pointer-events-none');
+    feedbackModal.classList.add('opacity-100', 'pointer-events-auto');
+  }
+
+  // 關閉小彈窗並進入下一個環節
+  function closeModal() {
+    feedbackModal.classList.add('opacity-0', 'pointer-events-none');
+    feedbackModal.classList.remove('opacity-100', 'pointer-events-auto');
+
+    if (pendingNextNode) {
+      const currentEnding = checkMidGameBadEnding();
+      if (currentEnding) {
+        showEnding(currentEnding);
+      } else {
+        renderNode(pendingNextNode);
+      }
+      pendingNextNode = null;
+    }
+  }
+
+  modalConfirmBtn.addEventListener('click', closeModal);
+
+  // 渲染章節
+  function renderNode(nodeId) {
+    if (nodeId === 'CHECK_ENDING') {
+      showEnding(evaluateEnding());
+      return;
+    }
+
+    const node = storyNodes[nodeId];
+    if (!node) return;
+
+    // 確保章節標籤統一為藍底藍字
+    elBadge.className = BLUE_BADGE_CLASS;
+    elBadge.textContent = node.badge;
+
+    elTitle.textContent = node.title;
+    elText.textContent = node.text;
+
+    elOptions.innerHTML = '';
+
+    node.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn w-full text-left p-3.5 sm:p-4 bg-white border border-stone-200/80 hover:border-[#C68B59] rounded-2xl font-bold text-xs sm:text-sm text-stone-700 shadow-xs leading-relaxed';
+      btn.textContent = opt.text;
+
+      btn.addEventListener('click', () => {
+        if (opt.effect.health) gameState.health += opt.effect.health;
+        if (opt.effect.love) gameState.love += opt.effect.love;
+        if (opt.effect.hair) gameState.hair += opt.effect.hair;
+        if (opt.effect.checkup) gameState.checkup += opt.effect.checkup;
+
+        gameState.day += 60;
+        gameState.step += 1;
+
+        updateBoard();
+
+        openModal(opt.icon, opt.msg, opt.next);
+      });
+
+      elOptions.appendChild(btn);
+    });
+  }
+
+  // 中途壞結局檢查
+  function checkMidGameBadEnding() {
+    if (gameState.health <= 25) return evaluateEnding();
+    if (gameState.hair >= 80) return evaluateEnding();
+    if (gameState.love <= 20) return evaluateEnding();
+    return null;
+  }
+
+  // 顯示結局頁面
+  function showEnding(ending) {
+    elBadge.className = BLUE_BADGE_CLASS;
+    elBadge.textContent = "遊戲故事結束";
+
+    elTitle.textContent = ending.title;
+    elText.textContent = ending.text;
+
+    if (ending.type === 'perfect') {
+      elCatAvatar.textContent = "👑";
+    } else if (ending.type === 'good') {
+      elCatAvatar.textContent = "😺";
+    } else {
+      elCatAvatar.textContent = "😿";
+    }
+
+    elOptions.innerHTML = `
+      <button id="restart-game-btn" type="button" class="w-full py-4 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-2xl text-sm transition-all shadow-md active:scale-95">
+        🔄 再次挑戰！重養一隻布偶貓
+      </button>
+    `;
+
+    document.getElementById('restart-game-btn').addEventListener('click', restartGame);
+  }
+
+  // 重置遊戲
+  function restartGame() {
+    gameState = {
+      step: 1,
+      day: 1,
+      health: 100,
+      love: 50,
+      hair: 10,
+      checkup: 100
+    };
+    updateBoard();
+    renderNode(1);
+  }
+
+  document.getElementById('restart-btn').addEventListener('click', restartGame);
+
+  // 初始化遊戲
+  updateBoard();
+  renderNode(1);
+  </script>
+</body>
+</html>
