@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>にゃにこれ? 喵的什麼? </title>
+  <title>Purina Cat Breeds Redesign</title>
   
   <!-- Google Fonts: Nunito & Noto Sans TC-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+
   <!-- 引入 Bootstrap Icons 圖示庫 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <style>
     /* 1. 嚴格色彩系統 (3種色相): 主色木棕、輔助綠、米白/碳灰中性底 */
     :root {
-      --primary-color: #C68B59;   /* 貓抓板暖木棕 */
-      --secondary-color: #5B8266; /* 鼠尾草綠 */
-      --bg-color: #FBF9F5;        /* 溫潤米白底 */
-      --text-color: #2B2D42;      /* 內文深碳灰 */
+      --primary-color: #C68B59;
+      /* 貓抓板暖木棕 */
+      --secondary-color: #5B8266;
+      /* 鼠尾草綠 */
+      --bg-color: #FBF9F5;
+      /* 溫潤米白底 */
+      --text-color: #2B2D42;
+      /* 內文深碳灰 */
     }
 
     /* 解決跨瀏覽器對齊與平滑滾動 */
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 70px;
-      scrollbar-gutter: stable; /* 預留滾動條空間，避免跨頁面跳動與對齊偏差 */
+      scrollbar-gutter: stable;
+      /* 預留滾動條空間，避免跨頁面跳動與對齊偏差 */
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -41,17 +51,22 @@
       font-family: 'Nunito', 'Noto Sans TC', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      font-size: 16px; /* 字級1: 內文 16px */
+      font-size: 16px;
+      /* 字級1: 內文 16px */
       line-height: 1.6;
     }
 
-    h1, .hero-title {
-      font-size: 32px; /* 字級2: 大標題 32px */
+    h1,
+    .hero-title {
+      font-size: 32px;
+      /* 字級2: 大標題 32px */
       font-weight: 700;
     }
 
-    h2, .card-title {
-      font-size: 20px; /* 字級3: 卡片/區塊標題 20px */
+    h2,
+    .card-title {
+      font-size: 20px;
+      /* 字級3: 卡片/區塊標題 20px */
       font-weight: 700;
     }
 
@@ -101,8 +116,92 @@
       transform: translateY(1px);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
+
+    /* --- 創意微型 Footer 樣式 --- */
+    .site-footer {
+      background-color: #ffffff;
+      border-top: 1px solid rgba(198, 139, 89, 0.15);
+      color: var(--text-color);
+      padding: 36px 0 28px;
+      font-size: 14px;
+    }
+
+    /* 肉球按鈕：蓋印章彈跳特效 */
+    .footer-paw-btn {
+      width: 48px;
+      height: 48px;
+      background-color: var(--bg-color);
+      border: 1.5px solid rgba(198, 139, 89, 0.3);
+      border-radius: 50%;
+      color: var(--primary-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.18s ease;
+    }
+
+    .paw-emoji {
+      font-size: 22px;
+      display: inline-block;
+      line-height: 1;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    .footer-paw-btn:hover {
+      color: #ffffff;
+      background-color: var(--primary-color);
+      transform: scale(1.15) rotate(-6deg);
+      box-shadow: 0 6px 14px rgba(198, 139, 89, 0.35);
+    }
+
+    .footer-paw-btn:active {
+      /* 點擊時如同肉球蓋印章下壓 */
+      transform: scale(0.92) rotate(2deg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 吸貓金句展示盒 */
+    .quote-box {
+      max-width: 620px;
+      margin: 0 auto 16px auto;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background-color: var(--bg-color);
+      border-left: 3px solid var(--primary-color);
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cat-quote {
+      font-size: 14.5px;
+      color: var(--text-color);
+      margin: 0;
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    .cat-quote.fade-out {
+      opacity: 0;
+    }
+
+    .footer-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
   </style>
 </head>
+
 <body id="top">
   <!-- 1. 頂部導覽列 Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
@@ -126,7 +225,7 @@
     <div class="container">
       <h1 class="hero-title mb-3">你想知道喵的什麼!探索適合你的貓咪品種</h1>
       <p class="mb-4 text-muted">輸入品種名稱或特性，快速查找貓咪照護知識與性格特質</p>
-      
+
       <!-- 搜尋列 -->
       <div class="row justify-content-center">
         <div class="col-md-6 col-12">
@@ -135,7 +234,9 @@
             <div class="position-relative flex-grow-1">
               <input type="text" id="cat-search-input" class="form-control pe-5" placeholder="例如:布偶貓、英國短毛貓...">
               <!-- 叉叉清除按鈕 (預設 d-none 隱藏，有字才會出現) -->
-              <button type="button" id="cat-clear-btn" class="btn btn-link text-secondary translate-middle-y me-2 p-0 position-absolute top-50 end-0 text-decoration-none d-none" aria-label="清除搜尋">
+              <button type="button" id="cat-clear-btn"
+                class="btn btn-link text-secondary translate-middle-y me-2 p-0 position-absolute top-50 end-0 text-decoration-none d-none"
+                aria-label="清除搜尋">
                 <i class="bi bi-x-circle-fill"></i>
               </button>
             </div>
@@ -153,7 +254,7 @@
       <h2>熱門品種圖鑑</h2>
       <span class="badge badge-custom rounded-pill px-3 py-2">共 3 種收錄</span>
     </div>
-    
+
     <div class="row g-4">
       <!-- 查無結果提示訊息 (預設 d-none 隱藏) -->
       <div id="no-result-msg" class="col-12 text-center py-5 d-none">
@@ -165,12 +266,14 @@
       <!-- 貓咪卡片 1 -->
       <div class="col-12 col-md-4 cat-item" id="cat-ragdoll">
         <div class="card cat-card h-100 shadow-sm border-0 position-relative">
-          <img src="https://images.unsplash.com/photo-1697358120032-c07f0d450760?q=80&w=1170&auto=format&fit=crop" class="card-img-top" style="object-position: 70% 50%;" alt="布偶貓">
+          <img src="https://images.unsplash.com/photo-1697358120032-c07f0d450760?q=80&w=1170&auto=format&fit=crop"
+            class="card-img-top" style="object-position: 70% 50%;" alt="布偶貓">
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="badge badge-custom">長毛 / 溫馴</span>
               <!-- 愛心按鈕與計數 -->
-              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn" data-count="128">
+              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn"
+                data-count="128">
                 <i class="bi bi-heart text-danger"></i>
                 <span class="like-counter text-muted small">128</span>
               </button>
@@ -185,11 +288,13 @@
       <!-- 貓咪卡片 2 -->
       <div class="col-12 col-md-4 cat-item" id="cat-bsh">
         <div class="card cat-card h-100 shadow-sm border-0 position-relative">
-          <img src="https://images.unsplash.com/photo-1629624467541-f73ef8f12df2?q=80&w=687&auto=format&fit=crop" class="card-img-top" style="object-position: 30% 60%;" alt="英國短毛貓">
+          <img src="https://images.unsplash.com/photo-1629624467541-f73ef8f12df2?q=80&w=687&auto=format&fit=crop"
+            class="card-img-top" style="object-position: 30% 60%;" alt="英國短毛貓">
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="badge badge-custom">短毛 / 安靜</span>
-              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn" data-count="96">
+              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn"
+                data-count="96">
                 <i class="bi bi-heart text-danger"></i>
                 <span class="like-counter text-muted small">96</span>
               </button>
@@ -204,11 +309,13 @@
       <!-- 貓咪卡片 3 -->
       <div class="col-12 col-md-4 cat-item" id="cat-siamese">
         <div class="card cat-card h-100 shadow-sm border-0 position-relative">
-          <img src="https://images.unsplash.com/photo-1588823668292-6dfc53f91140?q=80&w=764&auto=format&fit=crop" class="card-img-top" style="object-position: 50% 30%;" alt="暹羅貓">
+          <img src="https://images.unsplash.com/photo-1588823668292-6dfc53f91140?q=80&w=764&auto=format&fit=crop"
+            class="card-img-top" style="object-position: 50% 30%;" alt="暹羅貓">
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <span class="badge badge-custom">短毛 / 活潑話多</span>
-              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn" data-count="142">
+              <button class="btn btn-sm btn-link text-decoration-none p-0 d-flex align-items-center gap-1 like-btn"
+                data-count="142">
                 <i class="bi bi-heart text-danger"></i>
                 <span class="like-counter text-muted small">142</span>
               </button>
@@ -222,6 +329,50 @@
     </div>
   </main>
 
+  <!-- 頁尾 Footer -->
+  <footer class="site-footer text-center mt-5">
+    <div class="container">
+      <!-- 點擊滑回頂部的肉球蓋印章按鈕 -->
+      <div class="mb-3">
+        <a href="#top" class="footer-paw-btn" title="蓋個肉球印章，滑回頂部">
+            <!-- 純向量貓咪肉球圖示 -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <!-- 掌心大肉球 -->
+              <path d="M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z" />
+              <!-- 四個小腳趾肉球 -->
+              <ellipse cx="6.5" cy="10" rx="1.6" ry="2.2" transform="rotate(-15 6.5 10)" />
+              <ellipse cx="10" cy="7" rx="1.6" ry="2.2" transform="rotate(-5 10 7)" />
+              <ellipse cx="14" cy="7" rx="1.6" ry="2.2" transform="rotate(5 14 7)" />
+              <ellipse cx="17.5" cy="10" rx="1.6" ry="2.2" transform="rotate(15 17.5 10)" />
+            </svg>
+        </a>
+      </div>
+
+      <!-- 10 秒自動輪播吸貓金句 -->
+      <div class="quote-box">
+        <p id="cat-quote-text" class="cat-quote">
+          載入吸貓金句中...
+        </p>
+      </div>
+
+      <!-- 快速導航連結 -->
+      <div class="footer-links mb-3">
+        <a href="#top">回到頂端</a>
+        <span class="text-muted">•</span>
+        <a href="#cat-dex">品種圖鑑</a>
+        <span class="text-muted">•</span>
+        <a href="quiz.html">冷知識測驗</a>
+      </div>
+
+      <!-- 宣告 -->
+      <p class="text-muted mb-1" style="font-size: 13px;">
+        🐾 にゃにこれ? 喵的什麼? · 本專案由熱愛貓咪的前端小組打造
+      </p>
+      <p class="text-muted mb-0" style="font-size: 12px; opacity: 0.7;">
+        Designed for F2E Midterm Project © 2026
+      </p>
+    </div>
+  </footer>
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -314,11 +465,11 @@
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
-        
+
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           e.preventDefault(); // 阻擋原本預設的瞬間跳轉
-          
+
           targetElement.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
@@ -333,6 +484,48 @@
         }
       });
     });
+
+    // --- 吸貓金句 10 秒切換邏輯 ---
+    const catQuotes = [
+      "「大部分的煩惱，養貓就會好。」 —— 村上春樹",
+      "「世上還有什麼比貓的愛更大的禮物？」 —— 查爾斯・狄更斯",
+      "「貓對自己的情緒非常誠實。出於某些原因，人類會隱藏感受，但貓咪從不如此。」 —— 海明威",
+      "「一貓又一貓。」（One cat just leads to another.） —— 海明威",
+      "「最小的貓科動物可謂偉大的傑作。」 —— 達文西",
+      "「如果動物能說話，狗會是一個笨拙直言不諱的傢伙；而貓則擁有一種罕見的優雅，從不多說一句話。」 —— 馬克・吐溫"
+    ];
+
+    let currentQuoteIndex = Math.floor(Math.random() * catQuotes.length);
+    const quoteElement = document.getElementById('cat-quote-text');
+
+    function updateQuote() {
+      if (!quoteElement) return;
+
+      // 淡出過渡
+      quoteElement.classList.add('fade-out');
+
+      setTimeout(() => {
+        // 切換至下一句（隨機且不與前一句重複）
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * catQuotes.length);
+        } while (nextIndex === currentQuoteIndex && catQuotes.length > 1);
+
+        currentQuoteIndex = nextIndex;
+        quoteElement.textContent = catQuotes[currentQuoteIndex];
+
+        // 淡入顯示
+        quoteElement.classList.remove('fade-out');
+      }, 500); // 0.5 秒淡出完成後換字
+    }
+
+    // 頁面載入時先隨機呈現一句
+    if (quoteElement) {
+      quoteElement.textContent = catQuotes[currentQuoteIndex];
+      // 每 10000 毫秒（10 秒）觸發一次更新
+      setInterval(updateQuote, 10000);
+    }
   </script>
 </body>
+
 </html>
