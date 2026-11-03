@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冷知識測驗 - にゃにこれ? 喵的什麼?</title>
+
+    <!-- Google Fonts 同步首頁：Nunito & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 1. 嚴格色彩系統：完全同步 index.html */
+        :root {
+            --primary-color: #C68B59;
+            /* 貓抓板暖木棕 */
+            --secondary-color: #5B8266;
+            /* 鼠尾草綠 */
+            --bg-color: #FBF9F5;
+            /* 溫潤米白底 */
+            --text-color: #2B2D42;
+            /* 內文深碳灰 */
+        }
+
+        /* 2. 嚴格字型與字級：完全同步 index.html */
+        body {
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* 首頁同款：立體微浮雕膠囊 Logo 按鍵 */
+        .brand-capsule {
+            color: var(--primary-color) !important;
+            padding: 6px 14px;
+            border-radius: 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+        }
+
+        .brand-capsule:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .brand-capsule:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 頂級標題 32px */
+        h1,
+        .h1-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* 次級標題 20px */
+        h2,
+        .h2-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* 內文 16px */
+        p,
+        .body-text {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .quiz-card {
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid rgba(198, 139, 89, 0.18);
+        }
+
+        .btn-sage {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-sage:hover {
+            background-color: #496a52;
+            color: #ffffff;
+        }
+
+        .btn-wood {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-wood:hover {
+            background-color: #A86E3D;
+            color: #ffffff;
+        }
+
+        .option-btn {
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 16px;
+            border: 1.5px solid #E5DFD7;
+            border-radius: 12px;
+            background-color: #ffffff;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover {
+            background-color: #F4EFEB;
+            border-color: var(--primary-color);
+        }
+
+        .option-btn.correct {
+            background-color: #E2ECE5 !important;
+            border-color: var(--secondary-color) !important;
+            color: #2D4C35 !important;
+            font-weight: 600;
+        }
+
+        .option-btn.wrong {
+            background-color: #FBEBEB !important;
+            border-color: #DC3545 !important;
+            color: #A3202C !important;
+        }
+
+        .badge-breed {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: normal;
+            font-size: 14px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold brand-capsule my-0" href="#top" style="color: var(--primary-color);">にゃにこれ?
+                喵的什麼?</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#top">首頁</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#cat-dex">貓咪百科</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-bold" href="quiz.html">冷知識測驗</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 測驗主要容器 -->
+    <main class="container py-5" style="max-width: 680px;">
+
+        <!-- 1. 測驗封面頁（Start Screen） -->
+        <div class="card quiz-card shadow-sm p-4 p-md-5 text-center" id="start-box">
+            <div class="mb-3">
+                <i class="bi bi-patch-question  display-3" style="color: var(--secondary-color);"></i>
+            </div>
+            <h1 class="h1-title mb-3">貓奴等級檢定：品種冷知識挑戰</h1>
+            <p class="body-text text-muted mb-4">
+                本測驗題目皆出自首頁<strong>「熱門品種圖鑑」</strong>中的深度照護知識與性格特質！<br>
+                每次隨機自各品種抽取考題與隨機排列選項，檢驗你是否真的掌握了毛孩的細節。<br>
+                <em>準備好了嗎？如果不確定，建議先回首頁圖鑑好好做功課喔！</em>
+            </p>
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                <a href="index.html#cat-dex" class="btn btn-outline-secondary px-4 py-2">先回圖鑑複習</a>
+                <button class="btn btn-wood px-4 py-2 fw-bold" id="start-btn">開始隨堂挑戰 🐾</button>
+            </div>
+        </div>
+
+        <!-- 2. 進行中的測驗卡片（預設隱藏） -->
+        <div id="quiz-flow" class="d-none">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted fw-bold" id="progress-text">第 1 / 3 題</span>
+                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" id="exit-btn" onclick="exitQuiz()"
+                        style="font-size: 13px;" title="退出並返回測驗首頁">
+                        <i class="bi bi-box-arrow-left"></i> 退出測驗
+                    </button>
+                </div>
+                <span class="badge badge-breed" id="breed-tag">品種標籤</span>
+            </div>
+            <div class="progress mb-4" style="height: 8px; background-color: #E5DFD7;">
+                <div class="progress-bar" id="progress-bar" role="progressbar"
+                    style="width: 33%; background-color: var(--secondary-color);"></div>
+            </div>
+
+            <div class="card quiz-card shadow-sm p-4 p-md-5" id="quiz-box">
+                <h2 class="h2-title mb-4" id="question-text">載入題目中...</h2>
+                <div class="d-grid gap-3" id="options-container">
+                    <!-- 選項按鈕由 JS 隨機渲染 -->
+                </div>
+
+                <!-- 作答後的解析區塊 -->
+                <div id="explanation-box" class="alert mt-4 d-none">
+                    <div id="explanation-text" class="body-text mb-3"></div>
+                    <button class="btn btn-sage w-100 py-2 fw-bold" id="next-btn">下一題</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 測驗結算畫面（預設隱藏） -->
+        <div class="card quiz-card shadow-sm p-4 p-md-5 text-center d-none" id="result-box">
+            <div id="result-icon" class="mb-3"></div>
+            <h1 class="h1-title mb-2">檢定結果結算</h1>
+            <p class="fs-4 mb-3">答對題數：<span class="fw-bold text-danger" id="final-score">0</span> / <span
+                    id="total-questions">3</span> 題</p>
+
+            <div class="alert alert-light border mb-4 text-start" id="result-feedback">
+                <!-- 診斷訊息 -->
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center" id="action-buttons">
+                <!-- 動態跳轉按鈕 -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const questionBank = {
+            ragdoll: {
+                breedName: "布偶貓",
+                anchorId: "cat-ragdoll",
+                questions: [
+                    {
+                        question: "坊間常傳「布偶貓完全沒脾氣，怎麼弄都可以」，真實情況是？",
+                        options: [
+                            { text: "再溫和的貓也有底線，強抱太久或摸敏感部位仍會掙脫甚至拍打警告", correct: true },
+                            { text: "確實沒有任何痛覺與情緒底線，任何姿勢抱著都不會抗拒", correct: false },
+                            { text: "只要給予罐頭，不管怎麼強行搓揉肚子都不會反抗", correct: false },
+                            { text: "脾氣溫和到即使感到不適也絕對不敢表達任何反抗", correct: false }
+                        ],
+                        explanation: "再溫和的貓咪也有底線！強行抱太久或硬摸肚子等討厭部位，牠一樣會掙脫甚至拍打警告，尊重毛孩是雙向的。"
+                    },
+                    {
+                        question: "有人認為「布偶貓有點笨、不聰明」，主要原因往往是什麼？",
+                        options: [
+                            { text: "牠們對取悅人類與互動的動機，高於獨立解決複雜問題（如開鎖）", correct: true },
+                            { text: "布偶貓的大腦神經傳導速度先天低於其他短毛貓品種", correct: false },
+                            { text: "牠們無法透過零食獎勵學會握手或基礎動作指令", correct: false },
+                            { text: "智力測驗證實牠們缺乏記憶力，無法辨認飼主指令", correct: false }
+                        ],
+                        explanation: "與其說笨不如說是動機不同！布偶貓樂於為了零食參與互動指令（如握手），但對於自己開複雜門鎖等獨立解謎可能缺乏興趣。"
+                    },
+                    {
+                        question: "關於「所有布偶貓都一樣黏人」的說法，下列何者正確？",
+                        options: [
+                            { text: "存在個體差異，有些是跟屁蟲，有些則偏好同室相伴，無絕對標準", correct: true },
+                            { text: "只要是純種布偶貓，性格必定是24小時寸步不離的跟屁蟲", correct: false },
+                            { text: "如果沒有無時無刻黏在主人身上，就代表貓咪性格有缺陷", correct: false },
+                            { text: "布偶貓的黏人程度完全只受幼年飲食影響，與遺傳和經驗無關", correct: false }
+                        ],
+                        explanation: "個體差異很大！就像人有外向與內向，有些布偶貓是跟屁蟲等級，有些則是保持同處一室就好，並非24小時黏人才是正常。"
+                    }
+                ]
+            },
+            bsh: {
+                breedName: "英國短毛貓",
+                anchorId: "cat-bsh",
+                questions: [
+                    {
+                        question: "英國短毛貓圓臉可愛常被當成絨毛玩具，但牠們面對「抱抱」的真實反應通常是？",
+                        options: [
+                            { text: "喜歡陪伴但重視保有自主空間，被強行抱起時容易優雅跳開", correct: true },
+                            { text: "極度熱愛整天窩在人類懷裡被緊緊擁抱，絕不抗拒", correct: false },
+                            { text: "只要被抱起就會像布偶貓一樣全身癱軟不願意動彈", correct: false },
+                            { text: "完全無法忍受人類靠近，會立刻兇狠哈氣攻擊", correct: false }
+                        ],
+                        explanation: "英短的真實性格是「喜歡在身邊陪伴，但保有自己的空間」，去抱牠時牠反而經常會優雅跳開去一旁待著。"
+                    },
+                    {
+                        question: "許多人誤以為「短毛貓就不太會掉毛」，飼養英短時的真實落差是？",
+                        options: [
+                            { text: "毛量極其豐厚密集，每逢換季掉毛量驚人到宛如「家裡在下雪」", correct: true },
+                            { text: "因為是短毛品種，全年幾乎不會掉落任何廢毛", correct: false },
+                            { text: "只有年老時才會微量脫毛，幼年及成年期完全無掉毛困擾", correct: false },
+                            { text: "毛髮像人類頭髮一樣持續變長，只會分岔而不會整片脫落", correct: false }
+                        ],
+                        explanation: "英短雖然是短毛貓，但擁有極為濃密的雙層厚實毛量，換季時廢毛量驚人，常被飼主形容家裡像是在下雪。"
+                    },
+                    {
+                        question: "叫英短名字時牠們常面無表情不理睬，這通常代表什麼心態？",
+                        options: [
+                            { text: "其實聰明且聽得懂，只是「現在不想動」，常用裝傻表達自我意願", correct: true },
+                            { text: "天生聽力神經較弱，難以分辨人類喊出的音節頻率", correct: false },
+                            { text: "記憶能力極差，無法記住自己的專屬名字與稱呼", correct: false },
+                            { text: "陷入深層思考時會暫時失去對外界環境的所有感知", correct: false }
+                        ],
+                        explanation: "英短其實相當聰明，叫名字不理往往不是聽不懂，而是「聽到了但現在不想動」，用裝傻來堅持自己的節奏是其獨特魅力。"
+                    }
+                ]
+            },
+            siamese: {
+                breedName: "暹羅貓",
+                anchorId: "cat-siamese",
+                questions: [
+                    {
+                        question: "暹羅貓常發出豐富且頻繁的叫聲，新手常誤會牠們「愛生氣」，實情是？",
+                        options: [
+                            { text: "牠們極度喜愛發聲，是用熱情對話與豐富語調在表達需求與互動", correct: true },
+                            { text: "天生神經質且脾氣暴躁，每次叫喚都代表正在發怒抗議", correct: false },
+                            { text: "喉部肌肉發育異常，叫聲高頻是無法自行控制的痙攣現象", correct: false },
+                            { text: "叫聲只是為了驅趕同類，從未帶有任何與人類溝通的意圖", correct: false }
+                        ],
+                        explanation: "暹羅貓喜歡透過頻繁的叫聲與人類互動，叫聲豐富多變，常被不熟悉的人誤以為是愛吵架或脾氣暴躁，其實是熱情的對話。"
+                    },
+                    {
+                        question: "暹羅貓被稱為「貓界狗狗」，如果誤以為牠高冷獨立而長期讓牠獨處，會造成什麼後果？",
+                        options: [
+                            { text: "社交需求極高且依賴同伴，長時間獨處易引發分離焦慮或破壞行為", correct: true },
+                            { text: "會更享受絕對自由的單獨環境，生活品質大幅提升", correct: false },
+                            { text: "性格會自然退化為完全不發聲的靜音型貓咪", correct: false },
+                            { text: "會進入休眠狀態以降低新陳代謝，對心理毫無影響", correct: false }
+                        ],
+                        explanation: "暹羅貓社交需求非常高、極度依賴同伴！若誤以為貓咪都能適應長時間獨處，很容易引發分離焦慮或拆家等破壞行為。"
+                    },
+                    {
+                        question: "新手發現暹羅貓末端或整體毛色在冬天、隨年齡變深時常誤以為是生病，原因其實是？",
+                        options: [
+                            { text: "受酪胺酸酶與體溫影響，肢端較冷或氣溫降低時色素合成會使毛色變深", correct: true },
+                            { text: "長期接觸空氣中的灰塵沉積，屬於洗澡即可清除的毛髮髒污", correct: false },
+                            { text: "真菌感染造成的慢性皮膚黑色素沉澱病變", correct: false },
+                            { text: "飲食中缺乏維生素導致毛囊退化變色", correct: false }
+                        ],
+                        explanation: "暹羅貓的酪胺酸酶對溫度敏感，肢端體溫較低或冬季氣溫下降時，黑色素合成增加使毛色變深，這純屬正常的遺傳生理特徵。"
+                    }
+                ]
+            }
+        };
+        function shuffleArray(array) {
+            const copy = [...array];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        let currentQuizList = [];
+        let currentIndex = 0;
+        let correctCount = 0;
+        let answered = false;
+        let wrongBreeds = [];
+
+        const startBox = document.getElementById('start-box');
+        const startBtn = document.getElementById('start-btn');
+        const quizFlow = document.getElementById('quiz-flow');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationText = document.getElementById('explanation-text');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const breedTag = document.getElementById('breed-tag');
+        const resultBox = document.getElementById('result-box');
+        const resultIcon = document.getElementById('result-icon');
+        const finalScore = document.getElementById('final-score');
+        const totalQuestions = document.getElementById('total-questions');
+        const resultFeedback = document.getElementById('result-feedback');
+        const actionButtons = document.getElementById('action-buttons');
+
+        function initQuiz() {
+            const breeds = ['ragdoll', 'bsh', 'siamese'];
+            currentQuizList = breeds.map(breedKey => {
+                const data = questionBank[breedKey];
+                const randomQ = data.questions[Math.floor(Math.random() * data.questions.length)];
+                return {
+                    breedKey: breedKey,
+                    breedName: data.breedName,
+                    anchorId: data.anchorId,
+                    question: randomQ.question,
+                    options: shuffleArray(randomQ.options),
+                    explanation: randomQ.explanation
+                };
+            });
+
+            currentQuizList = shuffleArray(currentQuizList);
+
+            currentIndex = 0;
+            correctCount = 0;
+            wrongBreeds = [];
+            answered = false;
+
+            startBox.classList.add('d-none');
+            resultBox.classList.add('d-none');
+            quizFlow.classList.remove('d-none');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            explanationBox.classList.add('d-none');
+            const item = currentQuizList[currentIndex];
+
+            breedTag.textContent = item.breedName;
+            progressText.textContent = `第 ${currentIndex + 1} / ${currentQuizList.length} 題`;
+            progressBar.style.width = `${((currentIndex + 1) / currentQuizList.length) * 100}%`;
+            questionText.textContent = `${currentIndex + 1}. [${item.breedName}] ${item.question}`;
+
+            optionsContainer.innerHTML = '';
+            item.options.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn option-btn';
+                btn.textContent = opt.text;
+                btn.addEventListener('click', () => handleOptionClick(opt, btn));
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleOptionClick(selectedOption, clickedBtn) {
+            if (answered) return;
+            answered = true;
+
+            const currentItem = currentQuizList[currentIndex];
+            const allButtons = optionsContainer.querySelectorAll('.option-btn');
+
+            if (selectedOption.correct) {
+                clickedBtn.classList.add('correct');
+                correctCount += 1;
+                explanationBox.className = 'alert alert-success mt-4';
+                explanationText.innerHTML = `<strong>正解！</strong> ${currentItem.explanation}`;
+            } else {
+                clickedBtn.classList.add('wrong');
+                currentItem.options.forEach((opt, idx) => {
+                    if (opt.correct) allButtons[idx].classList.add('correct');
+                });
+                wrongBreeds.push(currentItem);
+                explanationBox.className = 'alert alert-danger mt-4';
+                explanationText.innerHTML = `<strong>答錯囉！</strong> ${currentItem.explanation}`;
+            }
+
+            explanationBox.classList.remove('d-none');
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex < currentQuizList.length) {
+                loadQuestion();
+            } else {
+                showFinalResult();
+            }
+        });
+
+        function showFinalResult() {
+            quizFlow.classList.add('d-none');
+            resultBox.classList.remove('d-none');
+
+            finalScore.textContent = correctCount;
+            totalQuestions.textContent = currentQuizList.length;
+            actionButtons.innerHTML = '';
+
+            if (wrongBreeds.length === 0) {
+                resultIcon.innerHTML = '<i class="bi bi-trophy text-warning display-2"></i>';
+                resultFeedback.innerHTML = `
+                    <h5 class="fw-bold text-success mb-2">🎉 恭喜！榮獲【貓咪百科大師】稱號！</h5>
+                    <p class="body-text mb-0">你對圖鑑中的各品種生活習性、歷史淵源與生理機制掌握得非常透徹，是百分之百的合格貓奴！</p>
+                `;
+                actionButtons.innerHTML = `
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再測一次</button>
+                    <a href="index.html#cat-dex" class="btn btn-sage px-4 py-2 fw-bold">回到貓咪圖鑑</a>
+                `;
+            } else if (wrongBreeds.length === 1) {
+                const target = wrongBreeds[0];
+                resultIcon.innerHTML = '<i class="bi bi-lightbulb text-warning display-2"></i>';
+                resultFeedback.innerHTML = `
+                    <h5 class="fw-bold text-warning-emphasis mb-2">🐾 表現優異！但在【${target.breedName}】上稍有遺漏！</h5>
+                    <p class="body-text mb-0">看來你只對 <strong>${target.breedName}</strong> 的冷知識不小心晃了神。趕緊點擊下方按鈕，直接帶你回到該卡片前重新惡補！</p>
+                `;
+                actionButtons.innerHTML = `
+                    <a href="index.html#${target.anchorId}" class="btn btn-wood px-4 py-2 fw-bold">前往複習【${target.breedName}】卡片</a>
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">重測一次</button>
+                `;
+            } else {
+                resultIcon.innerHTML = '<i class="bi bi-exclamation-triangle text-danger display-2"></i>';
+                resultFeedback.innerHTML = `
+                    <h5 class="fw-bold text-danger mb-2">🚨 知識告急！答錯了 ${wrongBreeds.length} 種品種知識！</h5>
+                    <p class="body-text mb-0">看來你還沒有仔細閱讀圖鑑卡片上的說明喔！建議先回到圖鑑首頁從頭將三隻貓咪的特質與照護細節完整看過一遍再來挑戰！</p>
+                `;
+                actionButtons.innerHTML = `
+                    <a href="index.html#cat-dex" class="btn btn-wood px-4 py-2 fw-bold">回到圖鑑首頁全面複習</a>
+                    <button class="btn btn-outline-secondary px-4 py-2" onclick="initQuiz()">再挑戰一次</button>
+                `;
+            }
+        }
+
+        startBtn.addEventListener('click', initQuiz);
+        // 退出測驗專用函數（全域可呼叫）
+        function exitQuiz() {
+            if (confirm('確定要中途退出測驗嗎？目前的作答進度將不會被保存喔！')) {
+                const quizFlowEl = document.getElementById('quiz-flow');
+                const startBoxEl = document.getElementById('start-box');
+                const resultBoxEl = document.getElementById('result-box');
+
+                if (quizFlowEl) quizFlowEl.classList.add('d-none');
+                if (resultBoxEl) resultBoxEl.classList.add('d-none');
+                if (startBoxEl) startBoxEl.classList.remove('d-none');
+            }
+        }
+    </script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
