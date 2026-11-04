@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>にゃにこれ? 喵的什麼? - 布偶貓成長故事養成記</title>
+<title>にゃにこれ? 喵的什麼? - 英國短毛貓成長故事養成記</title>
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C68B59'><path d='M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z'/><ellipse cx='6.5' cy='10' rx='1.6' ry='2.2' transform='rotate(-15 6.5 10)'/><ellipse cx='10' cy='7' rx='1.6' ry='2.2' transform='rotate(-5 10 7)'/><ellipse cx='14' cy='7' rx='1.6' ry='2.2' transform='rotate(5 14 7)'/><ellipse cx='17.5' cy='10' rx='1.6' ry='2.2' transform='rotate(15 17.5 10)'/></svg>">
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -31,12 +32,12 @@ html, body {
 
   <!-- 頂部標題與導覽 -->
   <header class="w-full max-w-xl bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-stone-200/80 shadow-xs flex justify-between items-center mb-4">
-    <a href="index_cat.html" class="px-3.5 py-1.5 bg-stone-800 text-white rounded-full flex items-center gap-1.5 text-xs font-semibold hover:bg-stone-700 transition-all">
+    <a href="index_shorthair.html" class="px-3.5 py-1.5 bg-stone-800 text-white rounded-full flex items-center gap-1.5 text-xs font-semibold hover:bg-stone-700 transition-all">
       ‹ 返回品種介紹
     </a>
     <div class="text-center">
-      <span class="text-[10px] font-bold text-[#C68B59] uppercase block tracking-wider">RAGDOLL Story Interactive</span>
-      <h1 class="text-base font-extrabold text-stone-800">布偶貓一生養成故事 🐾</h1>
+      <span class="text-[10px] font-bold text-[#C68B59] uppercase block tracking-wider">BRITISH SHORTHAIR STORY INTERACTIVE</span>
+      <h1 class="text-base font-extrabold text-stone-800">英國短毛貓一生養成故事 🐾</h1>
     </div>
     <button id="restart-btn" class="text-xs font-bold text-stone-500 hover:text-stone-800 underline">
       重新開始
@@ -52,13 +53,13 @@ html, body {
         <div class="flex items-center gap-2">
           <span class="text-2xl" id="cat-avatar">🐾</span>
           <div>
-            <h2 class="text-sm font-bold text-stone-800" id="cat-name">綿綿 (RAGDOLL)</h2>
+            <h2 class="text-sm font-bold text-stone-800" id="cat-name">包子 (BRITISH SHORTHAIR)</h2>
             <p class="text-xs text-[#C68B59] font-semibold" id="cat-age">年齡：幼貓 2 個月</p>
           </div>
         </div>
         <div class="text-right">
-          <span class="text-[10px] text-stone-400 font-bold block uppercase">天數記錄</span>
-          <span class="text-sm font-extrabold text-stone-700" id="day-counter">第 1 天</span>
+          <span class="text-[10px] text-stone-400 font-bold block uppercase">歲數記錄</span>
+          <span class="text-sm font-extrabold text-stone-700" id="day-counter">2個月</span>
         </div>
       </div>
 
@@ -117,10 +118,10 @@ html, body {
         章節 1：初次相遇
       </div>
       <h3 class="text-base sm:text-lg font-bold text-stone-800 leading-snug" id="story-title">
-        帶綿綿回家第一天！
+        帶包子回家第一天！
       </h3>
       <p class="text-xs sm:text-sm text-stone-600 leading-relaxed bg-[#FAF8F5]/80 p-4 rounded-2xl border border-stone-200/50" id="story-text">
-        你把這隻只有 2 個月大、眼睛湛藍如星空的小布偶貓接回了家。牠怯生生地縮在貓籠角落，喵喵小聲叫著。現在該準備牠的第一餐了，你準備了什麼食物給牠？
+        你接回了一隻圓滾滾、眼睛大大的英短幼貓「包子」。包子正蹲在客廳沙發旁觀察你，表現的有點害怕。現在到了幼貓餵食時間，你打算給牠準備什麼？
       </p>
     </section>
 
@@ -177,209 +178,207 @@ html, body {
     // ------------------- 幼貓篇 -------------------
     1: {
       badge: "幼貓期：2個月",
-      title: "帶綿綿回家第一天！選擇主糧",
-      text: "小綿綿才 2 個月大，腸胃非常脆弱嬌嫩。你拿出了準備好的貓糧，打算餵牠第一餐：",
+      title: "帶包子回家第一天！幼貓飲食與骨骼發育",
+      text: "你接回了一隻圓滾滾、眼睛大大的英短幼貓「包子」。包子正蹲在客廳沙發旁靜靜觀察你，表現得非常沉穩。現在到了幼貓的餵食時間，你打算給牠準備什麼:",
       options: [
         {
-          text: "A 選擇「幼貓專用高蛋白低敏無穀乾糧 + 幼貓主食罐」",
-          effect: { health: +10, love: +10 },
+          text: "A 餵食高蛋白質、高熱量幼貓專用配方糧，並搭配充足潔淨飲水",
+          effect: {health: +10, love: +10},
           next: 2,
           icon: "🥫",
-          msg: "答對了！幼貓需要高蛋白與好吸收的營養，無穀配方能有效保護布偶貓敏感的腸胃！"
+          msg: "答對了！英短幼貓需要充足的高蛋白質與熱量支援骨骼肌肉發育，營養相當均衡！"
         },
+
         {
-          text: "B 選擇「便宜的大包裝成貓乾糧」（想說貓糧應該都一樣）",
-          effect: { health: -40, love: -10 },
+          text: "B 怕包子長太胖，直接給牠吃低熱量的減肥成貓糧",
+          effect: {health: -35, love: -5},
           next: 2,
           icon: "⚠️",
-          msg: "糟糕！成貓糧顆粒過大且蛋白質比例不符，加上腸胃不耐受，綿綿開始嚴重拉肚子了！"
+          msg: "糟糕！幼貓正值發育期，過早限制熱量與蛋白質會導致發育不良、骨骼密度不足！"
         },
-        {
-          text: "C 餵牠喝「人類喝的全脂鮮牛奶」想幫牠補充營養",
-          effect: { health: -60, love: -15 },
-          next: 2,
-          icon: "🚨",
-          msg: "危險！大多數貓咪有乳糖不耐症，鮮奶導致綿綿劇烈嘔吐腹瀉，差點脫水！"
-        }
+
       ]
     },
 
     2: {
       badge: "幼貓期：3個月",
-      title: "長毛初展現！梳毛習慣培養",
-      text: "綿綿滿 3 個月了，豐厚的長毛開始迅速生長。你發現牠開始會自己舔毛梳理，這時你決定：",
+      title: "愛的擁抱!!",
+      text: "包子長到了 3 個月，像個精緻的絨毛玩具！朋友來家裡玩，覺得包子臉圓圓的一定很好抱，伸手就想強行把包子抱在懷裡，這時你會：",
       options: [
         {
-          text: "A 每天用不傷皮膚的鋼針梳/排梳幫牠梳毛 10 分鐘，並適量補充排毛粉",
-          effect: { hair: -10, love: +15 },
+          text: "A 任由朋友硬把包子抱在懷裡用力揉捏",
+          effect: { love: -30, health: -10 },
           next: 3,
-          icon: "🪮",
-          msg: "太棒了！從小培養梳毛習慣，綿綿很享受梳毛，毛髮絲滑順暢，完全沒有毛球問題！"
+          icon: "😿",
+          msg: "包子感到極度不適！英短討厭被強行約束，優雅跳開並躲進櫃子底下，對你產生了防備心。"
         },
         {
-          text: "B 覺得長毛貓自己舔毛就好，完全不去幫牠梳理",
-          effect: { hair: +45 },
+          text: "B 阻止朋友，說明英短「喜歡陪伴，但保有自己空間」，讓朋友蹲下慢慢靠近",
+          effect: { love: +20 },
           next: 3,
-          icon: "🧶",
-          msg: "警告！布偶貓髮量極大，綿綿吃下了大量死毛，開始頻繁咳嗽並吐出大塊毛球！"
+          icon: "🧸",
+          msg: "太棒了！尊重英短的邊界感！包子感到放鬆，主動走過來蹭了蹭朋友的手臂。"
         }
       ]
     },
 
     3: {
       badge: "幼貓期：4個月",
-      title: "與貓咪互動！避免討厭的行為",
-      text: "綿綿越來越黏人了！今天朋友來家裡玩，看到綿綿好可愛，想要跟牠玩。你該怎麼提醒朋友？",
+      title: "換季掉毛與毛球預防",
+      text: "包子4個月了！雖然是短毛貓，但英短的被毛極其濃密。到了換季時，家裡地上隨處可見毛屑飛揚，你決定：",
       options: [
         {
-          text: "A 引導朋友用逗貓棒輕柔互動，並讓貓咪自己靠近蹭人",
-          effect: { love: +20 },
+          text: "A 覺得「短毛貓不用梳毛」，完全不去管牠",
+          effect: { hair: +45 },
           next: 4,
-          icon: "💖",
-          msg: "綿綿非常開心！展現了布偶貓似狗般親人的個性，在大家腳邊翻肚肚咕嚕嚕。"
+          icon: "🧶",
+          msg: "警告！英短掉毛量極驚人！包子在舔毛時吞入過量死毛，開始頻繁咳嗽與嘔吐毛球！"
         },
         {
-          text: "B 朋友直接強行把綿綿倒抓懸空抱起來，還大聲對牠尖叫",
-          effect: { love: -35, health: -10 },
+          text: "B 每週定期梳毛 2~3 次清除死毛，並適時補充排毛粉",
+          effect: { hair: -15, love: +10 },
           next: 4,
-          icon: "😿",
-          msg: "綿綿受到了極大驚嚇！強行懸空讓牠極度不安，極度抗拒地抓傷人後躲進床底不敢出來。"
+          icon: "🪮",
+          msg: "觀念非常正確！英短毛量驚人，定期梳毛成功避免了家裡下雪與包子吐毛球的風險！"
         }
       ]
     },
 
     4: {
       badge: "幼貓期：6個月",
-      title: "遺傳疾病風險與醫院健檢",
-      text: "綿綿半歲囉！雖然外表看起來活潑可愛，但你知道布偶貓有遺傳性心臟病（HCM）與多囊腎（PKD）的潛在風險。你會：",
+      title: "遺傳病篩檢與預防針",
+      text: "包子滿 6 個月囉！包子看起來挺健康的，但你的友人建議去醫院檢查，你會：",
       options: [
         {
-          text: "A 帶牠去專業獸醫院進行心臟超音波檢查與遺傳基因篩檢",
+          text: "A 安排去獸醫院進行心臟與腎臟超音波篩檢，建立健康檔案",
           effect: { checkup: +20, health: +10 },
           next: 5,
           icon: "🏥",
-          msg: "醫生誇獎你非常有責任感！經過篩檢確認綿綿心臟與腎臟結構健康，建立了完整醫療檔案。"
+          msg: "非常有責任感！經過超音波檢查，包子的心肌與腎臟結構皆非常健康，可以提前預防HCM（肥大性心肌病）與多囊腎病（PKD！"
         },
         {
-          text: "B 覺得「沒看牠生病就不用去醫院」，省下健檢費用",
-          effect: { checkup: -50 },
+          text: "B 覺得包子看起來活潑健壯，省下健檢費用不過去醫院",
+          effect: { checkup: -45 },
           next: 5,
           icon: "🩺",
-          msg: "你忽視了定期檢驗。遺傳性心臟病通常早期完全無症狀，隱患正在偷偷累積..."
+          msg: "遺傳性心臟與腎臟疾病早期完全沒有明顯症狀，缺乏監測可能帶來潛在風險..."
         }
+
       ]
     },
 
     // ------------------- 成貓篇 -------------------
     5: {
       badge: "成貓期：一歲",
-      title: "一歲成年禮！飲食轉化",
-      text: "恭喜！綿綿滿 1 歲成年了！牠的體型變大了不少，被毛也更加豐滿。現在需要調整牠的成貓飲食：",
+      title: "體重與飲水管理",
+      text: "包子 1 歲成年了！英短非常容易發胖，且需要特別注意泌尿道健康。你如何安排飲食與飲水:",
       options: [
         {
-          text: "A 換成「高蛋白、中脂肪無穀成貓糧 + Omega-3 護膚魚油 + 主食罐」",
-          effect: { health: +15, love: +10 },
+          text: "A 換成控熱量成貓糧 + 使用流動飲水器提升飲水意願，預防結石",
+          effect: { health: +20, love: +10 },
           next: 6,
-          icon: "✨",
-          msg: "完美飲食！Omega-3 讓綿綿的爆毛毛質亮麗，營養均衡使肌肉發育良好。"
+          icon: "💧",
+          msg: "專業照料！流動水大大增加了包子的飲水量，體重控制得當，有效維護了泌尿道健康！"
         },
         {
-          text: "B 繼續無限量餵食高熱量幼貓糧，任由牠吃到飽",
-          effect: { health: -25 },
+          text: "B 乾糧無限量吃到飽，只用一般的死水碗而且很少換水",
+          effect: { health: -30 },
           next: 6,
           icon: "⚖️",
-          msg: "成貓運動量減少加上幼貓糧熱量過高，綿綿過度發胖，關節與心血管負擔大增！"
+          msg: "包子體重直線飆升過胖，給關節帶來極大負擔，且因不愛喝水出現了發炎結石症狀！"
         }
+
       ]
     },
 
     6: {
       badge: "成貓期：2歲",
-      title: "日常維護與日常地雷考驗",
-      text: "這天綿綿不小心踩到了腳踏墊上的水，腳掌有點濕。你想幫牠清潔，你會怎麼做？",
+      title: "英國短尾貓笨笨的?",
+      text: "包子坐在沙發上，你叫牠的名字牠卻只有耳朵動了一下，完全不理你。這時你：",
       options: [
         {
-          text: "A 用濕紙巾或乾毛巾溫柔幫牠擦拭腳掌，並給予零食獎勵",
-          effect: { love: +15, hair: -5 },
+          text: "A 覺得牠笨笨的聽不懂，跑過去強行抓牠想要讓他學會聽話",
+          effect: { love: -35, health: -10 },
           next: 7,
-          icon: "🐾",
-          msg: "溫柔的手法讓綿綿完全不排斥，蹭著你的手討摸摸。"
+          icon: "😿",
+          msg: "包子受到了驚嚇！強行抓抱與噪音打破了牠的心靈空間，這幾天都躲著你不出來。"
         },
         {
-          text: "B 覺得牠髒了，直接強行把牠按進浴缸裡全身洗澡狂沖水",
-          effect: { love: -40, health: -15 },
+          text: "B 理解英短「聽得懂但現在不想動」的裝傻個性，用零食或逗貓棒誘發好奇心",
+          effect: { love: +15 },
           next: 7,
-          icon: "💦",
-          msg: "慘劇！布偶貓極度抗拒突然的強行洗澡，綿綿應激反應劇烈，連續幾天對你發出嘶嘶聲。"
+          icon: "😼",
+          msg: "你完全掌握了英短的性格特徵！包子看到零食立刻優雅地走過來，用頭蹭你的手。"
         }
+
       ]
     },
 
     7: {
       badge: "成貓期：3歲",
       title: "完全成熟與最後體檢",
-      text: "布偶貓到了 3 歲正式完全成熟，體型達到巔峰！這時候毛髮結塊與健康管理迎來最後考驗：",
+      text: "英短到了 3 歲身材與毛髮達到完全成熟狀態！面對發胖風險與保健迎來最終考驗：",
       options: [
         {
-          text: "A 安排年度全身健檢（包含心臟超音波），並每天堅持梳毛",
-          effect: { checkup: +30, hair: -15, health: +10 },
+          text: "A 堅持每週刷牙、定期梳毛，並每年進行全身心腎健康檢查",
+          effect: { checkup: +30, hair: -10, health: +10 },
           next: 'CHECK_ENDING',
           icon: "🩺",
-          msg: "細心的照料成果顯著！隨時掌握貓咪的身體狀況。"
+          msg: "細心的照料成果顯著！包子擁有健朗的身體與完美的圓滾滾體態！"
         },
         {
-          text: "B 忙於工作完全不管牠，很久沒梳毛也沒去健檢",
+          text: "B 完全放任不管，既不梳毛也不去醫院體檢",
           effect: { hair: +35, checkup: -40 },
           next: 'CHECK_ENDING',
           icon: "🥀",
-          msg: "長時間忽略保養與健檢，問題累積到了臨界點..."
+          msg: "長期忽略體重控制與心腎健檢..."
         }
       ]
     }
   };
 
-  // 結局判定邏輯
+// 結局判定邏輯
   function evaluateEnding() {
     if (gameState.health <= 35) {
       return {
-        title: "❌ 壞結局 A：【脆弱腸胃的傷心離別】",
-        text: "因為飲食不當或應激反應過大，綿綿長期遭遇嚴重腸胃炎與營養不良，身體機能衰竭，無法順利健康長大...",
+        title: "❌ 壞結局 A：【肥胖與關節疾病的痛楚】",
+        text: "由於飲食未控制與缺乏水分，包子嚴重過胖並遭遇泌尿道結石與關節磨損，身體痛苦不堪...",
         type: "bad"
       };
     }
     if (gameState.hair >= 70) {
       return {
-        title: "❌ 壞結局 B：【毛球阻塞的急診驚魂】",
-        text: "由於長期缺乏梳毛，綿綿胃裡積聚了巨大的毛球無法排出，引發嚴重的急性腸道阻塞，必須緊急送醫剖腹手術，受盡苦頭...",
+        title: "❌ 壞結局 B：【毛球堵塞的緊急手術】",
+        text: "忽視了英短驚人的掉毛量，包子吞入過多死毛引發嚴重毛球阻塞，必須送醫上手術台急救...",
         type: "bad"
       };
     }
     if (gameState.checkup <= 30) {
       return {
-        title: "❌ 壞結局 C：【遺傳病的悄然突襲】",
-        text: "因為未定期進行心臟超音波與健檢，綿綿隱藏的 HCM（肥大性心肌病）在成年後突然發作，錯過了早期投藥控制的黃金時機...",
+        title: "❌ 壞結局 C：【心腎疾病的遺撼】",
+        text: "未定期進行心臟與腎臟超音波檢查，包子潛在的心腎病變在成年後爆發，錯過了黃金保養期...",
         type: "bad"
       };
     }
     if (gameState.love <= 30) {
       return {
-        title: "❌ 壞結局 D：【同一屋簷下的陌生人】",
-        text: "由於經常做出強行抱抓、洗澡與噪音等討厭行為，綿綿對你失去了信賴。牠不再蹭你，每天只躲在沙發底下，成為最熟悉的陌生貓...",
+        title: "❌ 壞結局 D：【保持距離的冷漠室友】",
+        text: "因經常強行抱抓與打擾牠的個人空間，包子對你失去了信任，成為只與你維持距離的冷漠室友...",
         type: "bad"
       };
     }
 
     if (gameState.health >= 85 && gameState.love >= 85 && gameState.hair <= 30 && gameState.checkup >= 70) {
       return {
-        title: "🎉 完美結局：【仙女貓降臨！完美的生命伴侶】",
-        text: "在你的無微不至照料下，綿綿長成了擁有夢幻爆毛、湛藍雙眼與極度親人性格的賽級仙女貓！牠身體健康、心臟強健，每天像小狗一樣在門口迎接你下班，給了你最溫暖的陪伴！",
+        title: "🎉 完美結局：【圓滾優雅！完美的紳士伴侶】",
+        text: "在你的科學照料下，包子長成了擁有包子臉、雙眼炯炯有神、體態勻稱健康的經典英短紳士！牠雖然不愛被硬抱，但每天都貼心地陪伴在你身邊，給予你最溫柔的默默守護！",
         type: "perfect"
       };
     }
 
     return {
-      title: "🌟 成功結局：【溫暖歲月！健康幸福的毛孩子】",
-      text: "綿綿順利健康地撫養長大了！雖然偶爾有些小毛病，但在你的細心陪伴與愛護下，牠過得非常幸福滿足！",
+      title: "🌟 成功結局：【健康幸福！陪伴歲月的毛孩子】",
+      text: "包子順利健康地長大了！在你的細心呵護下，牠過著舒適、自由且充滿愛的貓生！",
       type: "good"
     };
   }
@@ -430,7 +429,7 @@ html, body {
     elBarHospital.style.width = gameState.checkup + '%';
 
     if (gameState.step >= 5) {
-      elCatAvatar.textContent = "😻";
+      elCatAvatar.textContent = "😼";
       elCatAge.textContent = "年齡：成貓 (完全體)";
     } else {
       elCatAvatar.textContent = "🐱";
@@ -478,7 +477,7 @@ html, body {
     const node = storyNodes[nodeId];
     if (!node) return;
 
-    // 確保章節標籤統一為藍底藍字
+    // 藍色標籤固定樣式
     elBadge.className = BLUE_BADGE_CLASS;
     elBadge.textContent = node.badge;
 
@@ -537,7 +536,7 @@ html, body {
 
     elOptions.innerHTML = `
       <button id="restart-game-btn" type="button" class="w-full py-4 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-2xl text-sm transition-all shadow-md active:scale-95">
-        🔄 時間倒轉!再養一次綿綿
+        🔄 再次挑戰！重養一隻英國短毛貓
       </button>
     `;
 

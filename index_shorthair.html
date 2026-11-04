@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>にゃにこれ? 喵的什麼? 英國短毛貓 (BRITISH SHORTHAIR) 品種介紹</title>
-  <!-- Tailwind CSS CDN -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C68B59'><path d='M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z'/><ellipse cx='6.5' cy='10' rx='1.6' ry='2.2' transform='rotate(-15 6.5 10)'/><ellipse cx='10' cy='7' rx='1.6' ry='2.2' transform='rotate(-5 10 7)'/><ellipse cx='14' cy='7' rx='1.6' ry='2.2' transform='rotate(5 14 7)'/><ellipse cx='17.5' cy='10' rx='1.6' ry='2.2' transform='rotate(15 17.5 10)'/></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -278,6 +278,13 @@
 
     <!-- 右下角懸浮雲朵按鈕 -->
     <div class="fixed bottom-6 right-6 z-30">
+
+        <!-- 新增：養成小遊戲按鈕 (連結至 cat_game.html) -->
+  <a href="Shorthair_game.html" class="px-4 py-2.5 bg-[#5B826D] hover:bg-[#4A6E5B] text-white rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-all border-2 border-white text-xs sm:text-sm font-bold group">
+    <span class="text-base group-hover:rotate-12 transition-transform">🎮</span>
+    <span>英國短毛貓養成遊戲</span>
+  </a>
+
       <button id="cloud-btn" type="button" class="w-12 h-12 text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all border-2 border-white group cursor-pointer" style="background-color: var(--color-primary);" title="貓咪迷思破解小卡">
         <svg class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
           <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>

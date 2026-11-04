@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>冷知識測驗 - にゃにこれ? 喵的什麼?</title>
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C68B59'><path d='M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z'/><ellipse cx='6.5' cy='10' rx='1.6' ry='2.2' transform='rotate(-15 6.5 10)'/><ellipse cx='10' cy='7' rx='1.6' ry='2.2' transform='rotate(-5 10 7)'/><ellipse cx='14' cy='7' rx='1.6' ry='2.2' transform='rotate(5 14 7)'/><ellipse cx='17.5' cy='10' rx='1.6' ry='2.2' transform='rotate(15 17.5 10)'/></svg>">
 
     <!-- Google Fonts 同步首頁：Nunito & Noto Sans TC -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,6 +156,89 @@
         html {
             scroll-behavior: smooth;
         }
+
+            /* --- 創意微型 Footer 樣式 --- */
+    .site-footer {
+      background-color: #ffffff;
+      border-top: 1px solid rgba(198, 139, 89, 0.15);
+      color: var(--text-color);
+      padding: 36px 0 28px;
+      font-size: 14px;
+    }
+
+    /* 肉球按鈕：蓋印章彈跳特效 */
+    .footer-paw-btn {
+      width: 48px;
+      height: 48px;
+      background-color: var(--bg-color);
+      border: 1.5px solid rgba(198, 139, 89, 0.3);
+      border-radius: 50%;
+      color: var(--primary-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.18s ease;
+    }
+
+    .paw-emoji {
+      font-size: 22px;
+      display: inline-block;
+      line-height: 1;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+    }
+
+    .footer-paw-btn:hover {
+      color: #ffffff;
+      background-color: var(--primary-color);
+      transform: scale(1.15) rotate(-6deg);
+      box-shadow: 0 6px 14px rgba(198, 139, 89, 0.35);
+    }
+
+    .footer-paw-btn:active {
+      /* 點擊時如同肉球蓋印章下壓 */
+      transform: scale(0.92) rotate(2deg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 吸貓金句展示盒 */
+    .quote-box {
+      max-width: 620px;
+      margin: 0 auto 16px auto;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background-color: var(--bg-color);
+      border-left: 3px solid var(--primary-color);
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cat-quote {
+      font-size: 14.5px;
+      color: var(--text-color);
+      margin: 0;
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    .cat-quote.fade-out {
+      opacity: 0;
+    }
+
+    .footer-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
     </style>
 </head>
 
@@ -162,7 +246,7 @@
     <!-- 導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold brand-capsule my-0" href="#top" style="color: var(--primary-color);">にゃにこれ?
+            <a class="navbar-brand fw-bold brand-capsule my-0" href="index.html" style="color: var(--primary-color);">にゃにこれ?
                 喵的什麼?</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -245,6 +329,52 @@
         </div>
 
     </main>
+
+      <footer class="site-footer text-center mt-5">
+    <div class="container">
+      <!-- 點擊滑回頂部的肉球蓋印章按鈕 -->
+      <div class="mb-3">
+        <a href="#top" class="footer-paw-btn" title="蓋個肉球印章，滑回頂部">
+            <!-- 純向量貓咪肉球圖示 -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <!-- 掌心大肉球 -->
+              <path d="M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z" />
+              <!-- 四個小腳趾肉球 -->
+              <ellipse cx="6.5" cy="10" rx="1.6" ry="2.2" transform="rotate(-15 6.5 10)" />
+              <ellipse cx="10" cy="7" rx="1.6" ry="2.2" transform="rotate(-5 10 7)" />
+              <ellipse cx="14" cy="7" rx="1.6" ry="2.2" transform="rotate(5 14 7)" />
+              <ellipse cx="17.5" cy="10" rx="1.6" ry="2.2" transform="rotate(15 17.5 10)" />
+            </svg>
+        </a>
+      </div>
+
+      <!-- 10 秒自動輪播吸貓金句 -->
+      <div class="quote-box">
+        <p id="cat-quote-text" class="cat-quote">
+          載入吸貓金句中...
+        </p>
+      </div>
+
+      <!-- 快速導航連結 -->
+      <div class="footer-links mb-3">
+        <a href="#top">回到頂端</a>
+        <span class="text-muted">•</span>
+        <a href="#cat-dex">品種圖鑑</a>
+        <span class="text-muted">•</span>
+        <a href="quiz.html">冷知識測驗</a>
+      </div>
+
+      <!-- 宣告 -->
+      <p class="text-muted mb-1" style="font-size: 13px;">
+        🐾 にゃにこれ? 喵的什麼? · 本專案由熱愛貓咪的前端小組打造
+      </p>
+      <p class="text-muted mb-0" style="font-size: 12px; opacity: 0.7;">
+        Designed for F2E Midterm Project © 2026
+      </p>
+    </div>
+  </footer>
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         const questionBank = {
@@ -527,6 +657,47 @@
                 if (startBoxEl) startBoxEl.classList.remove('d-none');
             }
         }
+
+            // --- 吸貓金句 10 秒切換邏輯 ---
+    const catQuotes = [
+      "「大部分的煩惱，養貓就會好。」 —— 村上春樹",
+      "「世上還有什麼比貓的愛更大的禮物？」 —— 查爾斯・狄更斯",
+      "「貓對自己的情緒非常誠實。出於某些原因，人類會隱藏感受，但貓咪從不如此。」 —— 海明威",
+      "「一貓又一貓。」（One cat just leads to another.） —— 海明威",
+      "「最小的貓科動物可謂偉大的傑作。」 —— 達文西",
+      "「如果動物能說話，狗會是一個笨拙直言不諱的傢伙；而貓則擁有一種罕見的優雅，從不多說一句話。」 —— 馬克・吐溫"
+    ];
+
+    let currentQuoteIndex = Math.floor(Math.random() * catQuotes.length);
+    const quoteElement = document.getElementById('cat-quote-text');
+
+    function updateQuote() {
+      if (!quoteElement) return;
+
+      // 淡出過渡
+      quoteElement.classList.add('fade-out');
+
+      setTimeout(() => {
+        // 切換至下一句（隨機且不與前一句重複）
+        let nextIndex;
+        do {
+          nextIndex = Math.floor(Math.random() * catQuotes.length);
+        } while (nextIndex === currentQuoteIndex && catQuotes.length > 1);
+
+        currentQuoteIndex = nextIndex;
+        quoteElement.textContent = catQuotes[currentQuoteIndex];
+
+        // 淡入顯示
+        quoteElement.classList.remove('fade-out');
+      }, 500); // 0.5 秒淡出完成後換字
+    }
+
+    // 頁面載入時先隨機呈現一句
+    if (quoteElement) {
+      quoteElement.textContent = catQuotes[currentQuoteIndex];
+      // 每 10000 毫秒（10 秒）觸發一次更新
+      setInterval(updateQuote, 10000);
+    }
     </script>
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
