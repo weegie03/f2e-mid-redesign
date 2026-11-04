@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>にゃにこれ? 喵的什麼? - 暹羅貓成長故事養成記</title>
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C68B59'><path d='M12 10.5c-2.3 0-4.2 1.8-4.2 4 0 1.8 1.4 3.5 4.2 3.5s4.2-1.7 4.2-3.5c0-2.2-1.9-4-4.2-4z'/><ellipse cx='6.5' cy='10' rx='1.6' ry='2.2' transform='rotate(-15 6.5 10)'/><ellipse cx='10' cy='7' rx='1.6' ry='2.2' transform='rotate(-5 10 7)'/><ellipse cx='14' cy='7' rx='1.6' ry='2.2' transform='rotate(5 14 7)'/><ellipse cx='17.5' cy='10' rx='1.6' ry='2.2' transform='rotate(15 17.5 10)'/></svg>">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #FAF8F5;
+  color: #2D3748;
+  margin: 0;
+  padding: 0;
+}
+
+/* 按鈕懸浮效果 */
+.option-btn {
+  transition: all 0.2s ease;
+}
+.option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(198, 139, 89, 0.15);
+}
+</style>
+</head>
+<body class="min-h-screen bg-[#FAF8F5] flex flex-col justify-between items-center select-none py-6 px-4 relative">
+
+  <!-- 頂部標題與導覽 -->
+  <header class="w-full max-w-xl bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-stone-200/80 shadow-xs flex justify-between items-center mb-4">
+    <a href="index_Siamese.html" class="px-3.5 py-1.5 bg-stone-800 text-white rounded-full flex items-center gap-1.5 text-xs font-semibold hover:bg-stone-700 transition-all">
+      ‹ 返回品種介紹
+    </a>
+    <div class="text-center">
+      <span class="text-[10px] font-bold text-[#C68B59] uppercase block tracking-wider">SIAMESE STORY INTERACTIVE</span>
+      <h1 class="text-base font-extrabold text-stone-800">暹羅貓一生養成故事 🐾</h1>
+    </div>
+    <button id="restart-btn" class="text-xs font-bold text-stone-500 hover:text-stone-800 underline">
+      重新開始
+    </button>
+  </header>
+
+  <!-- 遊戲主舞台 -->
+  <main class="w-full max-w-xl bg-white rounded-3xl border border-stone-200/80 shadow-md p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+
+    <!-- 上方：階段與狀態看板 -->
+    <section class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200/60 space-y-3">
+      <div class="flex justify-between items-center border-b border-stone-200/60 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl" id="cat-avatar">🐱</span>
+          <div>
+            <h2 class="text-sm font-bold text-stone-800" id="cat-name">小月亮 (SIAMESE)</h2>
+            <p class="text-xs text-[#C68B59] font-semibold" id="cat-age">年齡：幼貓 3 個月</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-[10px] text-stone-400 font-bold block uppercase">歲數記錄</span>
+        <span class="text-sm font-extrabold text-stone-700" id="day-counter">3個月</span>
+        </div>
+      </div>
+
+      <!-- 四大核心狀態指標 -->
+      <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+        <!-- 健康度 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>❤️ 健康與身體狀況</span>
+            <span id="txt-health">100%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-health" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- 快樂度/親密度 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>💖 社交與信賴</span>
+            <span id="txt-love">50%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-love" class="h-full bg-pink-400 rounded-full transition-all duration-300" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- 心理安全防範分離焦慮 (已將變數與 ID 改為 safety) -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>🧠 心理安全與防焦慮</span>
+            <span id="txt-safety">90%</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-safety" class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: 90%;"></div>
+          </div>
+        </div>
+
+        <!-- 醫療與呼吸道照護 -->
+        <div>
+          <div class="flex justify-between text-stone-600 font-semibold mb-1">
+            <span>🏥 呼吸與眼疾防護</span>
+            <span id="txt-hospital">良好</span>
+          </div>
+          <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div id="bar-hospital" class="h-full bg-blue-400 rounded-full transition-all duration-300" style="width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 中間：故事劇情呈現區 -->
+    <section class="space-y-4 flex-1 flex flex-col justify-center my-2">
+      <!-- 標籤固定為藍色底與藍字 (bg-sky-100 text-sky-700) -->
+      <div id="story-badge" class="inline-block px-3 py-1 bg-sky-100 text-sky-700 text-xs font-bold rounded-lg w-max">
+        章節 1：初次相遇
+      </div>
+      <h3 class="text-base sm:text-lg font-bold text-stone-800 leading-snug" id="story-title">
+        帶小月亮回家！幼貓高蛋白飲食與環境適應
+      </h3>
+      <p class="text-xs sm:text-sm text-stone-600 leading-relaxed bg-[#FAF8F5]/80 p-4 rounded-2xl border border-stone-200/50" id="story-text">
+        你從收容所接回了一隻 3 個月大、擁有明亮藍眼睛與可愛重點色的暹羅貓「小月亮」。牠一到家就精神奕奕地到處探索，完全不怕生。現在到了第一餐的餵食時間，你準備了什麼？
+      </p>
+    </section>
+
+    <!-- 下方：劇情選擇肢按鈕區 -->
+    <section id="options-container" class="space-y-2.5 pt-2">
+      <!-- 按鈕會由 JS 動態生成 -->
+    </section>
+
+  </main>
+
+  <footer class="text-center py-4 text-xs text-stone-400 font-medium">
+    にゃにこれ? 喵的什麼? 互動養寵故事 · 提倡科學養寵與正確品種知識
+  </footer>
+
+  <!-- 選擇結果小彈窗 Modal -->
+  <div id="feedback-modal" class="fixed inset-0 bg-stone-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-100 text-center space-y-4 transform scale-95 transition-transform duration-300" id="modal-box">
+      
+      <div class="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#C68B59]/30 flex items-center justify-center text-2xl mx-auto" id="modal-icon">
+        💡
+      </div>
+
+      <h4 class="text-base font-bold text-stone-800" id="modal-title">選擇結果說明</h4>
+
+      <div class="bg-[#FAF8F5] p-3.5 rounded-2xl border border-stone-200/60 text-xs sm:text-sm text-stone-600 leading-relaxed text-left" id="modal-text">
+        這是產生的影響...
+      </div>
+
+      <button id="modal-confirm-btn" type="button" class="w-full py-3 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-xl text-xs sm:text-sm shadow-xs transition-all active:scale-95">
+        確認，繼續故事 🐾
+      </button>
+    </div>
+  </div>
+
+  <!-- 遊戲腳本系統 -->
+  <script>
+  // 貓咪當前數據 (已將 hair 換成 safety)
+  let gameState = {
+    step: 1,
+    day: 1,
+    health: 100,  // 健康狀況
+    love: 50,     // 社交與信賴
+    safety: 90,   // 心理安全感與防範分離焦慮
+    checkup: 100, // 醫療與呼吸道防護
+  };
+
+  let pendingNextNode = null;
+
+  // 藍色標籤固定樣式 Class
+  const BLUE_BADGE_CLASS = "inline-block px-3 py-1 bg-sky-100 text-sky-700 text-xs font-bold rounded-lg w-max";
+
+  // 暹羅貓故事節點圖譜
+  const storyNodes = {
+    1: {
+      badge: "幼貓期：2個月",
+      title: "帶小月亮回家！幼貓高蛋白飲食與環境適應",
+      text: "你從收容所接回了一隻擁有明亮藍眼睛與可愛重點色的暹羅貓「小月亮」。牠一到家就精神奕奕地到處探索，現在到了第一餐的餵食時間，你準備了什麼？",
+      options: [
+        {
+          text: "A 準備高蛋白質、無穀物優質幼貓專用濕食與乾糧，並準備溫暖舒適的窩",
+          effect: { health: +10, love: +10 },
+          next: 2,
+          icon: "🥩",
+          msg: "答對了！暹羅貓需要充足的高蛋白質來支持活潑好動的體力，無穀配方也能避免敏感的牠們腸胃不適！"
+        },
+        {
+          text: "B 隨便拿了一包便宜的全齡貓乾糧，想說有得吃就好",
+          effect: { health: -40, love: -10 },
+          next: 2,
+          icon: "⚠️",
+          msg: "糟糕！幼貓期營養不足導致小月亮有些虛弱，且因食物不適應而出現了拉肚子狀況！"
+        }
+      ]
+    },
+
+    2: {
+      badge: "幼貓期：3個月",
+      title: "驚奇的變色現象與溫度敏感",
+      text: "隨著日子一天天過去，你發現小月亮小時候偏白的身體，現在臉部、耳朵和四肢的「重點色」變得越來越深。剛好這幾天寒流來襲，你發現牠的毛色似乎又更深了一些。這時你該怎麼照顧牠？",
+      options: [
+        {
+          text: "A 以為小月亮生病變色了，急著帶牠去洗藥浴或剃毛想把深色毛洗掉",
+          effect: { health: -30, love: -20 },
+          next: 3,
+          icon: "🚨",
+          msg: "胡鬧！這是暹羅貓獨特的「溫度敏感型色素」表現，盲目亂搞反而會讓牠壓力過大、抵抗力下降！"
+        },
+        {
+        text: "B 了解這是因為基因與體溫有關的自然現象，並在室內為牠準備溫暖的暖墊與舒適環境",
+          effect: { checkup: +15, love: +10 },
+          next: 3,
+          icon: "🌡️",
+          msg: "沒錯！暹羅貓的重點色會隨著年齡增長與體溫、環境溫度產生自然的溫度漸層變化，保暖做得好讓牠健康又舒適！"
+        },
+        
+
+      ]
+    },
+
+    3: {
+      badge: "幼貓期：6個月",
+      title: "貓形跟屁蟲與「話癆」訓練",
+      text: "小月亮半歲了，個性越來越像一隻「狗勾」。你只要在家走動，牠一定緊緊跟隨；而牠最近開始頻繁地用各種高亢的叫聲向你表達意見。面對牠的黏人與叫聲，你決定：",
+      options: [
+        {
+          text: "A 嫌牠太吵、一直跟前跟後很煩，直接把牠關在房間裡不理牠",
+          effect: { safety: -45, love: -30 },
+          next: 4,
+          icon: "😿",
+          msg: "糟糕！暹羅貓極度害怕孤單，這樣做會讓牠產生嚴重的「分離焦慮」，甚至開始出現破壞家具的抗議行為！"
+        },
+        {
+          text: "B 耐心觀察牠叫聲代表的需求（如餓了或無聊），並提供固定的陪伴與益智玩具互動",
+          effect: { love: +25, safety: +10 },
+          next: 4,
+          icon: "🗣️",
+          msg: "太棒了！暹羅貓擁有極高的社交需求與豐富的聲音表達，理解牠的叫聲並適度回應，能建立深厚的信任！"
+        }
+
+      ]
+    },
+
+    4: {
+      badge: "幼貓期：9個月",
+      title: "聰明過頭的探索本能",
+      text: "小月亮展現了驚人的智商，牠不僅學會了用貓抓板，甚至自己學會了怎麼用爪子開抽屜偷零食！面對牠過度聰明而開始搞破壞的行為，你會：",
+      options: [
+        {
+          text: "A 在抽屜裝安全鎖，並設置專屬的益智玩具與探索區來消耗牠的腦力",
+          effect: { love: +20, checkup: +10 },
+          next: 5,
+          icon: "🧩",
+          msg: "非常聰明的應對！暹羅貓需要大量的心智刺激，提供替代方案既滿足了牠的好奇心，又保護了你的物品！"
+        },
+        {
+          text: "B 大聲責罵並處罰牠，把牠關在籠子裡反省",
+          effect: { love: -40, health: -15 },
+          next: 5,
+          icon: "💢",
+          msg: "記仇的小月亮對你產生了戒心！暹羅貓非常聰明且敏感，使用嚴厲處罰只會破壞彼此的感情！"
+        }
+      ]
+    },
+
+    // ------------------- 成貓篇 -------------------
+    5: {
+      badge: "成貓期：1 歲",
+      title: "一歲成年禮！預防分離焦慮與日常保養",
+      text: "小月亮滿 1 歲成年了！因為你明天必須出差兩天不在家，為了避免牠在家因為過度思念你而出現焦慮行為，你會怎麼做？",
+      options: [
+        {
+          text: "A 什麼都不準備直接出門兩天，反正放一盆乾糧跟水就好了",
+          effect: { safety: -50, health: -20 },
+          next: 6,
+          icon: "🏚️",
+          msg: "悲劇發生！回家時發現小月亮因為嚴重分離焦慮，把客廳的沙發抓得稀爛，還瘦了一圈！"
+        },
+        {
+          text: "B 出門前給予藏食玩具分散注意力，並請信任的朋友或寵物保母中途來探望照顧",
+          effect: { safety: +20, love: +15 },
+          next: 6,
+          icon: "🏡",
+          msg: "完美的安排！透過轉移注意力和減少獨處時間，成功守護了小月亮的心理健康，沒有引發焦慮！"
+        }
+
+      ]
+    },
+
+    6: {
+      badge: "成貓期：2 歲",
+      title: "呼吸道與眼部健康的小考驗",
+      text: "這天你發現小月亮眼睛有點紅腫分泌物，且有時會因為家裡灰塵多而有些輕微咳嗽。身為細心的飼主，你決定：",
+      options: [
+        {
+          text: "A 帶去信任的獸醫院檢查眼疾與呼吸道狀況，並改善家中空氣清潔、定期幫牠刷牙",
+          effect: { checkup: +25, health: +15 },
+          next: 7,
+          icon: "🩺",
+          msg: "做得好！暹羅貓較容易有呼吸道問題與遺傳性眼疾，及時就醫與日常護理讓小月亮恢復明亮雙眼！"
+        },
+        {
+          text: "B 覺得只是小毛病不用大驚小怪，隨便買成藥幫牠點眼藥水",
+          effect: { checkup: -45, health: -25 },
+          next: 7,
+          icon: "💊",
+          msg: "延誤了病情！小輕忽導致結膜炎惡化，不僅花了更多醫療費，也讓小月亮受了更多苦！"
+        }
+      ]
+    },
+
+    7: {
+      badge: "成貓期：3 歲",
+      title: "成熟穩定的陪伴與最後總體檢",
+      text: "小月亮 3 歲了，雖然還是個愛說話的「話癆」，但和你的默契已經達到絕佳狀態。面對成年後的體重控制與年度健康檢查，你迎來了最終考驗：",
+      options: [
+        {
+          text: "A 定期幫短毛的牠梳理浮毛、嚴格控管熱量與體重，並進行年度全身健康檢查",
+          effect: { checkup: +25, health: +15, love: +10 },
+          next: 'CHECK_ENDING',
+          icon: "✨",
+          msg: "太棒了！科學化的照顧讓小月亮維持完美體態與健康的身體！"
+        },
+        {
+          text: "B 覺得貓咪只要胖胖的才可愛，每天無限量供應零食且從不帶去體檢",
+          effect: { health: -35, checkup: -30 },
+          next: 'CHECK_ENDING',
+          icon: "🥀",
+          msg: "長期疏忽導致小月亮過胖且隱藏健康隱患，危機正悄悄逼近..."
+        }
+      ]
+    }
+  };
+
+  // 結局判定邏輯 (以 safety 取代 hair)
+  function evaluateEnding() {
+    if (gameState.safety <= 25) {
+      return {
+        title: "❌ 壞結局 A：【焦慮與拆家的無聲抗議】",
+        text: "因為長期疏忽小月亮的陪伴需求，頻繁將牠長時間獨留在家且缺乏心智刺激，導致小月亮出現了嚴重的「分離焦慮症」。牠不僅把家中家具抓得稀爛、到處亂尿尿，精神也陷入極度壓抑與焦慮，最終不得不面臨送養的無奈命運……",
+        type: "bad"
+      };
+    }
+    if (gameState.checkup <= 30) {
+      return {
+        title: "❌ 壞結局 B：【慢性病痛的折磨】",
+        text: "由於忽略了暹羅貓常見的呼吸道敏感與遺傳性眼疾，錯過了早期的防護與就醫時機，小月亮的結膜炎與氣喘問題惡化成慢性疾病。每天伴隨著痛苦的咳嗽與眼部感染，讓牠失去了原本靈動活潑的光彩……",
+        type: "bad"
+      };
+    }
+    if (gameState.health <= 35) {
+      return {
+        title: "❌ 壞結局 C：【過重帶來的健康崩盤】",
+        text: "因為把貓咪的「討食與叫聲」當作唯一回應，導致小月亮長期攝取過多熱量且缺乏運動，體重直線飆升。肥胖引發了關節磨損與代謝疾病（如糖尿病風險），讓原本修長優雅的暹羅貓再也無法輕盈跳躍……",
+        type: "bad"
+      };
+    }
+    if (gameState.love <= 30) {
+      return {
+        title: "❌ 壞結局 D：【形同陌路的冷漠室友】",
+        text: "因為在小月亮展現聰明本能或因焦慮調皮時使用了大聲責罵與關籠等嚴厲處罰，極度聰明且敏感的牠對你徹底失去了信任。從此牠不再當你的「貓形跟屁蟲」，而是選擇整天躲在角落，成為一個拒絕互動的冷漠室友……",
+        type: "bad"
+      };
+    }
+
+    if (gameState.health >= 85 && gameState.love >= 85 && gameState.safety >= 70 && gameState.checkup >= 70) {
+      return {
+        title: "🎉 完美結局：【完美的藍眼睛心靈伴侶】",
+        text: "透過最科學的陪伴、對叫聲與心理需求的細心理解，以及嚴格的體重與健康管理，小月亮完美展現了暹羅貓極致的聰明與深情！牠不僅是會跟前跟後的「貓形跟屁蟲」，更與你建立起不可動搖的默契。每天聽著牠溫柔的叫聲與無條件的信任，這就是最完美的人貓情誼！",
+        type: "perfect"
+      };
+    }
+
+    return {
+      title: "🌟 成功結局：【話多又黏人的幸福小室友】",
+      text: "在你的陪伴與照顧下，小月亮健康地長大了！雖然牠偶爾還是會像個小話癆一樣在你耳邊「大鳴大放」，也需要花心思理解牠的需求，但在日常的互動與遊戲中，牠已經完全融入你的生活，成為不可或缺的溫暖陪伴！",
+      type: "good"
+    };
+  }
+
+  // DOM 元素
+  const elCatAge = document.getElementById('cat-age');
+  const elDayCounter = document.getElementById('day-counter');
+  const elBarHealth = document.getElementById('bar-health');
+  const elTxtHealth = document.getElementById('txt-health');
+  const elBarLove = document.getElementById('bar-love');
+  const elTxtLove = document.getElementById('txt-love');
+  const elBarSafety = document.getElementById('bar-safety');
+  const elTxtSafety = document.getElementById('txt-safety');
+  const elBarHospital = document.getElementById('bar-hospital');
+  const elTxtHospital = document.getElementById('txt-hospital');
+
+  const elBadge = document.getElementById('story-badge');
+  const elTitle = document.getElementById('story-title');
+  const elText = document.getElementById('story-text');
+  const elOptions = document.getElementById('options-container');
+  const elCatAvatar = document.getElementById('cat-avatar');
+
+  // Modal 彈窗元件
+  const feedbackModal = document.getElementById('feedback-modal');
+  const modalIcon = document.getElementById('modal-icon');
+  const modalText = document.getElementById('modal-text');
+  const modalConfirmBtn = document.getElementById('modal-confirm-btn');
+
+  // 更新 UI 狀態看板
+  function updateBoard() {
+    gameState.health = Math.min(100, Math.max(0, gameState.health));
+    gameState.love = Math.min(100, Math.max(0, gameState.love));
+    gameState.safety = Math.min(100, Math.max(0, gameState.safety));
+    gameState.checkup = Math.min(100, Math.max(0, gameState.checkup));
+
+    elTxtHealth.textContent = gameState.health + '%';
+    elBarHealth.style.width = gameState.health + '%';
+
+    elTxtLove.textContent = gameState.love + '%';
+    elBarLove.style.width = gameState.love + '%';
+
+    elTxtSafety.textContent = gameState.safety + '%';
+    elBarSafety.style.width = gameState.safety + '%';
+
+    if (gameState.checkup >= 70) elTxtHospital.textContent = "良好";
+    else if (gameState.checkup >= 40) elTxtHospital.textContent = "待檢查";
+    else elTxtHospital.textContent = "危險！";
+    elBarHospital.style.width = gameState.checkup + '%';
+
+    if (gameState.step >= 5) {
+      elCatAvatar.textContent = "😻";
+      elCatAge.textContent = "年齡：成貓 (完全體)";
+    } else {
+      elCatAvatar.textContent = "🐱";
+      elCatAge.textContent = `年齡：幼貓 (${gameState.step * 2} 個月)`;
+    }
+
+    elDayCounter.textContent = `第 ${gameState.day} 天`;
+  }
+
+  // 顯示小彈窗
+  function openModal(icon, text, nextNode) {
+    modalIcon.textContent = icon || '💡';
+    modalText.textContent = text;
+    pendingNextNode = nextNode;
+
+    feedbackModal.classList.remove('opacity-0', 'pointer-events-none');
+    feedbackModal.classList.add('opacity-100', 'pointer-events-auto');
+  }
+
+  // 關閉小彈窗並進入下一個環節
+  function closeModal() {
+    feedbackModal.classList.add('opacity-0', 'pointer-events-none');
+    feedbackModal.classList.remove('opacity-100', 'pointer-events-auto');
+
+    if (pendingNextNode) {
+      const currentEnding = checkMidGameBadEnding();
+      if (currentEnding) {
+        showEnding(currentEnding);
+      } else {
+        renderNode(pendingNextNode);
+      }
+      pendingNextNode = null;
+    }
+  }
+
+  modalConfirmBtn.addEventListener('click', closeModal);
+
+  // 渲染章節
+  function renderNode(nodeId) {
+    if (nodeId === 'CHECK_ENDING') {
+      showEnding(evaluateEnding());
+      return;
+    }
+
+    const node = storyNodes[nodeId];
+    if (!node) return;
+
+    // 確保章節標籤統一為藍底藍字
+    elBadge.className = BLUE_BADGE_CLASS;
+    elBadge.textContent = node.badge;
+
+    elTitle.textContent = node.title;
+    elText.textContent = node.text;
+
+    elOptions.innerHTML = '';
+
+    node.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn w-full text-left p-3.5 sm:p-4 bg-white border border-stone-200/80 hover:border-[#C68B59] rounded-2xl font-bold text-xs sm:text-sm text-stone-700 shadow-xs leading-relaxed';
+      btn.textContent = opt.text;
+
+      btn.addEventListener('click', () => {
+        if (opt.effect.health) gameState.health += opt.effect.health;
+        if (opt.effect.love) gameState.love += opt.effect.love;
+        if (opt.effect.safety) gameState.safety += opt.effect.safety;
+        if (opt.effect.checkup) gameState.checkup += opt.effect.checkup;
+
+        gameState.day += 60;
+        gameState.step += 1;
+
+        updateBoard();
+
+        openModal(opt.icon, opt.msg, opt.next);
+      });
+
+      elOptions.appendChild(btn);
+    });
+  }
+
+  // 中途壞結局檢查 (以 safety 取代 hair)
+  function checkMidGameBadEnding() {
+    if (gameState.safety <= 15) return evaluateEnding();
+    if (gameState.checkup <= 20) return evaluateEnding();
+    if (gameState.health <= 25) return evaluateEnding();
+    return null;
+  }
+
+  // 顯示結局頁面
+  function showEnding(ending) {
+    elBadge.className = BLUE_BADGE_CLASS;
+    elBadge.textContent = "遊戲故事結束";
+
+    elTitle.textContent = ending.title;
+    elText.textContent = ending.text;
+
+    if (ending.type === 'perfect') {
+      elCatAvatar.textContent = "👑";
+    } else if (ending.type === 'good') {
+      elCatAvatar.textContent = "😺";
+    } else {
+      elCatAvatar.textContent = "😿";
+    }
+
+    elOptions.innerHTML = `
+      <button id="restart-game-btn" type="button" class="w-full py-4 bg-[#C68B59] hover:bg-[#B87B4B] text-white font-bold rounded-2xl text-sm transition-all shadow-md active:scale-95">
+        🔄 再次挑戰！重養一隻暹羅貓
+      </button>
+    `;
+
+    document.getElementById('restart-game-btn').addEventListener('click', restartGame);
+  }
+
+  // 重置遊戲
+  function restartGame() {
+    gameState = {
+      step: 1,
+      day: 1,
+      health: 100,
+      love: 50,
+      safety: 90,
+      checkup: 100
+    };
+    updateBoard();
+    renderNode(1);
+  }
+
+  document.getElementById('restart-btn').addEventListener('click', restartGame);
+
+  // 初始化遊戲
+  updateBoard();
+  renderNode(1);
+  </script>
+</body>
+</html>
